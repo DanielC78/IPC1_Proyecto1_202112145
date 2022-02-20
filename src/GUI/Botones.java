@@ -1,19 +1,25 @@
 package GUI;
 
 import javax.swing.*;
-import java.awt.*;
-
-public class Botones extends JButton {
 
 
-    ColoresFuentes variableGrafica = new ColoresFuentes();
+public class Botones extends JButton{
+
+    ColoresFuentes graficos = new ColoresFuentes();
+
     public Botones(){
+
+        this.setBorder(null);
+        this.setBorderPainted(false);
+        this.setContentAreaFilled(false);
+        this.setFocusable(false);
         this.setOpaque(true);
+        this.setHorizontalAlignment(JLabel.CENTER);
+        this.setVerticalAlignment(JLabel.CENTER);
         this.setVisible(true);
-        this.setSize(65, 16);
-        this.setLocation(100,100);
-        this.setBackground(Color.decode(variableGrafica.ColorFuente));
-        this.setForeground(Color.decode(variableGrafica.ColorBase));
-        this.setFont(variableGrafica.FuenteBaseFuerte);
+        this.setBackground(graficos.Azul);
+        this.setForeground(graficos.Blanco);
+        this.setFont(graficos.Letra_suave);
     }
+
 }
