@@ -13,15 +13,17 @@ public class Menu {
         panel.setLayout(null);
         panel.setOpaque(true);
         panel.setBackground(Color.white);
-        panel.setBorder(new LineBorder(Color.black));
+        panel.setBorder(new LineBorder(Color.black, 2));
 
         JButton BIniciarSesion = new Botones();
         BIniciarSesion.setBounds(585,111,118,29);
         BIniciarSesion.setText("INICIAR SESIÓN");
+        frame.efectoHover(BIniciarSesion);
 
         JButton BAbout = new Botones();
         BAbout.setBounds(52,381,118,29);
         BAbout.setText("ACERCA DE NOSOTROS");
+        frame.efectoHover(BAbout);
 
         panel.add(BAbout);
         panel.add(BIniciarSesion);

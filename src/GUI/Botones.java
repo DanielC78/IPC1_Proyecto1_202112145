@@ -1,6 +1,7 @@
 package GUI;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 
 public class Botones extends JButton{
@@ -9,13 +10,13 @@ public class Botones extends JButton{
 
     public Botones(){
 
-        this.setBorder(null);
-        this.setBorderPainted(false);
+        this.setBorder(new LineBorder(graficos.Azul, 2));
+        this.setBorderPainted(true);
         this.setContentAreaFilled(false);
         this.setFocusable(false);
         this.setOpaque(true);
-        this.setHorizontalAlignment(JLabel.CENTER);
-        this.setVerticalAlignment(JLabel.CENTER);
+        this.setHorizontalAlignment(JButton.CENTER);
+        this.setVerticalAlignment(JButton.CENTER);
         this.setVisible(true);
         this.setBackground(graficos.Azul);
         this.setForeground(graficos.Blanco);
