@@ -10,7 +10,7 @@ public class Botones extends JButton{
 
     public Botones(){
 
-        this.setBorder(new LineBorder(graficos.Azul, 2));
+        this.setBorder(new LineBorder(graficos.Azul, 2, true));
         this.setBorderPainted(true);
         this.setContentAreaFilled(false);
         this.setFocusable(false);

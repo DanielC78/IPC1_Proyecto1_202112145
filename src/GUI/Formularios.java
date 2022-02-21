@@ -117,14 +117,14 @@ public class Formularios extends JFrame {
                 super.mouseEntered(e);
                 boton.setForeground(grafica.Azul);
                 boton.setBackground(grafica.Blanco);
-                boton.setBorder(new LineBorder(grafica.Azul, 2));
+                boton.setBorder(new LineBorder(grafica.Azul, 2, true));
             }
 
             public void mouseExited(MouseEvent e){
                 super.mouseExited(e);
                 boton.setForeground(grafica.Blanco);
                 boton.setBackground(grafica.Azul);
-                boton.setBorder(new LineBorder(grafica.Azul, 2));
+                boton.setBorder(new LineBorder(grafica.Azul, 2,true));
 
             }
 

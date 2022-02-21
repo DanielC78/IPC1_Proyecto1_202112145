@@ -1,5 +1,6 @@
 package GUI;
 
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class ColoresFuentes {
@@ -12,6 +13,9 @@ public class ColoresFuentes {
     //Fuentes
     final public Font Letra_suave = new Font("Work Sans", 1, 12);
     final public Font Letra_fuerte = new Font("Work Sans", 1, 13);
+
+    //Bordes
+    final public LineBorder line = new LineBorder(Color.black, 2);
 
 
 }
