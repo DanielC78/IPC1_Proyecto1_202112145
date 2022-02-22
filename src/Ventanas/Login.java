@@ -2,55 +2,118 @@ package Ventanas;
 import GUI.*;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class Login {
+public class Login extends Formularios{
+
     //Objetos de otras clases
     private ColoresFuentes graficos = new ColoresFuentes();
-    private Inicio inicio = new Inicio();
+
     //Objetos de la clase Login
-    public Formularios frameLogin = new Formularios(395,445,"INICIO DE SESIÓN");
+    public Login(){
+        super(395,445,"INICIO DE SESIÓN");
+        iniciarComponentesLogin();
+    }
     private JPanel panelLogin = new Paneles();
+
     //Botones
-    private JButton botonIngresar = new Botones();
-    private JButton botonCancelar = new Botones();
+    private JButton botonIngresar = new Botones("INGRESAR",
+            238,
+            367,
+            118,
+            29);
+    private JButton botonCancelar = new Botones("CANCELAR",
+            42,
+            367,
+            118,
+            29);
+
     //Etiquetas
+    private JLabel etUsuario = new Etiquetas(
+            "USUARIO",
+            83,
+            184,
+            85,
+            16,
+            null,
+            graficos.Gris,
+            graficos.Letra_fuerte
+
+    );
+    private JLabel etPassword = new Etiquetas(
+            "CONTRASEÑA",
+            83,
+            264,
+            85,
+            16,
+            null,
+            graficos.Gris,
+            graficos.Letra_fuerte
+
+    );
+
+    private JLabel etFoto = new Etiquetas(
+            "",
+            162,
+            70,
+            80,
+            85,
+            null,
+            null,
+            null
+    );
 
 
-    public void iniciarComponentesLogin(){
-        frameLogin.getContentPane().add(panelLogin);
-        frameLogin.setVisible(true);
+    //Cajas de texto
+    private JTextField cajaUsuario = new CajasTexto(
+            83,
+            204,
+            229,
+            50
+    );
+    private JTextField cajaPassword = new CajasTexto(
+            83,
+            284 ,
+            229,
+            50
+    );
 
-        botonIngresar.setBounds(238,367,118,29);
-        botonIngresar.setText("INGRESAR");
-        botonIngresar.addMouseListener(new MouseAdapter() {
+
+    private void iniciarComponentesLogin(){
+        botonCancelar.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
+                botonIngresarActionPerformed(e);
             }
         });
 
-        botonCancelar.setText("CANCELAR");
-        botonCancelar.setBounds(42,367,118,29);
-        botonCancelar.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                frameLogin.setVisible(false);
-                inicio.iniciarComponentesInicio();
+        this.getContentPane().add(panelLogin);
 
-            }
-        });
+        etUsuario.setHorizontalAlignment(2);
+        etPassword.setHorizontalAlignment(2);
+        etFoto.setBorder(graficos.bordeNegro);
 
-        frameLogin.efectoHover(botonCancelar);
-        frameLogin.efectoHover(botonIngresar);
+        cajaUsuario.setFocusable(true);
 
+        panelLogin.add(etUsuario);
+        panelLogin.add(etPassword);
         panelLogin.add(botonCancelar);
         panelLogin.add(botonIngresar);
+        panelLogin.add(cajaUsuario);
+        panelLogin.add(cajaPassword);
     }
 
+    private void botonIngresarActionPerformed(ActionEvent e){
+        new Inicio().setVisible(true);
+        this.dispose();
+    }
 
-
+    private void botonCancelarActionPerformed(ActionEvent e){
+        new Alertas().setVisible(true);
+    }
 }

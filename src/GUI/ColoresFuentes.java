@@ -1,6 +1,9 @@
 package GUI;
 
-import javax.swing.border.LineBorder;
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class ColoresFuentes {
@@ -9,13 +12,15 @@ public class ColoresFuentes {
     final public Color Blanco = new Color(255,255,255);
     final public Color Rojo = new Color(241,67,67);
     final public Color Amarillo = new Color(246, 191,79);
-
+    final public Color Gris = new Color(0,0,0, 128);
     //Fuentes
-    final public Font Letra_suave = new Font("Work Sans", 1, 12);
-    final public Font Letra_fuerte = new Font("Work Sans", 1, 13);
+    final public Font Letra_suave = new Font("Work Sans", 0, 12);
+    final public Font Letra_fuerte = new Font("Work Sans", 1, 12);
 
     //Bordes
-    final public LineBorder line = new LineBorder(Color.black, 2);
-
+    final public Border bordeNegro = BorderFactory.createLineBorder(Color.black, 2);
+    final public Border bordeAzul = BorderFactory.createLineBorder(Azul,2);
+    final public Border margen = new EmptyBorder(0, 20, 0, 0);
+    final public CompoundBorder bordeCajas = new CompoundBorder(bordeAzul, margen);
 
 }

@@ -2,7 +2,6 @@ package Usuarios;
 
 public class Usuario {
 
-
     private String ID = "";
     private String Nombre = "";
     private String Usuario = "";

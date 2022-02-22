@@ -7,7 +7,7 @@ public class Paneles extends JPanel {
     public Paneles() {
         this.setLayout(null);
         this.setBackground(graficos.Blanco);
-        this.setBorder(graficos.line);
+        this.setBorder(graficos.bordeNegro);
 
     }
 }
