@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class ColoresFuentes {
@@ -24,11 +25,11 @@ public class ColoresFuentes {
 
     final public Border margenCajas = new EmptyBorder(0, 20, 0, 0);
     final public Border margenPanelesAdmin = new EmptyBorder(10,10,10,10);
-    final public Border margenBotones = new EmptyBorder(5,0,5,0);
+    final public Border margenBotones = new EmptyBorder(10,10,10,10);
 
     final public CompoundBorder bordeCajas = new CompoundBorder(bordeAzul, margenCajas);
     final public CompoundBorder bordePanelesAdmin = new CompoundBorder(margenPanelesAdmin, bordeNegro);
-    final public CompoundBorder bordeBotones = new CompoundBorder(margenBotones, null);
+    final public Border bordeBotones  = new CompoundBorder(margenBotones, bordeAzul);
 
 
 }
