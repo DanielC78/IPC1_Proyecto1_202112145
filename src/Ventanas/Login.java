@@ -2,23 +2,19 @@ package Ventanas;
 import GUI.*;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
+import java.util.Locale;
 
 public class Login extends Formularios{
 
-    //Objetos de otras clases
-    private ColoresFuentes graficos = new ColoresFuentes();
 
     //Objetos de la clase Login
     public Login(){
-        super(395,445,"INICIO DE SESIÓN");
+        super(395,500,"INICIO DE SESIÓN");
         iniciarComponentesLogin();
     }
+
     private JPanel panelLogin = new Paneles();
 
     //Botones
@@ -41,8 +37,8 @@ public class Login extends Formularios{
             85,
             16,
             null,
-            graficos.Gris,
-            graficos.Letra_fuerte
+            grafica.Gris,
+            grafica.Letra_fuerte
 
     );
     private JLabel etPassword = new Etiquetas(
@@ -52,8 +48,8 @@ public class Login extends Formularios{
             85,
             16,
             null,
-            graficos.Gris,
-            graficos.Letra_fuerte
+            grafica.Gris,
+            grafica.Letra_fuerte
 
     );
 
@@ -85,21 +81,29 @@ public class Login extends Formularios{
 
 
     private void iniciarComponentesLogin(){
-        botonCancelar.addActionListener(new ActionListener() {
+        this.getContentPane().add(panelLogin);
+
+        botonIngresar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 botonIngresarActionPerformed(e);
             }
         });
 
-        this.getContentPane().add(panelLogin);
+        botonCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                botonCancelarActionPerformed(e);
+            }
+        });
 
         etUsuario.setHorizontalAlignment(2);
         etPassword.setHorizontalAlignment(2);
-        etFoto.setBorder(graficos.bordeNegro);
+        etFoto.setBorder(grafica.bordeNegro);
 
         cajaUsuario.setFocusable(true);
 
+        panelLogin.add(etFoto);
         panelLogin.add(etUsuario);
         panelLogin.add(etPassword);
         panelLogin.add(botonCancelar);
@@ -109,11 +113,12 @@ public class Login extends Formularios{
     }
 
     private void botonIngresarActionPerformed(ActionEvent e){
-        new Inicio().setVisible(true);
+        new PanelAdministrador("Usuario".toUpperCase()).setVisible(true);
         this.dispose();
     }
 
     private void botonCancelarActionPerformed(ActionEvent e){
-        new Alertas().setVisible(true);
+        new Inicio().setVisible(true);
+        this.dispose();
     }
 }

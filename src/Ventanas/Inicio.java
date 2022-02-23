@@ -12,7 +12,7 @@ public class Inicio extends Formularios{
 
 
     public Inicio(){
-        super(760, 445, "BIBLIOTECA FACULTAD DE INGENIERIA USAC");
+        super(760, 500, "BIBLIOTECA FACULTAD DE INGENIERIA USAC");
         iniciarComponentesInicio();
     }
 

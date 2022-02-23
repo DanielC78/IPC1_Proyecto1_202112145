@@ -11,16 +11,22 @@ public class Formularios extends JFrame {
     private int LayoutX;
     private int LayoutY;
 
+    private int sizeXcont = 55;
+    private int sizeYcont = 50;
+
     protected int sizeX;
     protected int sizeY;
     protected String titulo;
     protected ColoresFuentes grafica = new ColoresFuentes();
 
     private JPanel BordeSuperior = new JPanel();
+    private JPanel contenedorBotones = new JPanel();
+    private JLabel tituloFormulario = new JLabel();
+    private JPanel contenedorIzquierto = new JPanel();
 
     JLabel botonCerrar = new Etiquetas(
             "",
-            17,
+            10,
             14,
             20,
             20,
@@ -31,7 +37,7 @@ public class Formularios extends JFrame {
 
     JLabel botonMinimizar = new Etiquetas(
             "",
-            42,
+            35,
             14,
             20,
             20,
@@ -39,7 +45,6 @@ public class Formularios extends JFrame {
             Color.black,
             grafica.Letra_fuerte
     );
-
 
 
     public Formularios(int sizeX, int sizeY, String titulo) throws HeadlessException {
@@ -54,25 +59,37 @@ public class Formularios extends JFrame {
     }
     private void iniciarComponentesFormularios(){
 
-        this.getContentPane().add(BordeSuperior);
-        BordeSuperior.setBounds(0,0,sizeX,45);
+
         BordeSuperior.setBackground(grafica.Azul);
+        BordeSuperior.setBorder(grafica.bordeNegro);
+        BordeSuperior.setPreferredSize(new Dimension(sizeX,50));
         BordeSuperior.setLayout(new BorderLayout());
-        BordeSuperior.setBorder(new LineBorder(Color.black,2));
+
+        contenedorBotones.setPreferredSize(new Dimension(sizeXcont,sizeYcont));
+        contenedorBotones.setLayout(null);
+        contenedorBotones.setBackground(null);
+        contenedorBotones.add(botonCerrar);
+        contenedorBotones.add(botonMinimizar);
+        contenedorBotones.setLocation(0,0);
+
+        contenedorIzquierto.setBackground(null);
+        contenedorIzquierto.setPreferredSize(new Dimension(sizeXcont, sizeYcont));
+
+        BordeSuperior.add(contenedorBotones, BorderLayout.LINE_START);
+        BordeSuperior.add(contenedorIzquierto, BorderLayout.LINE_END);
+
+        tituloFormulario.setText(titulo);
+        tituloFormulario.setHorizontalAlignment(SwingConstants.CENTER);
+        tituloFormulario.setVerticalAlignment(SwingConstants.CENTER);
+        tituloFormulario.setFont(grafica.Letra_fuerte);
+        tituloFormulario.setForeground(grafica.Blanco);
+
+        BordeSuperior.add(tituloFormulario, BorderLayout.CENTER);
+        this.getContentPane().add(BordeSuperior, BorderLayout.PAGE_START);
+
 
         eventosEntradaSalida(botonCerrar, "X");
         eventosEntradaSalida(botonMinimizar, "_");
-
-        JLabel tituloPrincipal = new JLabel();
-        tituloPrincipal.setText(titulo);
-        tituloPrincipal.setBackground(null);
-        tituloPrincipal.setFont(grafica.Letra_fuerte);
-        tituloPrincipal.setForeground(Color.white);
-        tituloPrincipal.setHorizontalAlignment(0);
-
-        BordeSuperior.add(botonMinimizar);
-        BordeSuperior.add(botonCerrar);
-        BordeSuperior.add(tituloPrincipal);
 
         botonCerrar.addMouseListener(new MouseAdapter() {
             @Override
@@ -101,6 +118,8 @@ public class Formularios extends JFrame {
                 bordeSuperiorMouseDragged(e);
             }
         });
+
+
     }
 
     private void eventosEntradaSalida(JLabel etiqueta, String textoMostrado){
