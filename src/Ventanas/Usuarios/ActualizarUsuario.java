@@ -1,4 +1,4 @@
-package Ventanas;
+package Ventanas.Usuarios;
 
 import GUI.Formularios;
 

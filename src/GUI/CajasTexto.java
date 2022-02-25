@@ -6,18 +6,9 @@ import java.awt.*;
 public class CajasTexto extends JTextField {
 
     private ColoresFuentes graficos = new ColoresFuentes();
-    protected int posX;
-    protected int posY;
-    protected int ancho;
-    protected int alto;
 
-    public CajasTexto(int posX, int posY, int ancho, int alto) {
-        this.posX = posX;
-        this.posY = posY;
-        this.ancho = ancho;
-        this.alto = alto;
+    public CajasTexto() {
         iniciarComponentesCT();
-
     }
 
     public void iniciarComponentesCT(){
@@ -27,6 +18,5 @@ public class CajasTexto extends JTextField {
         this.setFont(graficos.Letra_suave);
         this.setForeground(graficos.Gris);
         this.setBackground(graficos.Blanco);
-        this.setBounds(posX,posY,ancho,alto);
     }
 }

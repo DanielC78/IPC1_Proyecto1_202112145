@@ -24,27 +24,8 @@ public class Formularios extends JFrame {
     private JLabel tituloFormulario = new JLabel();
     private JPanel contenedorIzquierto = new JPanel();
 
-    JLabel botonCerrar = new Etiquetas(
-            "",
-            10,
-            14,
-            20,
-            20,
-            grafica.Rojo,
-            Color.black,
-            grafica.Letra_fuerte
-    );
-
-    JLabel botonMinimizar = new Etiquetas(
-            "",
-            35,
-            14,
-            20,
-            20,
-            grafica.Amarillo,
-            Color.black,
-            grafica.Letra_fuerte
-    );
+    JLabel botonCerrar = new Etiquetas("", grafica.Rojo, Color.black, grafica.Letra_fuerte);
+    JLabel botonMinimizar = new Etiquetas("", grafica.Amarillo, Color.black, grafica.Letra_fuerte);
 
 
     public Formularios(int sizeX, int sizeY, String titulo) throws HeadlessException {
@@ -60,6 +41,8 @@ public class Formularios extends JFrame {
     private void iniciarComponentesFormularios(){
 
 
+        botonCerrar.setBounds(10, 14, 20, 20);
+        botonMinimizar.setBounds( 35, 14, 20, 20);
         BordeSuperior.setBackground(grafica.Azul);
         BordeSuperior.setBorder(grafica.bordeNegro);
         BordeSuperior.setPreferredSize(new Dimension(sizeX,50));

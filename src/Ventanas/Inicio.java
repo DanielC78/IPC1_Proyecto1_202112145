@@ -23,51 +23,15 @@ public class Inicio extends Formularios{
     private JPanel panelInicio = new Paneles();
     //Botones
 
-    private JButton botonIngresar = new Botones("INICAR SESIÓN",
-            585,
-            111,
-            118,
-            29);
+    private JButton botonIngresar = new Botones("INICAR SESIÓN");
 
-    private JButton botonAbout = new Botones("ACERCA DE NOSOTROS",
-            52,
-            381,
-            150,
-            29);
+    private JButton botonAbout = new Botones("ACERCA DE NOSOTROS");
 
     //Etiquetas
-    private JLabel marcoLogin = new Etiquetas(
-            "",
-            53,
-            91,
-            665,
-            69,
-            graficos.Blanco,
-            Color.black,
-            graficos.Letra_fuerte
-    );
+    private JLabel marcoLogin = new Etiquetas("", graficos.Blanco, Color.black, graficos.Letra_fuerte);
 
-    private JLabel marcoAbout = new Etiquetas(
-            "",
-            437,
-            182,
-            280,
-            138,
-            null,
-            null,
-            null
-
-    );
-    private JLabel marcoLogo = new Etiquetas("",
-            53,
-            182,
-            345,
-            138,
-            null,
-            null,
-            null
-
-    );
+    private JLabel marcoAbout = new Etiquetas("", null, null, null);
+    private JLabel marcoLogo = new Etiquetas("", null, null, null);
 
     private void iniciarComponentesInicio(){
         botonIngresar.addActionListener(new ActionListener() {
@@ -90,8 +54,8 @@ public class Inicio extends Formularios{
     }
 
     private void IngresarActionPerformanced(ActionEvent e) {
+        this.setVisible(false);
         new Login().setVisible(true);
-        this.dispose();
     }
 
 

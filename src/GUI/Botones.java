@@ -12,17 +12,9 @@ public class Botones extends JButton{
     ColoresFuentes graficos = new ColoresFuentes();
 
     protected String mensaje;
-    protected int posicionX;
-    protected int posicionY;
-    protected int ancho;
-    protected int alto;
 
-    public Botones(String mensaje, int posicionX, int posicionY, int ancho, int alto) {
+    public Botones(String mensaje) {
         this.mensaje = mensaje;
-        this.posicionX = posicionX;
-        this.posicionY = posicionY;
-        this.ancho = ancho;
-        this.alto = alto;
         inicarComponenteBotones();
     }
 
@@ -39,7 +31,6 @@ public class Botones extends JButton{
         this.setFont(graficos.Letra_fuerte);
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
         this.setText(mensaje);
-        this.setBounds(posicionX,posicionY,ancho,alto);
         efectoHover();
     }
 
@@ -50,14 +41,14 @@ public class Botones extends JButton{
                 super.mouseEntered(e);
                 Botones.this.setForeground(graficos.Azul);
                 Botones.this.setBackground(graficos.Blanco);
-                Botones.this.setBorder(new LineBorder(graficos.Azul, 2, true));
+                Botones.this.setBorder(new LineBorder(graficos.Azul, 3, true));
             }
 
             public void mouseExited(MouseEvent e){
                 super.mouseExited(e);
                 Botones.this.setForeground(graficos.Blanco);
                 Botones.this.setBackground(graficos.Azul);
-                Botones.this.setBorder(new LineBorder(graficos.Azul, 2,true));
+                Botones.this.setBorder(graficos.bordeAzul);
             }
 
         });

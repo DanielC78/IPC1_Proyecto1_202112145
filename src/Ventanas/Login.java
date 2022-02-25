@@ -2,6 +2,7 @@ package Ventanas;
 import GUI.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
@@ -18,24 +19,12 @@ public class Login extends Formularios{
     private JPanel panelLogin = new Paneles();
 
     //Botones
-    private JButton botonIngresar = new Botones("INGRESAR",
-            238,
-            367,
-            118,
-            29);
-    private JButton botonCancelar = new Botones("CANCELAR",
-            42,
-            367,
-            118,
-            29);
+    private JButton botonIngresar = new Botones("INGRESAR");
+    private JButton botonCancelar = new Botones("CANCELAR");
 
     //Etiquetas
     private JLabel etUsuario = new Etiquetas(
             "USUARIO",
-            83,
-            184,
-            85,
-            16,
             null,
             grafica.Gris,
             grafica.Letra_fuerte
@@ -43,45 +32,30 @@ public class Login extends Formularios{
     );
     private JLabel etPassword = new Etiquetas(
             "CONTRASEÑA",
-            83,
-            264,
-            85,
-            16,
             null,
             grafica.Gris,
             grafica.Letra_fuerte
 
     );
 
-    private JLabel etFoto = new Etiquetas(
-            "",
-            162,
-            70,
-            80,
-            85,
-            null,
-            null,
-            null
-    );
+    private JLabel etFoto = new Etiquetas("", null, null, null);
 
 
     //Cajas de texto
-    private JTextField cajaUsuario = new CajasTexto(
-            83,
-            204,
-            229,
-            50
-    );
-    private JTextField cajaPassword = new CajasTexto(
-            83,
-            284 ,
-            229,
-            50
-    );
+    private JTextField cajaUsuario = new CajasTexto();
+    private JPasswordField cajaPassword = new JPasswordField();
 
 
     private void iniciarComponentesLogin(){
         this.getContentPane().add(panelLogin);
+
+        cajaUsuario.setBounds(83, 204, 229, 50);
+        cajaPassword.setBounds(83,284 ,229,50);
+        cajaPassword.setOpaque(true);
+        cajaPassword.setBorder(grafica.bordeCajas);
+        cajaPassword.setFont(grafica.Letra_suave);
+        cajaPassword.setForeground(grafica.Gris);
+        cajaPassword.setCursor(new Cursor(Cursor.TEXT_CURSOR));
 
         botonIngresar.addActionListener(new ActionListener() {
             @Override
@@ -118,7 +92,7 @@ public class Login extends Formularios{
     }
 
     private void botonCancelarActionPerformed(ActionEvent e){
+        this.setVisible(false);
         new Inicio().setVisible(true);
-        this.dispose();
     }
 }
