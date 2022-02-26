@@ -4,15 +4,20 @@ import GUI.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CrearUsuario extends Formularios {
 
     private static int anchoVentana = 500;
     private static int altoVentana = 600;
+    private String mensajeAlerta;
 
     public CrearUsuario(){
         super(anchoVentana, altoVentana,"CREAR USUARIOS");
+        botonMaximizar.setVisible(false);
         componentesCrearUsuario();
+
     }
 
     //Lista de roles
@@ -30,9 +35,10 @@ public class CrearUsuario extends Formularios {
     private JPanel rellenoDerecho = new Paneles();
     private JPanel rellenoIzquierdo = new Paneles();
     private JPanel rellenoCentral = new Paneles();
+    private JPanel rellenoCajas = new Paneles();
 
     //Botones
-    private JButton botonAceptar= new Botones("CREAR");
+    private JButton botonCrear = new Botones("CREAR");
     private JButton botonCancelar= new Botones("CANCELAR");
 
     //Cajas de texto
@@ -66,7 +72,7 @@ public class CrearUsuario extends Formularios {
         contenedorBotones.setLayout(new BorderLayout());
         contenedorBotones.setPreferredSize(new Dimension(anchoVentana,100));
 
-        contenedorCajas.setLayout(new GridLayout(7,1));
+        contenedorCajas.setLayout(new GridLayout(7,1,0,30));
 
         rellenoCentral.setLayout(new FlowLayout(FlowLayout.CENTER,25,15));
 
@@ -76,8 +82,23 @@ public class CrearUsuario extends Formularios {
         agregarRellenoBotones(rellenoIzquierdo, BorderLayout.LINE_START, 10, altoVentana);
         agregarRellenoBotones(rellenoCentral,BorderLayout.CENTER, 10,10);
 
-        agregarBotones(botonAceptar, FlowLayout.CENTER);
+        agregarBotones(botonCrear, FlowLayout.CENTER);
         agregarBotones(botonCancelar, FlowLayout.CENTER);
+
+        rellenoCajas.setLayout(new BorderLayout());
+        JPanel cajasIz = new Paneles();
+        JPanel cajasSup = new Paneles();
+        cajasSup.setPreferredSize(new Dimension(50,20));
+        cajasIz.setPreferredSize(new Dimension(50,sizeY));
+
+        cajasIz.setBorder(null);
+        cajasSup.setBorder(null);
+        rellenoCajas.setBorder(null);
+        contenedorCajas.setBorder(null);
+
+        rellenoCajas.add(cajasSup, BorderLayout.PAGE_START);
+        rellenoCajas.add(cajasIz, BorderLayout.LINE_END);
+        rellenoCajas.add(contenedorCajas, BorderLayout.CENTER);
 
         agregarCajasNormales(cajaID);
         agregarCajasNormales(cajaNombre);
@@ -89,12 +110,20 @@ public class CrearUsuario extends Formularios {
 
         agregarPaneles(contenedorBotones, BorderLayout.PAGE_END);
         agregarPaneles(contenedorEtiquetas, BorderLayout.WEST);
-        agregarPaneles(contenedorCajas, BorderLayout.EAST);
+        agregarPaneles(rellenoCajas, BorderLayout.EAST);
+
+        botonCrear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                funcionBtnCrear(e);
+            }
+        });
+
 
     }
 
     private void agregarEtiqueta(String texto){
-        JLabel etiqueta = new Etiquetas("         " + texto,grafica.Blanco,grafica.Negro,grafica.Letra_fuerte);
+        JLabel etiqueta = new Etiquetas("                    " + texto,grafica.Blanco,grafica.Negro,grafica.Letra_fuerte);
         etiqueta.setHorizontalAlignment(SwingConstants.LEFT);
         contenedorEtiquetas.add(etiqueta);
     }
@@ -128,5 +157,21 @@ public class CrearUsuario extends Formularios {
         contenedorCajas.add(txtNormal);
     }
 
+    private void funcionBtnCrear(ActionEvent e){
+        if(validarCamposVacios()){
+            mensajeAlerta = "DEBE DE LLENAR TODOS LOS CAMPOS";
+        }
 
+        Alertas validacionesCrear = new Alertas(mensajeAlerta);
+        validacionesCrear.setVisible(true);
+
+    }
+
+    private boolean validarCamposVacios(){
+        if(cajaID.getText().isEmpty() || cajaNombre.getText().isEmpty() || cajaApellido.getText().isEmpty() || cajaUsuario.getText().isEmpty() || cajaPassword.getPassword().length == 0 || cajaConfirmPassword.getPassword().length == 0){
+            return true;
+        } else{
+            return false;
+        }
+    }
 }

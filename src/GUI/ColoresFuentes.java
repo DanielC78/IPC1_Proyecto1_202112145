@@ -15,6 +15,7 @@ public class ColoresFuentes {
     final public Color Amarillo = new Color(246, 191,79);
     final public Color Gris = new Color(0,0,0, 128);
     final public Color Negro = new Color(0,0,0);
+    final public Color Verde = new Color(100,202,87);
     //Fuentes
     final public Font Letra_suave = new Font("Work Sans", 0, 12);
     final public Font Letra_fuerte = new Font("Work Sans", 1, 12);

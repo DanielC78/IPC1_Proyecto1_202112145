@@ -5,7 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Locale;
 
 public class Login extends Formularios{
 
@@ -13,6 +12,7 @@ public class Login extends Formularios{
     //Objetos de la clase Login
     public Login(){
         super(395,500,"INICIO DE SESIÓN");
+        botonMaximizar.setVisible(false);
         iniciarComponentesLogin();
     }
 

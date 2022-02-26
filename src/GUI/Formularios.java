@@ -23,9 +23,9 @@ public class Formularios extends JFrame {
     private JLabel tituloFormulario = new JLabel();
     private JPanel contenedorIzquierto = new JPanel();
 
-    JLabel botonCerrar = new Etiquetas("", grafica.Rojo, Color.black, grafica.Letra_fuerte);
-    JLabel botonMinimizar = new Etiquetas("", grafica.Amarillo, Color.black, grafica.Letra_fuerte);
-    JLabel botonMazimizar = new Etiquetas("", Color.green, Color.black, grafica.Letra_fuerte);
+    public JLabel botonCerrar = new Etiquetas("", grafica.Rojo, Color.black, grafica.Letra_fuerte);
+    public JLabel botonMinimizar = new Etiquetas("", grafica.Amarillo, Color.black, grafica.Letra_fuerte);
+    public JLabel botonMaximizar = new Etiquetas("", grafica.Verde, Color.black, grafica.Letra_fuerte);
 
 
     public Formularios(int sizeX, int sizeY, String titulo) throws HeadlessException {
@@ -44,7 +44,7 @@ public class Formularios extends JFrame {
 
         botonCerrar.setBounds(10, 14, 20, 20);
         botonMinimizar.setBounds( 35, 14, 20, 20);
-        botonMazimizar.setBounds(60, 14,20,20);
+        botonMaximizar.setBounds(60, 14,20,20);
 
         BordeSuperior.setBackground(grafica.Azul);
         BordeSuperior.setBorder(grafica.bordeNegro);
@@ -57,7 +57,7 @@ public class Formularios extends JFrame {
 
         contenedorBotones.add(botonCerrar);
         contenedorBotones.add(botonMinimizar);
-        contenedorBotones.add(botonMazimizar);
+        contenedorBotones.add(botonMaximizar);
 
         contenedorBotones.setLocation(0,0);
 
@@ -79,7 +79,7 @@ public class Formularios extends JFrame {
 
         eventosEntradaSalida(botonCerrar, "X");
         eventosEntradaSalida(botonMinimizar, "_");
-        eventosEntradaSalida(botonMazimizar, "+");
+        eventosEntradaSalida(botonMaximizar, "+");
 
         botonCerrar.addMouseListener(new MouseAdapter() {
             @Override
@@ -95,7 +95,7 @@ public class Formularios extends JFrame {
             }
         });
 
-        botonMazimizar.addMouseListener(new MouseAdapter() {
+        botonMaximizar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 funcionBtnMaximizar(e);
