@@ -1,7 +1,6 @@
 package GUI;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,7 +10,7 @@ public class Formularios extends JFrame {
     private int LayoutX;
     private int LayoutY;
 
-    private int sizeXcont = 55;
+    private int sizeXcont = 80;
     private int sizeYcont = 50;
 
     protected int sizeX;
@@ -26,6 +25,7 @@ public class Formularios extends JFrame {
 
     JLabel botonCerrar = new Etiquetas("", grafica.Rojo, Color.black, grafica.Letra_fuerte);
     JLabel botonMinimizar = new Etiquetas("", grafica.Amarillo, Color.black, grafica.Letra_fuerte);
+    JLabel botonMazimizar = new Etiquetas("", Color.green, Color.black, grafica.Letra_fuerte);
 
 
     public Formularios(int sizeX, int sizeY, String titulo) throws HeadlessException {
@@ -33,16 +33,19 @@ public class Formularios extends JFrame {
         this.sizeY = sizeY;
         this.titulo = titulo;
         this.setSize(sizeX, sizeY);
+        this.setTitle(titulo);
         this.setUndecorated(true);
+        this.setExtendedState(NORMAL);
         this.setLayout(new BorderLayout());
         this.setLocationRelativeTo(null);
         iniciarComponentesFormularios();
     }
     private void iniciarComponentesFormularios(){
 
-
         botonCerrar.setBounds(10, 14, 20, 20);
         botonMinimizar.setBounds( 35, 14, 20, 20);
+        botonMazimizar.setBounds(60, 14,20,20);
+
         BordeSuperior.setBackground(grafica.Azul);
         BordeSuperior.setBorder(grafica.bordeNegro);
         BordeSuperior.setPreferredSize(new Dimension(sizeX,50));
@@ -51,8 +54,11 @@ public class Formularios extends JFrame {
         contenedorBotones.setPreferredSize(new Dimension(sizeXcont,sizeYcont));
         contenedorBotones.setLayout(null);
         contenedorBotones.setBackground(null);
+
         contenedorBotones.add(botonCerrar);
         contenedorBotones.add(botonMinimizar);
+        contenedorBotones.add(botonMazimizar);
+
         contenedorBotones.setLocation(0,0);
 
         contenedorIzquierto.setBackground(null);
@@ -73,18 +79,26 @@ public class Formularios extends JFrame {
 
         eventosEntradaSalida(botonCerrar, "X");
         eventosEntradaSalida(botonMinimizar, "_");
+        eventosEntradaSalida(botonMazimizar, "+");
 
         botonCerrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                botonCerrarMouseClicked(e);
+                funcionBtnCerrar(e);
             }
         });
 
         botonMinimizar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                botonMinimizarMouseClicked(e);
+                funcionBtnMinimizar(e);
+            }
+        });
+
+        botonMazimizar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                funcionBtnMaximizar(e);
             }
         });
 
@@ -121,12 +135,20 @@ public class Formularios extends JFrame {
         });
     }
 
-    private void botonCerrarMouseClicked(MouseEvent e){
+    private void funcionBtnCerrar(MouseEvent e){
         this.dispose();
     }
 
-    private void botonMinimizarMouseClicked(MouseEvent e){
+    private void funcionBtnMinimizar(MouseEvent e){
         this.setExtendedState(ICONIFIED);
+    }
+
+    private void funcionBtnMaximizar(MouseEvent e){
+        if(this.getExtendedState() == MAXIMIZED_BOTH){
+            this.setExtendedState(NORMAL);
+        } else{
+            this.setExtendedState(MAXIMIZED_BOTH);
+        }
     }
 
     private void bordeSuperiorMouseDragged(MouseEvent e){
@@ -137,5 +159,6 @@ public class Formularios extends JFrame {
         LayoutX = e.getX();
         LayoutY = e.getY();
     }
+
 }
 

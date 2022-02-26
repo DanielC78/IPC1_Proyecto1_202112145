@@ -24,30 +24,15 @@ public class PanelAdministrador extends Formularios {
     private JPanel panelLibros = new Paneles();
 
     private JPanel contenedorReportes = new JPanel();
-    private JPanel rellenoIzq = new JPanel();
-    private JPanel rellenoDer = new JPanel();
 
     private JPanel contenedorLibros= new JPanel();
     private JPanel contenedorUsuarios= new JPanel();
 
-    private int sizeContRellenX = 25;
-    private int sizeContRellenY = 500;
+    private JLabel tituloReportes = new Etiquetas("REPORTES", null, grafica.Negro, grafica.Letra_fuerte);
+    private JLabel tituloLibros = new Etiquetas("BIBLIOGRAFÍAS", null, grafica.Negro, grafica.Letra_fuerte);
+    private JLabel tituloUsuarios = new Etiquetas("USUARIOS", null, grafica.Negro, grafica.Letra_fuerte);
 
-    private JLabel tituloReportes = new Etiquetas("REPORTES", null, Color.black, grafica.Letra_fuerte);
-    private JLabel tituloLibros = new Etiquetas("BIBLIOGRAFÍAS", null, Color.black, grafica.Letra_fuerte);
-    private JLabel tituloUsuarios = new Etiquetas("USUARIOS", null, Color.black, grafica.Letra_fuerte);
-
-
-    JLabel tituloInfo = new Etiquetas(
-      informacionUser, null, grafica.Negro, grafica.Letra_fuerte);
-
-    //Tamaños de los botones del repositorio
-    private int sizeXBR = 5;
-    private int sizeYBR = 5;
-
-    //Tamaños de los botones de Usuario y Bibliografia
-    private int sizeXUB = 1;
-    private int sizeYUB = 1;
+    private JLabel tituloInfo = new Etiquetas(informacionUser, null, grafica.Negro, grafica.Letra_fuerte);
 
     //Botones para reportes
     private JButton userRepo = new Botones("USUARIO");
@@ -193,6 +178,15 @@ public class PanelAdministrador extends Formularios {
         this.setVisible(false);
         new VerUsuario().setVisible(true);
         this.dispose();
+    }
+
+
+    //Getters y setters
+    public JLabel getTituloInfo() {
+        return tituloInfo;
+    }
+    public void setTituloInfo(JLabel tituloInfo) {
+        this.tituloInfo = tituloInfo;
     }
 
 }
