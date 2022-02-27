@@ -1,6 +1,7 @@
 package Ventanas;
 
 import GUI.*;
+import Usuarios.UsuarioNormal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,18 +11,17 @@ import java.awt.event.ActionListener;
 public class CrearUsuario extends Formularios {
 
     private static int anchoVentana = 500;
-    private static int altoVentana = 600;
+    private static int altoVentana = 550;
     private String mensajeAlerta;
 
     public CrearUsuario(){
         super(anchoVentana, altoVentana,"CREAR USUARIOS");
         botonMaximizar.setVisible(false);
         componentesCrearUsuario();
-
     }
 
     //Lista de roles
-    String[] roles = {"ESTUDIANTE", "CATEDRÁTICO"};
+    String[] roles = {"SELECCIONAR UN ROL","ESTUDIANTE", "CATEDRÁTICO"};
 
     //Paneles contenedores
     private JPanel panelCrearUsuario = new Paneles();
@@ -119,32 +119,36 @@ public class CrearUsuario extends Formularios {
             }
         });
 
+        botonCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                funcionBtnCancelar(e);
+            }
+        });
+
 
     }
 
+    //Agregar elemenos a la ventana
     private void agregarEtiqueta(String texto){
         JLabel etiqueta = new Etiquetas("                    " + texto,grafica.Blanco,grafica.Negro,grafica.Letra_fuerte);
         etiqueta.setHorizontalAlignment(SwingConstants.LEFT);
         contenedorEtiquetas.add(etiqueta);
     }
-
     private void agregarPaneles(JPanel panel, Object alineacion){
         panel.setBorder(null);
         panelCrearUsuario.add(panel, alineacion);
     }
-
     private void agregarBotones(JButton boton, Object alineacion){
         boton.setPreferredSize(new Dimension(140, 50));
         rellenoCentral.add(boton, alineacion);
     }
-
     private void agregarRellenoBotones(JPanel panel, Object alineacion, int ancho, int alto){
         panel.setBorder(null);
         panel.setBackground(grafica.Blanco);
         panel.setPreferredSize(new Dimension(ancho, alto));
         contenedorBotones.add(panel, alineacion);
     }
-
     private void agregarCajasPassword(JPasswordField txtPassword){
         txtPassword.setBorder(grafica.bordeCajas);
         txtPassword.setFont(grafica.Letra_suave);
@@ -152,26 +156,41 @@ public class CrearUsuario extends Formularios {
         txtPassword.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         contenedorCajas.add(txtPassword);
     }
-
     private void agregarCajasNormales(JTextField txtNormal){
         contenedorCajas.add(txtNormal);
     }
 
+    //Funcion de los botones
     private void funcionBtnCrear(ActionEvent e){
-        if(validarCamposVacios()){
-            mensajeAlerta = "DEBE DE LLENAR TODOS LOS CAMPOS";
+        if(!validarCamposVacios()){
+            UsuarioNormal normal = new UsuarioNormal(cajaID.getText(), cajaNombre.getText(), cajaApellido.getText(),cajaUsuario.getText(), cajaPassword.getPassword().toString(),(String)listaRoles.getSelectedItem());
         }
 
-        Alertas validacionesCrear = new Alertas(mensajeAlerta);
-        validacionesCrear.setVisible(true);
-
+    }
+    private void funcionBtnCancelar(ActionEvent e){
+        this.setVisible(false);
+        new PanelAdministrador("Daniel Cuque").setVisible(true);
+        this.dispose();
     }
 
     private boolean validarCamposVacios(){
-        if(cajaID.getText().isEmpty() || cajaNombre.getText().isEmpty() || cajaApellido.getText().isEmpty() || cajaUsuario.getText().isEmpty() || cajaPassword.getPassword().length == 0 || cajaConfirmPassword.getPassword().length == 0){
-            return true;
+        boolean validacion;
+        if(cajaID.getText().isEmpty() || cajaNombre.getText().isEmpty() || cajaApellido.getText().isEmpty() || cajaUsuario.getText().isEmpty() || cajaPassword.getText() == "" || cajaConfirmPassword.getText() == "" ){
+            mensajeAlerta = "<html><p style=\"text-align:center\">DEBE DE LLENAR <p>TODOS LOS CAMPOS<p></p><html>";
+            validacion = true;
+
+        } else if(listaRoles.getSelectedIndex() == 0){
+            mensajeAlerta = "DEBE DE SELECCIONAR UN ROL";
+            validacion = true;
         } else{
-            return false;
+            validacion = false;
         }
+
+        if(validacion){
+            Alertas validacionesCrear = new Alertas(mensajeAlerta);
+            validacionesCrear.setVisible(true);
+            return true;
+        }
+            return false;
     }
 }

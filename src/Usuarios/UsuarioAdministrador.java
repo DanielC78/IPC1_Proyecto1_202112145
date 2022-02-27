@@ -13,7 +13,7 @@ public class UsuarioAdministrador extends Usuario{
     private static String matrizUsuarios[][];
 
     public UsuarioAdministrador(String ID, String nombres, String apellidos, String user, String password, String rol, String[][] matrizUsuarios) {
-        super(ID, nombres, apellidos, user, password, rol, matrizUsuarios);
+        super(ID, nombres, apellidos, user, password, rol);
     }
 
     //Getters y Setters
