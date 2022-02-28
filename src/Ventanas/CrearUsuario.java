@@ -172,7 +172,14 @@ public class CrearUsuario extends Formularios {
 
         ValidacionesUsuario validar = new ValidacionesUsuario();
         if(!validar.validacionCamposVacios(id,nombre,apellido,usuario,rol,password,confirmPassword)){
-            Usuario crearUsuario = new Usuario(id, nombre, apellido, usuario, rol, password);
+            Usuario crearUsuario = new Usuario();
+            crearUsuario.setID(id);
+            crearUsuario.setNombres(nombre);
+            crearUsuario.setApellidos(apellido);
+            crearUsuario.setUser(usuario);
+            crearUsuario.setRol(rol);
+            crearUsuario.setPassword(password);
+
             if(crearUsuario.crearUsuario()){
                 System.out.println("Usuario creado con exito");
             } else{
