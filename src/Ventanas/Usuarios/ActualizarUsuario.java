@@ -1,7 +1,6 @@
 package Ventanas.Usuarios;
 
 import GUI.*;
-import Usuarios.UsuarioNormal;
 import Ventanas.Alertas;
 import Ventanas.PanelAdministrador;
 
@@ -192,7 +191,6 @@ public class ActualizarUsuario extends Formularios {
     //Funcion de los botones
     private void funcionBtnCrear(ActionEvent e){
         if(!validarCamposVacios()){
-            UsuarioNormal normal = new UsuarioNormal(cajaID.getText(), cajaNombre.getText(), cajaApellido.getText(),cajaUsuario.getText(), cajaPassword.getPassword().toString(),(String)listaRoles.getSelectedItem());
         }
 
     }

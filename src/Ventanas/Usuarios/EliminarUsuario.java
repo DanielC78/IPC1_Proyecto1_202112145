@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 
 public class EliminarUsuario extends Formularios {
 
-
     private static int anchoVentana = 500;
     private static int altoVentana = 450;
     private String mensajeAlerta;

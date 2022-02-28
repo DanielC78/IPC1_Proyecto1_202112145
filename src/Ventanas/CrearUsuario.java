@@ -1,7 +1,8 @@
 package Ventanas;
 
 import GUI.*;
-import Usuarios.UsuarioNormal;
+import Usuarios.Usuario;
+import Usuarios.ValidacionesUsuario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,6 @@ public class CrearUsuario extends Formularios {
 
     private static int anchoVentana = 500;
     private static int altoVentana = 550;
-    private String mensajeAlerta;
 
     public CrearUsuario(){
         super(anchoVentana, altoVentana,"CREAR USUARIOS");
@@ -162,8 +162,22 @@ public class CrearUsuario extends Formularios {
 
     //Funcion de los botones
     private void funcionBtnCrear(ActionEvent e){
-        if(!validarCamposVacios()){
-            UsuarioNormal normal = new UsuarioNormal(cajaID.getText(), cajaNombre.getText(), cajaApellido.getText(),cajaUsuario.getText(), cajaPassword.getPassword().toString(),(String)listaRoles.getSelectedItem());
+        String id = cajaID.getText();
+        String nombre = cajaNombre.getText();
+        String apellido = cajaApellido.getText();
+        String usuario = cajaUsuario.getText();
+        String rol = (String)listaRoles.getSelectedItem();
+        String password = cajaPassword.getText();
+        String confirmPassword = cajaConfirmPassword.getText();
+
+        ValidacionesUsuario validar = new ValidacionesUsuario();
+        if(!validar.validacionCamposVacios(id,nombre,apellido,usuario,rol,password,confirmPassword)){
+            Usuario crearUsuario = new Usuario(id, nombre, apellido, usuario, rol, password);
+            if(crearUsuario.crearUsuario()){
+                System.out.println("Usuario creado con exito");
+            } else{
+                System.out.println("No se pudo crear");
+            }
         }
 
     }
@@ -173,24 +187,4 @@ public class CrearUsuario extends Formularios {
         this.dispose();
     }
 
-    private boolean validarCamposVacios(){
-        boolean validacion;
-        if(cajaID.getText().isEmpty() || cajaNombre.getText().isEmpty() || cajaApellido.getText().isEmpty() || cajaUsuario.getText().isEmpty() || cajaPassword.getText() == "" || cajaConfirmPassword.getText() == "" ){
-            mensajeAlerta = "<html><p style=\"text-align:center\">DEBE DE LLENAR <p>TODOS LOS CAMPOS<p></p><html>";
-            validacion = true;
-
-        } else if(listaRoles.getSelectedIndex() == 0){
-            mensajeAlerta = "DEBE DE SELECCIONAR UN ROL";
-            validacion = true;
-        } else{
-            validacion = false;
-        }
-
-        if(validacion){
-            Alertas validacionesCrear = new Alertas(mensajeAlerta);
-            validacionesCrear.setVisible(true);
-            return true;
-        }
-            return false;
-    }
 }
