@@ -180,11 +180,12 @@ public class CrearUsuario extends Formularios {
             crearUsuario.setRol(rol);
             crearUsuario.setPassword(password);
 
-            if(crearUsuario.crearUsuario()){
-                System.out.println("Usuario creado con exito");
-            } else{
-                System.out.println("No se pudo crear");
-            }
+            Usuario nuevoUsuario = new Usuario();
+            String mensaje = nuevoUsuario.crearUsuario();
+            System.out.println(mensaje);
+            Alertas mensajeAlerta = new Alertas(mensaje.toUpperCase());
+            mensajeAlerta.setVisible(true);
+
         }
 
     }

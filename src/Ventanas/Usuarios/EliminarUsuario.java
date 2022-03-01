@@ -1,6 +1,7 @@
 package Ventanas.Usuarios;
 
 import GUI.*;
+import Usuarios.Usuario;
 import Ventanas.Alertas;
 import Ventanas.PanelAdministrador;
 
@@ -14,25 +15,24 @@ public class EliminarUsuario extends Formularios {
     private static int anchoVentana = 500;
     private static int altoVentana = 450;
     private String mensajeAlerta;
+    private int indiceActualizar;
 
     public EliminarUsuario(){
         super(anchoVentana,altoVentana,"ELIMINAR USUARIOS");
         botonMaximizar.setVisible(false);
-        componentesActualizarUsuario();
+        componentesEliminarUsuario();
     }
 
 
     //Lista de roles
-    String[] roles = {"SELECCIONAR UN ROL","ESTUDIANTE", "CATEDRÁTICO"};
 
     //Paneles contenedores
-    private JPanel panelCrearUsuario = new Paneles();
+    private JPanel panelEliminarUsuario = new Paneles();
     private JPanel contenedorAuxiliarEtiquetas = new Paneles();
     private JPanel contenedorCajas = new Paneles();
     private JPanel contenedorBotones = new Paneles();
 
     private JPanel contenedorPrincipalEtiquetas = new Paneles();
-
 
     //Relleno
     private JPanel rellenoSuperiorCajas = new Paneles();
@@ -57,14 +57,11 @@ public class EliminarUsuario extends Formularios {
     private JTextField cajaUsuario = new CajasTexto();
 
 
-    //Menu de opciones
-    private JComboBox<String> listaRoles = new JComboBox<>(roles);
-
-    private void componentesActualizarUsuario(){
-        this.getContentPane().add(panelCrearUsuario);
+    private void componentesEliminarUsuario(){
+        this.getContentPane().add(panelEliminarUsuario);
 
         //Layout de los paneles contenedores
-        panelCrearUsuario.setLayout(new BorderLayout());
+        panelEliminarUsuario.setLayout(new BorderLayout());
 
         contenedorBotones.setLayout(new BorderLayout());
         contenedorBotones.setPreferredSize(new Dimension(anchoVentana,100));
@@ -125,7 +122,6 @@ public class EliminarUsuario extends Formularios {
         agregarCajasNormales(cajaNombre);
         agregarCajasNormales(cajaApellido);
         agregarCajasNormales(cajaUsuario);
-        contenedorCajas.add(listaRoles);
 
 
         //Agregar paneles al panel principal
@@ -158,7 +154,7 @@ public class EliminarUsuario extends Formularios {
     }
     private void agregarPaneles(JPanel panel, Object alineacion){
         panel.setBorder(null);
-        panelCrearUsuario.add(panel, alineacion);
+        panelEliminarUsuario.add(panel, alineacion);
     }
     private void agregarBotones(JButton boton, Object alineacion){
         boton.setPreferredSize(new Dimension(140, 50));
@@ -171,13 +167,12 @@ public class EliminarUsuario extends Formularios {
         contenedorBotones.add(panel, alineacion);
     }
     private void agregarCajasNormales(JTextField txtNormal){
+        txtNormal.setEnabled(false);
         contenedorCajas.add(txtNormal);
     }
 
     //Funcion de los botones
     private void funcionBtnEliminar(ActionEvent e){
-        if(!validarCamposVacios()){
-        }
 
     }
 
@@ -187,25 +182,25 @@ public class EliminarUsuario extends Formularios {
         this.dispose();
     }
 
-    //Validacion de campos
-    private boolean validarCamposVacios(){
-        boolean validacion;
-        if(cajaID.getText().isEmpty() || cajaNombre.getText().isEmpty() || cajaApellido.getText().isEmpty() || cajaUsuario.getText().isEmpty()){
-            mensajeAlerta = "<html><p style=\"text-align:center\">DEBE DE LLENAR <p>TODOS LOS CAMPOS<p></p><html>";
-            validacion = true;
-
-        } else if(listaRoles.getSelectedIndex() == 0){
-            mensajeAlerta = "DEBE DE SELECCIONAR UN ROL";
-            validacion = true;
+    private void funcionBtnBuscar(ActionEvent e){
+        Usuario datosUsuario = new Usuario();
+        String[] matrizDatos;
+        if(cajaID.getText().length() > 0){
+            matrizDatos = datosUsuario.datosUsuario(cajaID.getText());
+            if(matrizDatos[0] != null){
+                for (int i = 0; i < matrizDatos.length; i++){
+                    System.out.println(matrizDatos[i]);
+                }
+                cajaNombre.setText(matrizDatos[1]);
+                cajaApellido.setText(matrizDatos[2]);
+                cajaUsuario.setText(matrizDatos[3]);
+                indiceActualizar = Integer.valueOf(matrizDatos[6]);
+            } else{
+                new Alertas("NO SE ENCONTRÓ AL USUARIO").setVisible(true);
+            }
         } else{
-            validacion = false;
+            new Alertas("DEBE ESCRIBIR UN ID").setVisible(true);
         }
-
-        if(validacion){
-            Alertas validacionesCrear = new Alertas(mensajeAlerta);
-            validacionesCrear.setVisible(true);
-            return true;
-        }
-        return false;
     }
+
 }

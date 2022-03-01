@@ -1,12 +1,11 @@
-
-import Ventanas.CrearUsuario;
+import Ventanas.Usuarios.EliminarUsuario;
 
 
 public class Menu{
 
 
     public static void main(String args[]) {
-        new CrearUsuario().setVisible(true);
+        new EliminarUsuario().setVisible(true);
 
     }
 

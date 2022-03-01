@@ -16,7 +16,7 @@ public class Usuario {
     private static String user;
     private static String rol;
     private static String password;
-    private static String matrizUsuarios[][] = new String[100][6];
+    public static String matrizUsuarios[][] = new String[100][6];
 
 
     public Usuario() {
@@ -31,11 +31,8 @@ public class Usuario {
     //Retorna verdadero si el usuario se creo corrrectamente
     //Retorna falso si el usuario no se ingreso a la matriz
 
-    public boolean crearUsuario(){
-        usuarioExistente(getID());
-        if(usuarioExistente(getID())) {
-            return false;
-        } else{
+    public String crearUsuario(){
+        if(!usuarioExistente()) {
             for (int i = 0; i < matrizUsuarios.length; i++){
                 if(matrizUsuarios[i][0] == null){
                     matrizUsuarios[i][0] = getID();
@@ -47,36 +44,60 @@ public class Usuario {
                     break;
                 }
             }
-
-            for(int i = 0; i < matrizUsuarios.length; i++){
-                for(int j = 0; j < matrizUsuarios[i].length; j++){
-                    if(matrizUsuarios[i][j] != null){
-                        System.out.print("|"+matrizUsuarios[i][j]);
-                        if(j == (matrizUsuarios[i].length-1)){
-                            System.out.println();
-                        }
+            return "<html><p style=\"text-align:center\">¡USUARIO CREADO<p style=\"text-align:center\">CORRECTAMENTE!<p></p><html>";
+        } else if(usuarioExistente()){
+            return "¡Error!, el usuario ya existe";
+        } else{
+            return "Hubo un error";
+        }
+    }
+    //Busca al usuario dentro del arreglo
+    public String[] datosUsuario(String id){
+        String[] matrizDatos = new String[7];
+        String idComprobacion;
+        for(int i = 0; i < matrizUsuarios.length; i++){
+            idComprobacion = matrizUsuarios[i][0];
+            if(matrizUsuarios[i][0] != null){
+                if(idComprobacion.equals(id)){
+                    for (int j = 0; j < matrizUsuarios[i].length; j++){
+                        matrizDatos[j] = matrizUsuarios[i][j];
+                        matrizDatos[6] = String.valueOf(i);
                     }
                 }
             }
-            for(int i = 0; i < matrizUsuarios.length; i++){
-                if(matrizUsuarios[i][0] == getID()){
-                    System.out.println("El indice es: "+i+"\nEl Id es: "+matrizUsuarios[i][0]+"\nEl id ingresado es: "+ getID());
-                    return true;
-                }
-            }
-            return true;
         }
+        return matrizDatos;
     }
 
+    public String eliminarUsuario(){
+        return "Eliminacion exitosa";
+    }
+
+    public String actualizarUsuario(int indice, String id, String nombre, String apellido,String user, String rol, String password){
+        matrizUsuarios[indice][0] = id;
+        matrizUsuarios[indice][1] = nombre;
+        matrizUsuarios[indice][2] = apellido;
+        matrizUsuarios[indice][3] = user;
+        matrizUsuarios[indice][4] = rol;
+        matrizUsuarios[indice][5] = password;
+        return "ACTUALIZACIÓN EXITOSA";
+    }
+
+
     //Verifica si el id del usiario es identico a otro
-    private boolean usuarioExistente(String id){
+    private boolean usuarioExistente(){
+        boolean idExistente = false;
+        String comprobacion;
         for(int i = 0; i < matrizUsuarios.length; i++){
-            if(matrizUsuarios[i][0] == id){
-                System.out.println("El indice es: "+i+"\nEl Id es: "+matrizUsuarios[i][0]+"\nEl id ingresado es: "+ id);
-                return true;
+            comprobacion = matrizUsuarios[i][0];
+            if(comprobacion != null){
+                if(comprobacion.equals(getID())){
+                    idExistente = true;
+                    break;
+                }
             }
         }
-        return false;
+        return idExistente;
     }
 
     public String getID() {

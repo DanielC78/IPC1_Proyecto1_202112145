@@ -1,6 +1,8 @@
 package Ventanas.Usuarios;
 
 import GUI.*;
+import Usuarios.Usuario;
+import Usuarios.ValidacionesUsuario;
 import Ventanas.Alertas;
 import Ventanas.PanelAdministrador;
 
@@ -14,6 +16,7 @@ public class ActualizarUsuario extends Formularios {
     private static int anchoVentana = 500;
     private static int altoVentana = 550;
     private String mensajeAlerta;
+    private int indiceActualizar;
 
     public ActualizarUsuario(){
         super(anchoVentana,altoVentana,"ACTUALIZAR USUARIOS");
@@ -144,7 +147,7 @@ public class ActualizarUsuario extends Formularios {
         botonGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                funcionBtnCrear(e);
+                funcionBtnActualizar(e);
             }
         });
 
@@ -152,6 +155,13 @@ public class ActualizarUsuario extends Formularios {
             @Override
             public void actionPerformed(ActionEvent e) {
                 funcionBtnCancelar(e);
+            }
+        });
+
+        botonBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                funcionBtnBuscar(e);
             }
         });
 
@@ -189,10 +199,20 @@ public class ActualizarUsuario extends Formularios {
     }
 
     //Funcion de los botones
-    private void funcionBtnCrear(ActionEvent e){
-        if(!validarCamposVacios()){
-        }
+    private void funcionBtnActualizar(ActionEvent e){
+        String id = cajaID.getText();
+        String nombre = cajaNombre.getText();
+        String apellido = cajaApellido.getText();
+        String usuario = cajaUsuario.getText();
+        String rol = (String)listaRoles.getSelectedItem();
+        String password = cajaPassword.getText();
+        String confirmPassword = cajaConfirmPassword.getText();
 
+        ValidacionesUsuario validar = new ValidacionesUsuario();
+        if(!validar.validacionCamposVacios(id,nombre,apellido,usuario,rol,password,confirmPassword)){
+            Usuario actualizarUsuario = new Usuario();
+            new Alertas(actualizarUsuario.actualizarUsuario(indiceActualizar,id,nombre,apellido,usuario,rol,password)).setVisible(true);
+        }
     }
 
     private void funcionBtnCancelar(ActionEvent e){
@@ -201,10 +221,33 @@ public class ActualizarUsuario extends Formularios {
         this.dispose();
     }
 
+    private void funcionBtnBuscar(ActionEvent e){
+        Usuario datosUsuario = new Usuario();
+        String[] matrizDatos;
+        if(cajaID.getText().length() > 0){
+            matrizDatos = datosUsuario.datosUsuario(cajaID.getText());
+            if(matrizDatos[0] != null){
+                for (int i = 0; i < matrizDatos.length; i++){
+                    System.out.println(matrizDatos[i]);
+                }
+                cajaNombre.setText(matrizDatos[1]);
+                cajaApellido.setText(matrizDatos[2]);
+                cajaUsuario.setText(matrizDatos[3]);
+                listaRoles.setSelectedItem(matrizDatos[4]);
+                cajaPassword.setText(matrizDatos[5]);
+                indiceActualizar = Integer.valueOf(matrizDatos[6]);
+            } else{
+                new Alertas("NO SE ENCONTRÓ AL USUARIO").setVisible(true);
+            }
+        } else{
+            new Alertas("DEBE ESCRIBIR UN ID").setVisible(true);
+        }
+    }
+
     //Validacion de campos
     private boolean validarCamposVacios(){
         boolean validacion;
-        if(cajaID.getText().isEmpty() || cajaNombre.getText().isEmpty() || cajaApellido.getText().isEmpty() || cajaUsuario.getText().isEmpty() || cajaPassword.getText() == "" || cajaConfirmPassword.getText() == "" ){
+        if(cajaID.getText().isEmpty() || cajaNombre.getText().isEmpty() || cajaApellido.getText().isEmpty() || cajaUsuario.getText().isEmpty()){
             mensajeAlerta = "<html><p style=\"text-align:center\">DEBE DE LLENAR <p>TODOS LOS CAMPOS<p></p><html>";
             validacion = true;
 
