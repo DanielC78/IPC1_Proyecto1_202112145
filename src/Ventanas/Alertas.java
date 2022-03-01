@@ -15,8 +15,8 @@ public class Alertas extends Formularios {
     private JButton botonAceptar = new Botones("ACEPTAR");
     private JLabel etMensaje = new Etiquetas("", Color.white, Color.black, graficos.Letra_fuerte);
 
-    public Alertas(String mensajeAlerta){
-        super(385,225,"ERROR");
+    public Alertas(String mensajeAlerta, String tipoMensaje){
+        super(385,225,tipoMensaje);
         this.mensajeAlerta = mensajeAlerta;
         botonMaximizar.setVisible(false);
         iniciarComponentesAlerta();

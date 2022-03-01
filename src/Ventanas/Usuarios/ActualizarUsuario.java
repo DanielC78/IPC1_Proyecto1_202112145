@@ -210,8 +210,8 @@ public class ActualizarUsuario extends Formularios {
 
         ValidacionesUsuario validar = new ValidacionesUsuario();
         if(!validar.validacionCamposVacios(id,nombre,apellido,usuario,rol,password,confirmPassword)){
-            Usuario actualizarUsuario = new Usuario();
-            new Alertas(actualizarUsuario.actualizarUsuario(indiceActualizar,id,nombre,apellido,usuario,rol,password)).setVisible(true);
+            Usuario actualizacionUsuario = new Usuario();
+            new Alertas(actualizacionUsuario.actualizarUsuario(indiceActualizar,id,nombre,apellido,usuario,rol,password),"").setVisible(true);
         }
     }
 
@@ -237,10 +237,10 @@ public class ActualizarUsuario extends Formularios {
                 cajaPassword.setText(matrizDatos[5]);
                 indiceActualizar = Integer.valueOf(matrizDatos[6]);
             } else{
-                new Alertas("NO SE ENCONTRÓ AL USUARIO").setVisible(true);
+                new Alertas("NO SE ENCONTRÓ AL USUARIO","ERROR").setVisible(true);
             }
         } else{
-            new Alertas("DEBE ESCRIBIR UN ID").setVisible(true);
+            new Alertas("DEBE ESCRIBIR UN ID","ERROR").setVisible(true);
         }
     }
 
@@ -259,7 +259,7 @@ public class ActualizarUsuario extends Formularios {
         }
 
         if(validacion){
-            Alertas validacionesCrear = new Alertas(mensajeAlerta);
+            Alertas validacionesCrear = new Alertas(mensajeAlerta,"ERROR");
             validacionesCrear.setVisible(true);
             return true;
         }

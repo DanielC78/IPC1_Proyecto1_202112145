@@ -14,8 +14,7 @@ public class EliminarUsuario extends Formularios {
 
     private static int anchoVentana = 500;
     private static int altoVentana = 450;
-    private String mensajeAlerta;
-    private int indiceActualizar;
+    private int indiceEliminar;
 
     public EliminarUsuario(){
         super(anchoVentana,altoVentana,"ELIMINAR USUARIOS");
@@ -55,6 +54,7 @@ public class EliminarUsuario extends Formularios {
     private JTextField cajaNombre = new CajasTexto();
     private JTextField cajaApellido = new CajasTexto();
     private JTextField cajaUsuario = new CajasTexto();
+    private JTextField cajaRol = new CajasTexto();
 
 
     private void componentesEliminarUsuario(){
@@ -122,6 +122,7 @@ public class EliminarUsuario extends Formularios {
         agregarCajasNormales(cajaNombre);
         agregarCajasNormales(cajaApellido);
         agregarCajasNormales(cajaUsuario);
+        agregarCajasNormales(cajaRol);
 
 
         //Agregar paneles al panel principal
@@ -141,6 +142,13 @@ public class EliminarUsuario extends Formularios {
             @Override
             public void actionPerformed(ActionEvent e) {
                 funcionBtnCancelar(e);
+            }
+        });
+
+        botonBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                funcionBtnBuscar(e);
             }
         });
 
@@ -167,12 +175,23 @@ public class EliminarUsuario extends Formularios {
         contenedorBotones.add(panel, alineacion);
     }
     private void agregarCajasNormales(JTextField txtNormal){
-        txtNormal.setEnabled(false);
+        if(txtNormal != cajaID){
+            txtNormal.setEnabled(false);
+        }
+        txtNormal.setPreferredSize(new Dimension(180, 25));
         contenedorCajas.add(txtNormal);
     }
 
     //Funcion de los botones
     private void funcionBtnEliminar(ActionEvent e){
+        cajaUsuario.setText("");
+        cajaNombre.setText("");
+        cajaApellido.setText("");
+        cajaID.setText("");
+        cajaRol.setText("");
+
+        Usuario eliminacionUsuario = new Usuario();
+        new Alertas(eliminacionUsuario.eliminarUsuario(indiceEliminar),"").setVisible(true);
 
     }
 
@@ -194,12 +213,13 @@ public class EliminarUsuario extends Formularios {
                 cajaNombre.setText(matrizDatos[1]);
                 cajaApellido.setText(matrizDatos[2]);
                 cajaUsuario.setText(matrizDatos[3]);
-                indiceActualizar = Integer.valueOf(matrizDatos[6]);
+                cajaRol.setText(matrizDatos[4]);
+                indiceEliminar = Integer.valueOf(matrizDatos[6]);
             } else{
-                new Alertas("NO SE ENCONTRÓ AL USUARIO").setVisible(true);
+                new Alertas("NO SE ENCONTRÓ AL USUARIO","ERROR").setVisible(true);
             }
         } else{
-            new Alertas("DEBE ESCRIBIR UN ID").setVisible(true);
+            new Alertas("DEBE ESCRIBIR UN ID","ERROR").setVisible(true);
         }
     }
 

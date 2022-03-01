@@ -69,18 +69,43 @@ public class Usuario {
         return matrizDatos;
     }
 
-    public String eliminarUsuario(){
-        return "Eliminacion exitosa";
+    public String eliminarUsuario(int indiceEliminar){
+        //Dejamos los valores como null dentro de la fila que vamos a eliminar
+            matrizUsuarios[indiceEliminar][0] = "";
+            matrizUsuarios[indiceEliminar][1] = "";
+            matrizUsuarios[indiceEliminar][2] = "";
+            matrizUsuarios[indiceEliminar][3] = "";
+            matrizUsuarios[indiceEliminar][4] = "";
+            matrizUsuarios[indiceEliminar][5] = "";
+
+        //Desplazamos los usuarios una casilla hacia arriba cuando un usuario sea eliminado
+        /*for(int i = 0; i < (matrizUsuarios.length-1); i++){
+            for (int j = 0; j < matrizUsuarios[i].length; j++){
+                if(matrizUsuarios[i][0] == "" && matrizUsuarios[i+1][0] !=null){
+                    matrizUsuarios[i][j] = matrizUsuarios[i+1][j];
+                }
+            }
+        }*/
+        if(matrizUsuarios[indiceEliminar][0] == ""){
+            return "ELIMINACIÓN EXITOSA";
+        } else{
+            return "OCURRIO UN ERROR";
+        }
+
     }
 
-    public String actualizarUsuario(int indice, String id, String nombre, String apellido,String user, String rol, String password){
-        matrizUsuarios[indice][0] = id;
-        matrizUsuarios[indice][1] = nombre;
-        matrizUsuarios[indice][2] = apellido;
-        matrizUsuarios[indice][3] = user;
-        matrizUsuarios[indice][4] = rol;
-        matrizUsuarios[indice][5] = password;
+    public String actualizarUsuario(int indiceActualizar, String id, String nombre, String apellido,String user, String rol, String password){
+        matrizUsuarios[indiceActualizar][0] = id;
+        matrizUsuarios[indiceActualizar][1] = nombre;
+        matrizUsuarios[indiceActualizar][2] = apellido;
+        matrizUsuarios[indiceActualizar][3] = user;
+        matrizUsuarios[indiceActualizar][4] = rol;
+        matrizUsuarios[indiceActualizar][5] = password;
         return "ACTUALIZACIÓN EXITOSA";
+    }
+
+    public String [][] verDatos(){
+        return matrizUsuarios;
     }
 
 

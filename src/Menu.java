@@ -1,11 +1,12 @@
-import Ventanas.Usuarios.EliminarUsuario;
+
+import Ventanas.Usuarios.VerUsuario;
 
 
 public class Menu{
 
 
     public static void main(String args[]) {
-        new EliminarUsuario().setVisible(true);
+        new VerUsuario().setVisible(true);
 
     }
 

@@ -183,7 +183,7 @@ public class CrearUsuario extends Formularios {
             Usuario nuevoUsuario = new Usuario();
             String mensaje = nuevoUsuario.crearUsuario();
             System.out.println(mensaje);
-            Alertas mensajeAlerta = new Alertas(mensaje.toUpperCase());
+            Alertas mensajeAlerta = new Alertas(mensaje.toUpperCase(),"");
             mensajeAlerta.setVisible(true);
 
         }

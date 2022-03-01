@@ -23,7 +23,7 @@ public class ValidacionesUsuario {
         }
 
         if(validacion){
-            Alertas validacionesCrear = new Alertas(mensajeAlerta);
+            Alertas validacionesCrear = new Alertas(mensajeAlerta, "ERROR");
             validacionesCrear.setVisible(true);
             return true;
         }
