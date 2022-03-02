@@ -1,6 +1,6 @@
 package Usuarios;
 
-import Ventanas.Alertas;
+import Ventanas.General.Alertas;
 
 public class ValidacionesUsuario {
     private String mensajeAlerta;

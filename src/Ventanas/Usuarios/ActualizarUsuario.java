@@ -3,8 +3,8 @@ package Ventanas.Usuarios;
 import GUI.*;
 import Usuarios.Usuario;
 import Usuarios.ValidacionesUsuario;
-import Ventanas.Alertas;
-import Ventanas.PanelAdministrador;
+import Ventanas.General.Alertas;
+import Ventanas.General.PanelAdministrador;
 
 import javax.swing.*;
 import java.awt.*;
@@ -213,11 +213,19 @@ public class ActualizarUsuario extends Formularios {
             Usuario actualizacionUsuario = new Usuario();
             new Alertas(actualizacionUsuario.actualizarUsuario(indiceActualizar,id,nombre,apellido,usuario,rol,password),"").setVisible(true);
         }
+        cajaID.setText("");
+        cajaNombre.setText("");
+        cajaApellido.setText("");
+        cajaUsuario.setText("");
+        listaRoles.setSelectedIndex(0);
+        cajaPassword.setText("");
+        cajaConfirmPassword.setText("");
+
     }
 
     private void funcionBtnCancelar(ActionEvent e){
         this.setVisible(false);
-        new PanelAdministrador("Daniel Cuque").setVisible(true);
+        new PanelAdministrador().setVisible(true);
         this.dispose();
     }
 
@@ -227,9 +235,6 @@ public class ActualizarUsuario extends Formularios {
         if(cajaID.getText().length() > 0){
             matrizDatos = datosUsuario.datosUsuario(cajaID.getText());
             if(matrizDatos[0] != null){
-                for (int i = 0; i < matrizDatos.length; i++){
-                    System.out.println(matrizDatos[i]);
-                }
                 cajaNombre.setText(matrizDatos[1]);
                 cajaApellido.setText(matrizDatos[2]);
                 cajaUsuario.setText(matrizDatos[3]);

@@ -1,5 +1,6 @@
-package Ventanas;
+package Ventanas.General;
 import GUI.*;
+import Usuarios.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,18 +24,10 @@ public class Login extends Formularios{
     private JButton botonCancelar = new Botones("CANCELAR");
 
     //Etiquetas
-    private JLabel etUsuario = new Etiquetas(
-            "USUARIO",
-            null,
-            grafica.Gris,
-            grafica.Letra_fuerte
+    private JLabel etUsuario = new Etiquetas("USUARIO", null,grafica.Gris,grafica.Letra_fuerte
 
     );
-    private JLabel etPassword = new Etiquetas(
-            "CONTRASEÑA",
-            null,
-            grafica.Gris,
-            grafica.Letra_fuerte
+    private JLabel etPassword = new Etiquetas("CONTRASEÑA", null,grafica.Gris,grafica.Letra_fuerte
 
     );
 
@@ -56,6 +49,12 @@ public class Login extends Formularios{
         cajaPassword.setFont(grafica.Letra_suave);
         cajaPassword.setForeground(grafica.Gris);
         cajaPassword.setCursor(new Cursor(Cursor.TEXT_CURSOR));
+
+        etUsuario.setBounds(83, 184, 85, 16);
+        etPassword.setBounds(83, 264, 85, 16);
+        etFoto.setBounds(162, 70, 80, 85);
+        botonIngresar.setBounds(238, 367, 118, 29);
+        botonCancelar.setBounds(42, 367, 118, 29);
 
         botonIngresar.addActionListener(new ActionListener() {
             @Override
@@ -87,8 +86,45 @@ public class Login extends Formularios{
     }
 
     private void botonIngresarActionPerformed(ActionEvent e){
-        new PanelAdministrador("Usuario".toUpperCase()).setVisible(true);
-        this.dispose();
+        String user = cajaUsuario.getText();
+        String password  = cajaPassword.getText();
+
+        Usuario comprobarUsuario = new Usuario();
+        String mensajeAlerta = "";
+
+        String [][] datos = comprobarUsuario.verDatos();
+
+        for (int i = 0; i < datos.length; i++) {
+                if(datos[i][0] != null){
+                    if(datos[i][3].equals(user)){
+                        if(datos[i][5].equals(password)){
+                            mensajeAlerta = "";
+                            Usuario.setNombreActivo(datos[i][1]);
+                            Usuario.setApellidoActivo(datos[i][2]);
+                            break;
+                        } else{
+                            mensajeAlerta = "LA CONTRA ES INCORRECTA";
+                            break;
+                        }
+                    } else{
+                        mensajeAlerta = "EL USUARIO NO EXISTE";
+                    }
+                }
+        }
+
+        if(mensajeAlerta != ""){
+            new Alertas(mensajeAlerta,"ERROR").setVisible(true);
+        } else{
+            if(Usuario.getNombreActivo().equals("Administrador")){
+                new PanelAdministrador().setVisible(true);
+                this.dispose();
+            } else{
+                new PanelNormal().setVisible(true);
+                this.dispose();
+            }
+        }
+
+
     }
 
     private void botonCancelarActionPerformed(ActionEvent e){

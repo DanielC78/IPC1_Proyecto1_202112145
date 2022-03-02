@@ -2,8 +2,8 @@ package Ventanas.Usuarios;
 
 import GUI.*;
 import Usuarios.Usuario;
-import Ventanas.Alertas;
-import Ventanas.PanelAdministrador;
+import Ventanas.General.Alertas;
+import Ventanas.General.PanelAdministrador;
 
 import javax.swing.*;
 import java.awt.*;
@@ -197,7 +197,7 @@ public class EliminarUsuario extends Formularios {
 
     private void funcionBtnCancelar(ActionEvent e){
         this.setVisible(false);
-        new PanelAdministrador("Daniel Cuque").setVisible(true);
+        new PanelAdministrador().setVisible(true);
         this.dispose();
     }
 
