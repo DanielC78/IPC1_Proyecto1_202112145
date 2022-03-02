@@ -7,7 +7,7 @@ public class Menu{
 
 
     public static void main(String args[]) {
-        new Login().setVisible(true);
+        new PanelNormal().setVisible(true);
 
     }
 
