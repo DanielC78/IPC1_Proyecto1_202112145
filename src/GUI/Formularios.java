@@ -70,7 +70,7 @@ public class Formularios extends JFrame {
         tituloFormulario.setText(titulo);
         tituloFormulario.setHorizontalAlignment(SwingConstants.CENTER);
         tituloFormulario.setVerticalAlignment(SwingConstants.CENTER);
-        tituloFormulario.setFont(grafica.Letra_fuerte);
+        tituloFormulario.setFont(grafica.letra_titulos);
         tituloFormulario.setForeground(grafica.Blanco);
 
         BordeSuperior.add(tituloFormulario, BorderLayout.CENTER);

@@ -103,7 +103,7 @@ public class Login extends Formularios{
                             Usuario.setApellidoActivo(datos[i][2]);
                             break;
                         } else{
-                            mensajeAlerta = "LA CONTRA ES INCORRECTA";
+                            mensajeAlerta = "LA CONTRASEÑA ES INCORRECTA";
                             break;
                         }
                     } else{

@@ -18,6 +18,12 @@ public class Botones extends JButton{
         inicarComponenteBotones();
     }
 
+    public Botones(String mensaje, Font fuente){
+        this.mensaje = mensaje;
+        inicarComponenteBotones();
+        this.setFont(fuente);
+    }
+
     public void inicarComponenteBotones(){
         this.setBorder(new LineBorder(graficos.Azul, 2));
         this.setBorderPainted(true);

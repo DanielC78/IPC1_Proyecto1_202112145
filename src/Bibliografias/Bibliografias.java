@@ -1,49 +1,192 @@
 package Bibliografias;
 
 public class Bibliografias {
-    private String autor = "";
-    private String titulo = "";
-    private int edicion = 0;
-    private String descripcion = "";
-    private String temas = "";
-    private int copias = 0;
-    private int disponible = 0;
 
-    public Bibliografias(String autor, String titulo, int edicion, String descripcion, String temas, int copias, int disponible) {
+    //Atributos fijos
+    private String autor ;
+    private String titulo;
+    private int edicion;
+    private String descripcion;
+    private String[] temas;
+    private int copias;
+    private int disponibles;
+
+    //Atributos de revistas
+    private String frecuenciaActual;
+    private int ejemplares;
+
+    //Atributos de tesis
+    private String area;
+
+    //Temas separados por comas
+    private String strTemas;
+    private String strEdicion;
+    private String strCopias;
+    private String strDisponibles;
+    private String temasConcatenados;
+
+
+    public Bibliografias(
+            String autor,
+            String titulo,
+            String edicion,
+            String descripcion,
+            String temas,
+            String copias,
+            String disponibles,
+            String frecuenciaActual,
+            String ejemplares,
+            String area
+
+    ) {
         this.autor = autor;
         this.titulo = titulo;
-        this.edicion = edicion;
+        this.edicion = Integer.parseInt(edicion);
         this.descripcion = descripcion;
-        this.temas = temas;
-        this.copias = copias;
-        this.disponible = disponible;
+        this.temas = temas.split(",");
+        this.copias = Integer.parseInt(copias);
+        this.disponibles = Integer.parseInt(disponibles);
+        this.frecuenciaActual = frecuenciaActual;
+        this.ejemplares = Integer.parseInt(ejemplares);
+        this.area = area;
+
+        this.strEdicion = edicion;
+        this.strCopias = copias;
+        this.strDisponibles = disponibles;
+        this.temasConcatenados = temas;
+
     }
+
+    public Bibliografias(){
+
+    }
+
+    public void MostrarTemas(){
+        for(String tema: getTemas()){
+
+        }
+    }
+
+    //Getters y setters
+
 
     public String getAutor() {
         return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 
     public String getTitulo() {
         return titulo;
     }
 
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
     public int getEdicion() {
         return edicion;
+    }
+
+    public void setEdicion(int edicion) {
+        this.edicion = edicion;
     }
 
     public String getDescripcion() {
         return descripcion;
     }
 
-    public String getTemas() {
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String[] getTemas() {
         return temas;
+    }
+
+    public void setTemas(String[] temas) {
+        this.temas = temas;
     }
 
     public int getCopias() {
         return copias;
     }
 
-    public int getDisponible() {
-        return disponible;
+    public void setCopias(int copias) {
+        this.copias = copias;
+    }
+
+    public int getDisponibles() {
+        return disponibles;
+    }
+
+    public void setDisponibles(int disponibles) {
+        this.disponibles = disponibles;
+    }
+
+    public String getFrecuenciaActual() {
+        return frecuenciaActual;
+    }
+
+    public void setFrecuenciaActual(String frecuenciaActual) {
+        this.frecuenciaActual = frecuenciaActual;
+    }
+
+    public int getEjemplares() {
+        return ejemplares;
+    }
+
+    public void setEjemplares(int ejemplares) {
+        this.ejemplares = ejemplares;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getStrTemas() {
+        return strTemas;
+    }
+
+    public void setStrTemas(String strTemas) {
+        this.strTemas = strTemas;
+    }
+
+    public String getStrEdicion() {
+        return strEdicion;
+    }
+
+    public void setStrEdicion(String strEdicion) {
+        this.strEdicion = strEdicion;
+    }
+
+    public String getStrCopias() {
+        return strCopias;
+    }
+
+    public void setStrCopias(String strCopias) {
+        this.strCopias = strCopias;
+    }
+
+    public String getStrDisponibles() {
+        return strDisponibles;
+    }
+
+    public void setStrDisponibles(String strDisponibles) {
+        this.strDisponibles = strDisponibles;
+    }
+
+    public String getTemasConcatenados() {
+        return temasConcatenados;
+    }
+
+    public void setTemasConcatenados(String temasConcatenados) {
+        this.temasConcatenados = temasConcatenados;
     }
 }
