@@ -11,8 +11,8 @@ public class Usuario {
     private static String passwordAdmin = "password";
 
     //Usuario actual
-    private static String nombreActivo;
-    private static String apellidoActivo;
+    private static String nombreActivo = "daniel";
+    private static String apellidoActivo = "cuque";
 
     //Campos para usuarios
     private static String ID;
