@@ -1,17 +1,11 @@
-import Ventanas.Bibliografias.CargaIndividual;
-import Ventanas.General.Login;
-import Ventanas.General.PanelNormal;
-
+import Ventanas.Bibliografias.CargaMasiva;
+import Ventanas.Bibliografias.EliminarLibros;
 
 public class Menu{
 
 
     public static void main(String args[]) {
-        new PanelNormal().setVisible(true);
+        new EliminarLibros().setVisible(true);
 
     }
-
-
-
-
 }

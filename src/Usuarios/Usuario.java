@@ -31,6 +31,14 @@ public class Usuario {
         matrizUsuarios[0][3] = usuarioAdmin;
         matrizUsuarios[0][4] = rolAdmin;
         matrizUsuarios[0][5] = passwordAdmin;
+
+        matrizUsuarios[1][0] = "daniel";
+        matrizUsuarios[1][1] = "daniel";
+        matrizUsuarios[1][2] = "daniel";
+        matrizUsuarios[1][3] = "daniel";
+        matrizUsuarios[1][4] = "daniel";
+        matrizUsuarios[1][5] = "daniel";
+
     }
 
     //Retorna verdadero si el usuario se creo corrrectamente

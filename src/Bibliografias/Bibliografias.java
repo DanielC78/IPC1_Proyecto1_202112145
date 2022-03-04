@@ -3,6 +3,7 @@ package Bibliografias;
 public class Bibliografias {
 
     //Atributos fijos
+    private String tipo;
     private String autor ;
     private String titulo;
     private int edicion;
@@ -19,45 +20,47 @@ public class Bibliografias {
     private String area;
 
     //Temas separados por comas
+    private String strTipo;
     private String strTemas;
     private String strEdicion;
     private String strCopias;
     private String strDisponibles;
+    private String strEjemplares;
     private String temasConcatenados;
 
 
     public Bibliografias(
+            String tipo,
             String autor,
             String titulo,
-            String edicion,
             String descripcion,
+            String edicion,
             String temas,
-            String copias,
-            String disponibles,
             String frecuenciaActual,
             String ejemplares,
-            String area
+            String area,
+            String copias,
+            String disponibles
 
     ) {
+        this.tipo = tipo;
         this.autor = autor;
         this.titulo = titulo;
         this.edicion = Integer.parseInt(edicion);
         this.descripcion = descripcion;
         this.temas = temas.split(",");
-        this.copias = Integer.parseInt(copias);
-        this.disponibles = Integer.parseInt(disponibles);
         this.frecuenciaActual = frecuenciaActual;
         this.ejemplares = Integer.parseInt(ejemplares);
         this.area = area;
+        this.copias = Integer.parseInt(copias);
+        this.disponibles = Integer.parseInt(disponibles);
 
+        this.strTipo = tipo;
         this.strEdicion = edicion;
         this.strCopias = copias;
         this.strDisponibles = disponibles;
         this.temasConcatenados = temas;
-
-    }
-
-    public Bibliografias(){
+        this.strEjemplares = ejemplares;
 
     }
 
@@ -68,7 +71,21 @@ public class Bibliografias {
     }
 
     //Getters y setters
+    public String getStrTipo() {
+        return strTipo;
+    }
 
+    public void setStrTipo(String strTipo) {
+        this.strTipo = strTipo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
     public String getAutor() {
         return autor;
@@ -188,5 +205,13 @@ public class Bibliografias {
 
     public void setTemasConcatenados(String temasConcatenados) {
         this.temasConcatenados = temasConcatenados;
+    }
+
+    public String getStrEjemplares() {
+        return strEjemplares;
+    }
+
+    public void setStrEjemplares(String strEjemplares) {
+        this.strEjemplares = strEjemplares;
     }
 }

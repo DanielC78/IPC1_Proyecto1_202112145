@@ -1,6 +1,6 @@
 package Ventanas.General;
 
-import Bibliografias.Bibliografias;
+import Bibliografias.*;
 import GUI.*;
 import Usuarios.Usuario;
 
@@ -8,13 +8,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 
 public class PanelNormal extends Formularios {
-
-    //Mostrar bibliografias
-    private String[] columnas;
-    private String[][] datos;
 
     //Dimensiones de la ventana
     private static final int sizeX = 1100;
@@ -60,6 +58,7 @@ public class PanelNormal extends Formularios {
 
     //Caja de texto
     private JTextField cajaTema = new CajasTexto();
+    JTable tablaBibliografia;
 
     public PanelNormal() {
         super(sizeX, sizeY, "USUARIO NORMAL");
@@ -69,10 +68,10 @@ public class PanelNormal extends Formularios {
 
     private void componentesPanelNormal(){
         this.getContentPane().add(panelNormal);
+        cajaTema.requestFocus();
 
         //Elementos de la CAPA 1
         rellenoPaneles(panelNormal);
-
         panelPrincipal.setBorder(null);
         panelNormal.add(panelPrincipal, BorderLayout.CENTER);
 
@@ -126,6 +125,7 @@ public class PanelNormal extends Formularios {
         panelInferior.add(botonPrestar, BorderLayout.PAGE_END);
 
         botonPrestar.setPreferredSize(new Dimension(10,30));
+
         //Botones
         panelBotones.setLayout(new BorderLayout(45,0));
         panelBotones.setPreferredSize(new Dimension(10,35));
@@ -150,14 +150,50 @@ public class PanelNormal extends Formularios {
                 btnLogout(e);
             }
         });
+
+        botonPrestar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnPrestar(e);
+            }
+        });
+
+        botonBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarBibliografia();
+
+            }
+        });
+
+        botonVerPrestamos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        cajaTema.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                cajaMostrarDatos(e);
+            }
+        });
     }
 
     private void mostrarBibliografia(){
-        Bibliografias verBibliografias = new Bibliografias();
-        String [] cabecera =  {
-                "TIPO", "AUTOR", "TITULO", "PALABRAS CLAVE", "EDICION", "DESCRIPCION","TEMAS","FRECUENCIA ACTUAL","EJEMPLARES","COPIAS"
-        };
-        JTable tablaBibliografia = new JTable();
+        String datos[][] = AlmacenLibros.obtenerLibros();
+        tablaBibliografia = new JTable(datos, AlmacenLibros.cabeceraLibros());
         tablaBibliografia.setAutoscrolls(true);
         tablaBibliografia.setOpaque(true);
         tablaBibliografia.setRowMargin(5);
@@ -165,6 +201,17 @@ public class PanelNormal extends Formularios {
         scrollTabla.setViewportView(tablaBibliografia);
 
         panelTabla.add(scrollTabla, BorderLayout.CENTER);
+    }
+
+    private void buscarBibliografia(){
+        String tema = cajaTema.getText();
+        String datos[][] = AlmacenLibros.buscarTemaLibro(tema);
+        tablaBibliografia = new JTable(datos, AlmacenLibros.cabeceraLibros());
+        tablaBibliografia.setAutoscrolls(true);
+        tablaBibliografia.setOpaque(true);
+        tablaBibliografia.setRowMargin(5);
+        scrollTabla.setBorder(grafica.bordePanelesAdmin);
+        scrollTabla.setViewportView(tablaBibliografia);
     }
 
     private void rellenoPaneles(JPanel panelNormal) {
@@ -212,5 +259,23 @@ public class PanelNormal extends Formularios {
     private void btnLogout(ActionEvent e){
         new Login().setVisible(true);
         this.dispose();
+    }
+
+    private void btnPrestar(ActionEvent e){
+        int i = tablaBibliografia.getSelectedRow();
+        int j = tablaBibliografia.getSelectedColumn();
+        int a = (int) tablaBibliografia.getValueAt(i,j);
+        System.out.println(a);
+    }
+
+    private void cajaMostrarDatos(KeyEvent e){
+        String tema = cajaTema.getText();
+        if(tema.equals("")){
+            mostrarBibliografia();
+            System.out.println("o");
+        } else{
+            buscarBibliografia();
+        }
+
     }
 }

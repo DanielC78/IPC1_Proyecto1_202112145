@@ -20,6 +20,7 @@ public class ColoresFuentes {
     final public Font Letra_suave = new Font("Work Sans", 0, 12);
     final public Font Letra_fuerte = new Font("Work Sans", 1, 12);
     final public Font letra_titulos = new Font("Work Sans",1,17);
+    final public Font letraCargaMasiva = new Font("Work Sans", 0, 18);
 
     //Bordes simples
     final public Border bordeNegro = BorderFactory.createLineBorder(Negro, 2);

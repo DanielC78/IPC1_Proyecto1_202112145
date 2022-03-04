@@ -22,9 +22,6 @@ public class EliminarUsuario extends Formularios {
         componentesEliminarUsuario();
     }
 
-
-    //Lista de roles
-
     //Paneles contenedores
     private JPanel panelEliminarUsuario = new Paneles();
     private JPanel contenedorAuxiliarEtiquetas = new Paneles();

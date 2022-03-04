@@ -23,6 +23,7 @@ public class VerUsuario extends Formularios {
     private JPanel rellenoIzq= new Paneles();
     private JPanel contenedorEncabezado = new Paneles();
 
+    private JTable tablaDatos;
     private JScrollPane scroller = new JScrollPane();
     private JButton botonRegresar = new Botones("MENÚ PRINCIPAL");
 
@@ -88,7 +89,7 @@ public class VerUsuario extends Formularios {
                 "ID", "NOMBRE", "APELLIDO", "USER", "ROL", "CONTRASEÑA"
         };
 
-        JTable tablaDatos = new JTable(verUsuarios.verDatos(), cabecera);
+        tablaDatos = new JTable(verUsuarios.verDatos(), cabecera);
         tablaDatos.setAutoscrolls(true);
         tablaDatos.setOpaque(true);
         tablaDatos.setRowMargin(5);

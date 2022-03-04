@@ -5,6 +5,10 @@ import GUI.Etiquetas;
 import GUI.Formularios;
 import GUI.Paneles;
 import Usuarios.Usuario;
+import Ventanas.Bibliografias.ActualizarLibros;
+import Ventanas.Bibliografias.CrearLibros;
+import Ventanas.Bibliografias.EliminarLibros;
+import Ventanas.Bibliografias.VerLibros;
 import Ventanas.Usuarios.ActualizarUsuario;
 import Ventanas.Usuarios.CrearUsuario;
 import Ventanas.Usuarios.EliminarUsuario;
@@ -34,43 +38,37 @@ public class PanelAdministrador extends Formularios {
     private JPanel contenedorUsuarios= new JPanel();
 
     //Etiquetas de los paneles
-    private JLabel tituloReportes = new Etiquetas("REPORTES", null, grafica.Negro, grafica.Letra_fuerte);
-    private JLabel tituloLibros = new Etiquetas("BIBLIOGRAFÍAS", null, grafica.Negro, grafica.Letra_fuerte);
-    private JLabel tituloUsuarios = new Etiquetas("USUARIOS", null, grafica.Negro, grafica.Letra_fuerte);
+    private final JLabel tituloReportes = new Etiquetas("REPORTES", null, grafica.Negro, grafica.letra_titulos);
+    private final JLabel tituloLibros = new Etiquetas("BIBLIOGRAFÍAS", null, grafica.Negro, grafica.letra_titulos);
+    private final JLabel tituloUsuarios = new Etiquetas("USUARIOS", null, grafica.Negro, grafica.letra_titulos);
 
     //Informaciond del usuario
-    private JLabel tituloInfo = new Etiquetas(nombre+" "+apellido, null, grafica.Negro, grafica.Letra_fuerte);
+    private JLabel tituloInfo = new Etiquetas(nombre+" "+apellido, null, grafica.Negro, grafica.letra_titulos);
     private JLabel fotoInfo = new Etiquetas("", null, grafica.Negro, null);
 
     //Botones para reportes
-    private JButton userRepo = new Botones("USUARIO");
-    private JButton biblioRepo = new Botones("BIBLIOGRAFÍA");
-    private JButton prestamosRepo = new Botones("PRÉSTAMOS");
+    private JButton userRepo = new Botones("USUARIO",grafica.letra_titulos);
+    private JButton biblioRepo = new Botones("BIBLIOGRAFÍA",grafica.letra_titulos);
+    private JButton prestamosRepo = new Botones("PRÉSTAMOS",grafica.letra_titulos);
 
     //Botones para usuarios
-    private JButton userCrear = new Botones("CREAR");
-    private JButton userVer = new Botones("VER");
-    private JButton userActualizar = new Botones("MODIFICAR");
-    private JButton userEliminar = new Botones("ELIMINAR");
+    private JButton userCrear = new Botones("CREAR", grafica.letra_titulos);
+    private JButton userVer = new Botones("VER",grafica.letra_titulos);
+    private JButton userActualizar = new Botones("MODIFICAR",grafica.letra_titulos);
+    private JButton userEliminar = new Botones("ELIMINAR",grafica.letra_titulos);
 
     //Botones para bibliografias
-    private JButton biblioCrear = new Botones("CREAR");
-    private JButton biblioVer = new Botones("VER");
-    private JButton biblioActualizar = new Botones("MODIFICAR");
-    private JButton biblioEliminar = new Botones("ELIMINAR");
+    private JButton biblioCrear = new Botones("CREAR",grafica.letra_titulos);
+    private JButton biblioVer = new Botones("VER",grafica.letra_titulos);
+    private JButton biblioActualizar = new Botones("MODIFICAR",grafica.letra_titulos);
+    private JButton biblioEliminar = new Botones("ELIMINAR",grafica.letra_titulos);
 
     //Logout
-    private JButton logout = new Botones("LOGOUT");
+    private JButton logout = new Botones("LOGOUT",grafica.letra_titulos);
 
-    public PanelAdministrador(String nombre, String apellido){
-        super(760,500,"PANEL DE ADMINISTRADOR");
-        this.nombre = nombre;
-        this.apellido = apellido;
-        iniciarComponentesPanelAdmin();
-    }
 
     public PanelAdministrador(){
-        super(760,500,"PANEL DE ADMINISTRADOR");
+        super(1100,700,"PANEL DE ADMINISTRADOR");
         iniciarComponentesPanelAdmin();
     }
 
@@ -116,8 +114,6 @@ public class PanelAdministrador extends Formularios {
 
         //Agregamos el Panel de LogOut en el panel principal
         informacionUsuario(panelInfo, logout, tituloInfo);
-
-
 
         //Funcion de los botones para Usuarios
         userCrear.addActionListener(new ActionListener() {
@@ -274,36 +270,35 @@ public class PanelAdministrador extends Formularios {
     }
 
     private void btnBiblioCrear(ActionEvent e){
-
+        this.dispose();
+        new CrearLibros().setVisible(true);
     }
 
 
     private void btnBiblioEliminar(ActionEvent e){
 
+        this.dispose();
+        new EliminarLibros().setVisible(true);
     }
 
     private void btnBiblioActualizar(ActionEvent e){
+        this.dispose();
+        new ActualizarLibros().setVisible(true);
 
     }
 
     private void btnBiblioVer(ActionEvent e){
-
+        this.dispose();
+        new VerLibros().setVisible(true);
     }
 
     private void btnLogOut(ActionEvent e){
-        Usuario logoutUsuario = new Usuario();
-        logoutUsuario.setNombreActivo(null);
-        logoutUsuario.setApellidoActivo(null);
+        Usuario.setNombreActivo(null);
+        Usuario.setApellidoActivo(null);
         this.setVisible(false);
         new Login().setVisible(true);
         this.dispose();
     }
 
-    private void btnCancelar(ActionEvent e){
-        Inicio inicio = new Inicio();
-        this.setVisible(false);
-        inicio.setVisible(true);
-        this.dispose();
-    }
 
 }
