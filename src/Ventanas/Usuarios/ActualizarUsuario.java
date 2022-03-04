@@ -169,7 +169,7 @@ public class ActualizarUsuario extends Formularios {
 
     //Agregar elemenos a la ventana
     private void agregarEtiqueta(String texto){
-        JLabel etiqueta = new Etiquetas("            " + texto,grafica.Blanco,grafica.Negro,grafica.Letra_fuerte);
+        JLabel etiqueta = new Etiquetas("            " + texto,grafica.Blanco,grafica.Negro,grafica.letraFuerte);
         etiqueta.setHorizontalAlignment(SwingConstants.LEFT);
         contenedorAuxiliarEtiquetas.add(etiqueta);
     }
@@ -189,7 +189,7 @@ public class ActualizarUsuario extends Formularios {
     }
     private void agregarCajasPassword(JPasswordField txtPassword){
         txtPassword.setBorder(grafica.bordeCajas);
-        txtPassword.setFont(grafica.Letra_suave);
+        txtPassword.setFont(grafica.letraSuave);
         txtPassword.setForeground(grafica.Gris);
         txtPassword.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         contenedorCajas.add(txtPassword);

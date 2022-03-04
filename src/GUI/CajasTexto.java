@@ -15,7 +15,7 @@ public class CajasTexto extends JTextField {
         this.setOpaque(true);
         this.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         this.setBorder(graficos.bordeCajas);
-        this.setFont(graficos.Letra_suave);
+        this.setFont(graficos.letraSuave);
         this.setForeground(graficos.Gris);
         this.setBackground(graficos.Blanco);
     }

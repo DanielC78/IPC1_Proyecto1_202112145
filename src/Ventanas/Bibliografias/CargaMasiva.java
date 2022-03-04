@@ -117,15 +117,15 @@ public class CargaMasiva extends Formularios {
             String[] atributos = linea.split(";");
             if(atributos.length == 11 && atributos[0].matches("[0-2]") ){
                 if(atributos[0].equals("0")){
-                    atributos[0] = "Libro";
+                    atributos[0] = "LIBRO";
                     atributos[7] = "0";
                     atributos[8] = "0";
                     atributos[9] = "0";
                 } else if(atributos[0].equals("1")){
-                    atributos[0] = "Revista";
+                    atributos[0] = "REVISTA";
                     atributos[7] = atributos[7].trim();
                 } else if(atributos[0].equals("2")){
-                    atributos[0] = "Tesis";
+                    atributos[0] = "TESIS";
                     atributos[7] = "0";
                     atributos[8] = "0";
                 }

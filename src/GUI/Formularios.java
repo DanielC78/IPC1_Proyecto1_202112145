@@ -23,9 +23,9 @@ public class Formularios extends JFrame {
     private JLabel tituloFormulario = new JLabel();
     private JPanel contenedorIzquierto = new JPanel();
 
-    public JLabel botonCerrar = new Etiquetas("", grafica.Rojo, Color.black, grafica.Letra_fuerte);
-    public JLabel botonMinimizar = new Etiquetas("", grafica.Amarillo, Color.black, grafica.Letra_fuerte);
-    public JLabel botonMaximizar = new Etiquetas("", grafica.Verde, Color.black, grafica.Letra_fuerte);
+    public JLabel botonCerrar = new Etiquetas("", grafica.Rojo, Color.black, grafica.letraFuerte);
+    public JLabel botonMinimizar = new Etiquetas("", grafica.Amarillo, Color.black, grafica.letraFuerte);
+    public JLabel botonMaximizar = new Etiquetas("", grafica.Verde, Color.black, grafica.letraFuerte);
 
 
     public Formularios(int sizeX, int sizeY, String titulo) throws HeadlessException {
@@ -70,7 +70,7 @@ public class Formularios extends JFrame {
         tituloFormulario.setText(titulo);
         tituloFormulario.setHorizontalAlignment(SwingConstants.CENTER);
         tituloFormulario.setVerticalAlignment(SwingConstants.CENTER);
-        tituloFormulario.setFont(grafica.letra_titulos);
+        tituloFormulario.setFont(grafica.letraTitulos);
         tituloFormulario.setForeground(grafica.Blanco);
 
         BordeSuperior.add(tituloFormulario, BorderLayout.CENTER);
@@ -120,7 +120,7 @@ public class Formularios extends JFrame {
     }
 
     private void eventosEntradaSalida(JLabel etiqueta, String textoMostrado){
-        etiqueta.setFont(grafica.Letra_fuerte);
+        etiqueta.setFont(grafica.letraFuerte);
         etiqueta.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {

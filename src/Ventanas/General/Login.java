@@ -24,10 +24,10 @@ public class Login extends Formularios{
     private JButton botonCancelar = new Botones("CANCELAR");
 
     //Etiquetas
-    private JLabel etUsuario = new Etiquetas("USUARIO", null,grafica.Gris,grafica.Letra_fuerte
+    private JLabel etUsuario = new Etiquetas("USUARIO", null,grafica.Gris,grafica.letraFuerte
 
     );
-    private JLabel etPassword = new Etiquetas("CONTRASEÑA", null,grafica.Gris,grafica.Letra_fuerte
+    private JLabel etPassword = new Etiquetas("CONTRASEÑA", null,grafica.Gris,grafica.letraFuerte
 
     );
 
@@ -46,7 +46,7 @@ public class Login extends Formularios{
         cajaPassword.setBounds(83,284 ,229,50);
         cajaPassword.setOpaque(true);
         cajaPassword.setBorder(grafica.bordeCajas);
-        cajaPassword.setFont(grafica.Letra_suave);
+        cajaPassword.setFont(grafica.letraSuave);
         cajaPassword.setForeground(grafica.Gris);
         cajaPassword.setCursor(new Cursor(Cursor.TEXT_CURSOR));
 

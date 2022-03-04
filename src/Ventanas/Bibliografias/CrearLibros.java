@@ -27,9 +27,9 @@ public class CrearLibros extends Formularios {
 
 
     //Botones
-    private JButton botonCargaMasiva = new Botones("CARGA MASIVA", grafica.letra_titulos);
-    private JButton botonCargaIndividual = new Botones("CARGA INDIVIDUAL", grafica.letra_titulos);
-    private JButton botonRegresar = new Botones("MENÚ PRINCIPAL", grafica.Letra_fuerte);
+    private JButton botonCargaMasiva = new Botones("CARGA MASIVA", grafica.letraTitulos);
+    private JButton botonCargaIndividual = new Botones("CARGA INDIVIDUAL", grafica.letraTitulos);
+    private JButton botonRegresar = new Botones("MENÚ PRINCIPAL", grafica.letraFuerte);
 
     public CrearLibros(){
         super(sizeX,sizeY, "CREAR BIBLIOGRAFIAS");

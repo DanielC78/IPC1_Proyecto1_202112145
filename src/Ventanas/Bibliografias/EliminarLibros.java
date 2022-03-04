@@ -28,12 +28,12 @@ public class EliminarLibros extends Formularios {
     private JPanel contenedorInferior = new Paneles();
 
     //Componentes de la parte superior
-    JLabel etiquetaBuscar = new Etiquetas("BUSCAR",null, grafica.Negro,grafica.letra_titulos);
+    JLabel etiquetaBuscar = new Etiquetas("BUSCAR",null, grafica.Negro,grafica.letraTitulos);
     JTextField cajaBuscar = new CajasTexto();
 
     //Componentes de la parte inferior
-    JButton botonEliminar = new Botones("ELIMINAR", grafica.letra_titulos);
-    JButton botonRegresar = new Botones("MENÚ PRINCIPAL", grafica.letra_titulos);
+    JButton botonEliminar = new Botones("ELIMINAR", grafica.letraTitulos);
+    JButton botonRegresar = new Botones("MENÚ PRINCIPAL", grafica.letraTitulos);
 
     //Componenentes de la tabla
     private DefaultTableModel modeloTabla;
@@ -98,6 +98,12 @@ public class EliminarLibros extends Formularios {
             }
         });
 
+        botonRegresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnRegresar(e);
+            }
+        });
         mostrarLibros();
     }
 

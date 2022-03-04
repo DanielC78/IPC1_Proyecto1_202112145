@@ -28,7 +28,7 @@ public class Inicio extends Formularios{
     private JButton botonAbout = new Botones("ACERCA DE NOSOTROS");
 
     //Etiquetas
-    private JLabel marcoLogin = new Etiquetas("", graficos.Blanco, Color.black, graficos.Letra_fuerte);
+    private JLabel marcoLogin = new Etiquetas("", graficos.Blanco, Color.black, graficos.letraFuerte);
 
     private JLabel marcoAbout = new Etiquetas("", null, null, null);
     private JLabel marcoLogo = new Etiquetas("", null, null, null);

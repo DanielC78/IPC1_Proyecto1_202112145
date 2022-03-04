@@ -34,7 +34,7 @@ public class Botones extends JButton{
         this.setVisible(true);
         this.setBackground(graficos.Azul);
         this.setForeground(graficos.Blanco);
-        this.setFont(graficos.Letra_fuerte);
+        this.setFont(graficos.letraFuerte);
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
         this.setText(mensaje);
         efectoHover();

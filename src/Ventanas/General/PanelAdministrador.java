@@ -38,33 +38,33 @@ public class PanelAdministrador extends Formularios {
     private JPanel contenedorUsuarios= new JPanel();
 
     //Etiquetas de los paneles
-    private final JLabel tituloReportes = new Etiquetas("REPORTES", null, grafica.Negro, grafica.letra_titulos);
-    private final JLabel tituloLibros = new Etiquetas("BIBLIOGRAFÍAS", null, grafica.Negro, grafica.letra_titulos);
-    private final JLabel tituloUsuarios = new Etiquetas("USUARIOS", null, grafica.Negro, grafica.letra_titulos);
+    private final JLabel tituloReportes = new Etiquetas("REPORTES", null, grafica.Negro, grafica.letraTitulos);
+    private final JLabel tituloLibros = new Etiquetas("BIBLIOGRAFÍAS", null, grafica.Negro, grafica.letraTitulos);
+    private final JLabel tituloUsuarios = new Etiquetas("USUARIOS", null, grafica.Negro, grafica.letraTitulos);
 
     //Informaciond del usuario
-    private JLabel tituloInfo = new Etiquetas(nombre+" "+apellido, null, grafica.Negro, grafica.letra_titulos);
+    private JLabel tituloInfo = new Etiquetas(nombre+" "+apellido, null, grafica.Negro, grafica.letraTitulos);
     private JLabel fotoInfo = new Etiquetas("", null, grafica.Negro, null);
 
     //Botones para reportes
-    private JButton userRepo = new Botones("USUARIO",grafica.letra_titulos);
-    private JButton biblioRepo = new Botones("BIBLIOGRAFÍA",grafica.letra_titulos);
-    private JButton prestamosRepo = new Botones("PRÉSTAMOS",grafica.letra_titulos);
+    private JButton userRepo = new Botones("USUARIO",grafica.letraTitulos);
+    private JButton biblioRepo = new Botones("BIBLIOGRAFÍA",grafica.letraTitulos);
+    private JButton prestamosRepo = new Botones("PRÉSTAMOS",grafica.letraTitulos);
 
     //Botones para usuarios
-    private JButton userCrear = new Botones("CREAR", grafica.letra_titulos);
-    private JButton userVer = new Botones("VER",grafica.letra_titulos);
-    private JButton userActualizar = new Botones("MODIFICAR",grafica.letra_titulos);
-    private JButton userEliminar = new Botones("ELIMINAR",grafica.letra_titulos);
+    private JButton userCrear = new Botones("CREAR", grafica.letraTitulos);
+    private JButton userVer = new Botones("VER",grafica.letraTitulos);
+    private JButton userActualizar = new Botones("MODIFICAR",grafica.letraTitulos);
+    private JButton userEliminar = new Botones("ELIMINAR",grafica.letraTitulos);
 
     //Botones para bibliografias
-    private JButton biblioCrear = new Botones("CREAR",grafica.letra_titulos);
-    private JButton biblioVer = new Botones("VER",grafica.letra_titulos);
-    private JButton biblioActualizar = new Botones("MODIFICAR",grafica.letra_titulos);
-    private JButton biblioEliminar = new Botones("ELIMINAR",grafica.letra_titulos);
+    private JButton biblioCrear = new Botones("CREAR",grafica.letraTitulos);
+    private JButton biblioVer = new Botones("VER",grafica.letraTitulos);
+    private JButton biblioActualizar = new Botones("MODIFICAR",grafica.letraTitulos);
+    private JButton biblioEliminar = new Botones("ELIMINAR",grafica.letraTitulos);
 
     //Logout
-    private JButton logout = new Botones("LOGOUT",grafica.letra_titulos);
+    private JButton logout = new Botones("LOGOUT",grafica.letraTitulos);
 
 
     public PanelAdministrador(){

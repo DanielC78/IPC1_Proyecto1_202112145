@@ -44,7 +44,7 @@ public class PanelNormal extends Formularios {
     //Etiquetas
     private final JLabel etLogo = new Etiquetas("",grafica.Blanco,null,null);
     private final JLabel etNombre = new Etiquetas(
-            "<html><p style=\"text-align:center\">BIENVENIDO<p style=\"text-align:center\">"+ Usuario.getNombreActivo().toUpperCase()+" "+Usuario.getApellidoActivo().toUpperCase()+"<p></p><html>",null,grafica.Negro,grafica.letra_titulos);
+            "<html><p style=\"text-align:center\">BIENVENIDO<p style=\"text-align:center\">"+ Usuario.getNombreActivo().toUpperCase()+" "+Usuario.getApellidoActivo().toUpperCase()+"<p></p><html>",null,grafica.Negro,grafica.letraTitulos);
     private final JLabel etFoto = new Etiquetas("",null,grafica.Blanco, null);
 
     //Tabla de datos
@@ -272,7 +272,6 @@ public class PanelNormal extends Formularios {
         String tema = cajaTema.getText();
         if(tema.equals("")){
             mostrarBibliografia();
-            System.out.println("o");
         } else{
             buscarBibliografia();
         }

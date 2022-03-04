@@ -1,122 +1,247 @@
 package Ventanas.Bibliografias;
 
-import GUI.Botones;
-import GUI.CajasTexto;
-import GUI.Formularios;
-import GUI.Paneles;
+import Bibliografias.AlmacenLibros;
+import Bibliografias.Bibliografias;
+import GUI.*;
+import Ventanas.General.Alertas;
+import Ventanas.General.PanelAdministrador;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CargaIndividual extends Formularios {
 
     //Tamaño de la ventanas
     private static int sizeX = 700 ;
-    private static int sizeY = 500;
+    private static int sizeY = 650;
+
+    //Paneles
+    private JPanel panelCargaIndividual = new Paneles();
+
+    private JPanel panelIzquierdo = new Paneles();
+    private JPanel panelDerecho = new Paneles();
+    private JPanel panelBotones = new Paneles();
+
+    //Paneles del lado izquierdo
+    private JPanel panelElementosDerechos = new Paneles();
+
+    //Botones
+    private JButton botonCrear = new Botones("CREAR",grafica.letraTitulos);
+    private JButton botonCancelar = new Botones("CANCELAR",grafica.letraTitulos);
 
     //Opciones de revista
     String [] tipoRevista = {"LIBRO","REVISTA","TESIS"};
 
-    //Paneles CAPA 1
-    private static JPanel panelCargaIndividual = new Paneles();
-    private static JPanel contenedorIzquierdo = new JPanel();
-    private static JPanel contenedorDerecho = new JPanel();
+    //Cajas de texto
+    private JTextField cajaAutor = new CajasTexto();
+    private JTextField cajaTitulo = new CajasTexto();
+    private JTextField cajaEdicion = new CajasTexto();
+    private JTextField cajaDescripcion = new CajasTexto();
+    private JTextField cajaTemas = new CajasTexto();
+    private JTextField cajaFrecuencia = new CajasTexto();
+    private JTextField cajaEjemplares = new CajasTexto();
+    private JTextField cajaArea = new CajasTexto();
+    private JTextField cajaCopias = new CajasTexto();
+    private JTextField cajaDisponibles = new CajasTexto();
 
-    //Paneles CAPA 2
-    private static JPanel contenedorCentral1 = new Paneles();
-    private static JPanel contenedorCentral2 = new Paneles();
-
-    //Paneles CAPA 3
-    private static JPanel contenedorCentral1_1 = new Paneles();
-    private static JPanel contenedorCentral2_1 = new Paneles();
-
-
-    //Paneles contenedores de etiquetas
-    private static JPanel contenedorEtiquetas1 = new Paneles();
-    private static JPanel contenedorEtiquetas2 = new Paneles();
-
-    //Paneles contenedores de botones
-    private static JPanel contenedorBotones1 = new Paneles();
-    private static JPanel contenedorBotones2 = new Paneles();
-
-    //Paneles contenedores de cajas de texto
-    private static JPanel contenedorCajas1 = new Paneles();
-    private static JPanel contenedorCajas2 = new Paneles();
-
-    //Componentes de cajas de texto
-    private static JTextField cajaAutor = new CajasTexto();
-    private static JTextField cajaTitulo = new CajasTexto();
-    private static JTextField cajaEdicion = new CajasTexto();
-    private static JTextField cajaDescripcion = new CajasTexto();
-    private static JTextField cajaTemas = new CajasTexto();
-    private static JTextField cajaFrecuencia = new CajasTexto();
-    private static JTextField cajaEjemplares = new CajasTexto();
-    private static JTextField cajaCopias = new CajasTexto();
-    private static JTextField cajaDisponibles = new CajasTexto();
-
-    //Botones
-    private static JButton botonCrear = new Botones("CREAR");
-    private static JButton botonCancelar = new Botones("CANCELAR");
-
-    //Lista de opciones
-    private JComboBox<String> listaTipo = new JComboBox<>(tipoRevista);
+    //Lista
+    private JComboBox<String> listaTipos = new JComboBox<>(tipoRevista);
 
     public CargaIndividual(){
-        super(sizeX, sizeY, "CARGA INDIVIDUAL");
-        componentenesCargaIndividual();
+        super(sizeX,sizeY,"CARGA INDIVIDUAL");
+        componentesCargaIndividual();
+
     }
 
-    private void componentenesCargaIndividual(){
+    private void componentesCargaIndividual(){
         this.getContentPane().add(panelCargaIndividual);
-        panelCargaIndividual.setLayout(new GridLayout(1,2));
-        panelCargaIndividual.add(contenedorIzquierdo);
-        panelCargaIndividual.add(contenedorDerecho);
+        panelCargaIndividual.setLayout(new BorderLayout());
+        panelCargaIndividual.add(panelRelleno(),BorderLayout.PAGE_START);
+        rellenoPaneles(panelIzquierdo, BorderLayout.WEST);
+        rellenoPaneles(panelElementosDerechos, BorderLayout.EAST);
+        rellenoPaneles(panelBotones, BorderLayout.PAGE_END);
 
-        contenedorCentral1.setLayout(new BorderLayout());
-        contenedorCentral2.setLayout(new BorderLayout());
+        panelIzquierdo.setPreferredSize(new Dimension((sizeX/2),40));
+        panelDerecho.setPreferredSize(new Dimension((sizeX/2), 40));
+        panelBotones.setPreferredSize(new Dimension(10,100));
 
-        //Contenedores de la capa 1
-        agregarPanelesPrincipales(contenedorIzquierdo, contenedorCentral1);
-        agregarPanelesPrincipales(contenedorDerecho, contenedorCentral2);
 
-        contenedorBotones1.add(botonCrear);
-        contenedorBotones2.add(botonCancelar);
+        //Agregamos los elementos izquierdos
+        panelIzquierdo.setLayout(new GridLayout(6,2,5,65));
+        panelIzquierdo.add(crearEtiquetas("TIPO"));
+        panelIzquierdo.add(listaTipos);
+        panelIzquierdo.add(crearEtiquetas("AUTOR"));
+        panelIzquierdo.add(cajaAutor);
+        panelIzquierdo.add(crearEtiquetas("TITULO"));
+        panelIzquierdo.add(cajaTitulo);
+        panelIzquierdo.add(crearEtiquetas("EDICIÓN"));
+        panelIzquierdo.add(cajaEdicion);
+        panelIzquierdo.add(crearEtiquetas("DESCRIPCIÓN"));
+        panelIzquierdo.add(cajaDescripcion);
+        panelIzquierdo.add(crearEtiquetas("TEMAS"));
+        panelIzquierdo.add(cajaTemas);
 
-        //Contenedores de la capa 2
-        agregarPanelesCentrales(contenedorCentral1, contenedorCentral1_1, BorderLayout.CENTER);
-        agregarPanelesCentrales(contenedorCentral1, contenedorBotones1, BorderLayout.PAGE_END);
+        //Agregamos los elementos derechos
+        panelElementosDerechos.setLayout(new BorderLayout());
+        panelElementosDerechos.setBorder(null);
+        panelElementosDerechos.add(panelRelleno(), BorderLayout.PAGE_START);
+        panelElementosDerechos.add(panelRelleno(), BorderLayout.PAGE_END);
+        panelElementosDerechos.add(panelRelleno(), BorderLayout.LINE_END);
+        panelElementosDerechos.add(panelDerecho, BorderLayout.CENTER);
 
-        agregarPanelesCentrales(contenedorCentral2, contenedorCentral2_1, BorderLayout.CENTER);
-        agregarPanelesCentrales(contenedorCentral2, contenedorBotones2, BorderLayout.PAGE_END);
+        panelDerecho.setLayout(new GridLayout(5,2,5,80));
+        panelDerecho.setBorder(null);
+        panelDerecho.add(crearEtiquetas("ÁREA"));
+        panelDerecho.add(cajaArea);
+        panelDerecho.add(crearEtiquetas("FRECUENCIA"));
+        panelDerecho.add(cajaFrecuencia);
+        panelDerecho.add(crearEtiquetas("EJEMPLARES"));
+        panelDerecho.add(cajaEjemplares);
+        panelDerecho.add(crearEtiquetas("COPIAS"));
+        panelDerecho.add(cajaCopias);
+        panelDerecho.add(crearEtiquetas("DISPONIBLES"));
+        panelDerecho.add(cajaDisponibles);
+
+        //Agregamos los botones
+        panelBotones.setLayout(new FlowLayout(FlowLayout.CENTER,75,25));
+        agregarBotones(botonCrear);
+        agregarBotones(botonCancelar);
+
+        //Se inicializa ya que el inidce 0 es Libro
+        //A menos de que el usario lo cambie
+        metodoDesactivar(cajaFrecuencia,"-");
+        metodoDesactivar(cajaArea, "-");
+        metodoDesactivar(cajaEjemplares,"0");
+
+        //Funcion de los botones
+        botonCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnCancelar(e);
+            }
+        });
+
+        listaTipos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cambioTipo(e);
+            }
+        });
+
+        botonCrear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnCrear(e);
+            }
+        });
+    }
+
+    private void rellenoPaneles(JPanel panel, Object alineacion){
+        panel.setLayout(new BorderLayout());
+        panel.setBorder(null);
+        panelCargaIndividual.add(panel, alineacion);
 
     }
 
-
-    private void agregarPanelesPrincipales(JPanel contenedor, JPanel central){
-        /*Central se refiere al panel en donde estarán el contenedor de botones y
-          el contenedor Central2 para las cajas de texto y etiquetas
-         */
-        contenedor.setLayout(new BorderLayout());
-        central.setBorder(null);
-        contenedor.add(panelRelleno(), BorderLayout.PAGE_START);
-        contenedor.add(panelRelleno(), BorderLayout.LINE_END);
-        contenedor.add(panelRelleno(), BorderLayout.LINE_START);
-        contenedor.add(panelRelleno(), BorderLayout.PAGE_END);
-        contenedor.add(central, BorderLayout.CENTER);
+    private void agregarBotones(JButton boton){
+        boton.setPreferredSize(new Dimension(150,40));
+        panelBotones.add(boton);
     }
 
-    private void agregarPanelesCentrales(JPanel contenedor, JPanel contenedorObjetos, Object alineacion){
-        contenedorObjetos.setBorder(null);
-        contenedor.setPreferredSize(new Dimension(50,50));
-        contenedor.add(contenedorObjetos, alineacion);
+    private JLabel crearEtiquetas(String mensaje){
+        JLabel etiqueta  = new Etiquetas(mensaje,null, null, grafica.letraFuerte);
+        return  etiqueta;
     }
-
 
     private JPanel panelRelleno(){
         JPanel panelRelleno = new Paneles();
         panelRelleno.setBorder(null);
         panelRelleno.setPreferredSize(new Dimension(20,20));
         return  panelRelleno;
+    }
+
+    private void btnCrear(ActionEvent e){
+        String tipo = (String) listaTipos.getSelectedItem();
+        String autor= cajaAutor.getText();
+        String titulo= cajaTitulo.getText();
+        String edicion = cajaEdicion.getText();
+        String descripcion = cajaDescripcion.getText();
+        String temas = cajaTemas.getText();
+        String frecuencia = cajaFrecuencia.getText();
+        String ejemplares = cajaEjemplares.getText();
+        String area = cajaArea.getText();
+        String copias = cajaCopias.getText();
+        String disponibles = cajaDisponibles.getText();
+
+        String mensaje = AlmacenLibros.validarCampos(
+                autor,
+                titulo,
+                edicion,
+                descripcion,
+                temas,
+                frecuencia,
+                ejemplares,
+                area,
+                copias,
+                disponibles
+        );
+
+        if( mensaje == ""){
+            AlmacenLibros.crearBibliografia(new Bibliografias(
+                    tipo,
+                    autor,
+                    titulo,
+                    descripcion,
+                    edicion,
+                    temas,
+                    frecuencia,
+                    ejemplares,
+                    area,
+                    copias,
+                    disponibles)
+            );
+
+            new Alertas("CREACION EXITOSA","").setVisible(true);
+        } else {
+            new Alertas(mensaje,"ERROR").setVisible(true);
+        }
+    }
+
+    private void btnCancelar(ActionEvent e){
+        this.dispose();
+        new PanelAdministrador().setVisible(true);
+    }
+
+    private void cambioTipo(ActionEvent e){
+        if(listaTipos.getSelectedIndex() == 0) {
+            metodoDesactivar(cajaFrecuencia,"-");
+            metodoDesactivar(cajaArea, "-");
+            metodoDesactivar(cajaEjemplares,"0");
+
+        } else if(listaTipos.getSelectedIndex() == 1){
+            metodoDesactivar(cajaArea,"-");
+            metodoActivar(cajaFrecuencia);
+            metodoActivar(cajaEjemplares);
+
+        } else if(listaTipos.getSelectedIndex() == 2){
+            metodoDesactivar(cajaFrecuencia,"-");
+            metodoDesactivar(cajaEjemplares, "0");
+
+            metodoActivar(cajaArea);
+
+        }
+    }
+
+    private void metodoDesactivar(JTextField caja, String mostrar){
+        caja.setText(mostrar);
+        caja.setEnabled(false);
+    }
+
+    private void metodoActivar(JTextField caja){
+        caja.setEnabled(true);
+        caja.setText("");
     }
 
 }

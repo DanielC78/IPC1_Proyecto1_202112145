@@ -29,7 +29,7 @@ public class VerLibros extends Formularios {
     private JButton botonRegresar = new Botones("MENÚ PRINCIPAL");
 
     //Etiquetas
-    private JLabel listaLibros = new Etiquetas("LISTA DE LIBROS",null,null,grafica.letra_titulos);
+    private JLabel listaLibros = new Etiquetas("LISTA DE LIBROS",null,null,grafica.letraTitulos);
 
     //Dimensiones de la ventana
     private static int sizeX = 1300;

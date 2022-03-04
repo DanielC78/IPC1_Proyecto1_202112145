@@ -13,10 +13,10 @@ public class Alertas extends Formularios {
     private ColoresFuentes graficos = new ColoresFuentes();
     private JPanel panelAlerta = new Paneles();
     private JButton botonAceptar = new Botones("ACEPTAR");
-    private JLabel etMensaje = new Etiquetas("", Color.white, Color.black, graficos.Letra_fuerte);
+    private JLabel etMensaje = new Etiquetas("", Color.white, Color.black, graficos.letraFuerte);
 
     public Alertas(String mensajeAlerta, String tipoMensaje){
-        super(385,225,tipoMensaje);
+        super(400,250,tipoMensaje);
         this.mensajeAlerta = mensajeAlerta;
         botonMaximizar.setVisible(false);
         iniciarComponentesAlerta();
@@ -24,13 +24,12 @@ public class Alertas extends Formularios {
 
     public void iniciarComponentesAlerta(){
         this.getContentPane().add(panelAlerta);
+        panelAlerta.setLayout(new BorderLayout());
 
-        botonAceptar.setBounds(133, 126, 115, 28);
-        etMensaje.setBounds(92, 50, 200,40);
+        botonAceptar.setPreferredSize( new Dimension(10,30));
+        panelAlerta.add(botonAceptar, BorderLayout.PAGE_END);
+        panelAlerta.add(etMensaje, BorderLayout.CENTER);
         etMensaje.setText(mensajeAlerta);
-
-        panelAlerta.add(etMensaje);
-        panelAlerta.add(botonAceptar);
 
         this.getRootPane().setDefaultButton(botonAceptar);
         botonAceptar.addActionListener(new ActionListener() {

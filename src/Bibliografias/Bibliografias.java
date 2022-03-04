@@ -28,7 +28,6 @@ public class Bibliografias {
     private String strEjemplares;
     private String temasConcatenados;
 
-
     public Bibliografias(
             String tipo,
             String autor,

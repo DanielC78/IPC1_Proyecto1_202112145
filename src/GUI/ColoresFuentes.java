@@ -12,14 +12,14 @@ public class ColoresFuentes {
     final public Color Blanco = new Color(255,255,255);
     final public Color Rojo = new Color(241,67,67);
     final public Color Amarillo = new Color(246, 191,79);
-    final public Color Gris = new Color(0,0,0, 128);
+    final public Color Gris = new Color(0,0,0, 136);
     final public Color Negro = new Color(0,0,0);
     final public Color Verde = new Color(100,202,87);
 
     //Fuentes
-    final public Font Letra_suave = new Font("Work Sans", 0, 12);
-    final public Font Letra_fuerte = new Font("Work Sans", 1, 12);
-    final public Font letra_titulos = new Font("Work Sans",1,17);
+    final public Font letraSuave = new Font("Work Sans", 0, 13);
+    final public Font letraFuerte = new Font("Work Sans", 1, 13);
+    final public Font letraTitulos = new Font("Work Sans",1,17);
     final public Font letraCargaMasiva = new Font("Work Sans", 0, 18);
 
     //Bordes simples

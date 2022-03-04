@@ -1,6 +1,7 @@
 package Bibliografias;
 
 public class AlmacenLibros {
+
     private static Bibliografias[] arregloBibliografias = new Bibliografias[100];
     private static int  cantidadBibliografias = 0;
 
@@ -22,15 +23,22 @@ public class AlmacenLibros {
     }
 
     public static void eliminarLibro(String titulo){
-        for (Bibliografias libro :
-                arregloBibliografias) {
-            if(libro != null){
-                if(libro.getTitulo().equals(titulo)){
-                    System.out.println("eliminao "+ titulo);
+        for (int i = 0; i < (arregloBibliografias.length-1); i++) {
+            if(arregloBibliografias[i] != null){
+                if(arregloBibliografias[i].getTitulo().equals(titulo)){
+                    arregloBibliografias[i] = null;
+                    break;
                 }
             }
         }
 
+        for (int i = 0; i < (arregloBibliografias.length - 1); i++) {
+            if(arregloBibliografias[i] == null || arregloBibliografias[i+1] != null){
+                arregloBibliografias[i] = arregloBibliografias[i+1];
+                arregloBibliografias[i+1] = null;
+            }
+        }
+        System.out.println(arregloBibliografias.length);
     }
 
 
@@ -110,5 +118,49 @@ public class AlmacenLibros {
             }
         }
         return datos;
+    }
+
+    public static String validarCampos(String autor,
+                                String titulo,
+                                String edicion,
+                                String descripcion,
+                                String temas,
+                                String frecuencia,
+                                String ejemplares,
+                                String area,
+                                String copia,
+                                String disponibles){
+        String mensajeAlerta = "";
+        if(autor.length() == 0
+                || titulo.length() == 0 //String
+                || edicion.length() == 0 //int
+                || descripcion.length() == 0 //String
+                || temas.length() == 0 //String
+                || frecuencia.length() == 0 //String
+                || ejemplares.length() == 0 //int
+                || area.length() == 0 //String
+                || copia.length() == 0 //int
+                || disponibles.length() == 0 //int
+        ){
+            mensajeAlerta = "DEBE DE LLENAR TODOS LOS CAMPOS";
+        } else{
+            if(!autor.matches("^[A-Za-z ]*$")
+                    || !titulo.trim().matches("^[A-Za-z ]*$")
+                    || !descripcion.trim().matches("^[A-Za-z ]*$")
+                    || !temas.trim().matches("^[A-Za-z ]*$")
+                    || !frecuencia.trim().matches("^[A-Za-z ]*$")
+                    || !area.trim().matches("^[A-Za-z ]*$")
+            ){
+                mensajeAlerta = "SOLO SE PERMITEN LETRAS";
+
+            } else if( !edicion.matches("^[0-9]+$")
+                    || !ejemplares.matches("^[0-9]+$")
+                    || !copia.matches("^[0-9]+$")
+                    || !disponibles.matches("^[0-9]+$")){
+                mensajeAlerta = "SOLO SE PERMITEN NUMEROS";
+            }
+        }
+
+        return mensajeAlerta;
     }
 }

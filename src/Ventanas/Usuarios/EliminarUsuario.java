@@ -153,7 +153,7 @@ public class EliminarUsuario extends Formularios {
 
     //Agregar elemenos a la ventana
     private void agregarEtiqueta(String texto){
-        JLabel etiqueta = new Etiquetas("            " + texto,grafica.Blanco,grafica.Negro,grafica.Letra_fuerte);
+        JLabel etiqueta = new Etiquetas("            " + texto,grafica.Blanco,grafica.Negro,grafica.letraFuerte);
         etiqueta.setHorizontalAlignment(SwingConstants.LEFT);
         contenedorAuxiliarEtiquetas.add(etiqueta);
     }
@@ -205,7 +205,6 @@ public class EliminarUsuario extends Formularios {
             matrizDatos = datosUsuario.datosUsuario(cajaID.getText());
             if(matrizDatos[0] != null){
                 for (int i = 0; i < matrizDatos.length; i++){
-                    System.out.println(matrizDatos[i]);
                 }
                 cajaNombre.setText(matrizDatos[1]);
                 cajaApellido.setText(matrizDatos[2]);
