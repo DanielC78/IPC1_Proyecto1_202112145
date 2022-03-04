@@ -48,7 +48,7 @@ public class Bibliografias {
         this.titulo = titulo;
         this.edicion = Integer.parseInt(edicion);
         this.descripcion = descripcion;
-        this.temas = temas.split(",");
+        this.temas = temas.trim().split(",");
         this.frecuenciaActual = frecuenciaActual;
         this.ejemplares = Integer.parseInt(ejemplares);
         this.area = area;

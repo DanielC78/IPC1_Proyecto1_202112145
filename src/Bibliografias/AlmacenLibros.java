@@ -22,6 +22,14 @@ public class AlmacenLibros {
     }
 
     public static void eliminarLibro(String titulo){
+        for (Bibliografias libro :
+                arregloBibliografias) {
+            if(libro != null){
+                if(libro.getTitulo().equals(titulo)){
+                    System.out.println("eliminao "+ titulo);
+                }
+            }
+        }
 
     }
 
@@ -29,10 +37,27 @@ public class AlmacenLibros {
     public static String[][] buscarTemaLibro(String buscar){
         String datos[][] = new String[cantidadBibliografias][11];
         int pos = 0;
+        boolean verificarTitulo = false;
+        boolean verificarTema = false;
         for(Bibliografias bibliografias: arregloBibliografias){
             if(bibliografias != null){
-                if(bibliografias.getTemasConcatenados().contains(buscar) || bibliografias.getTitulo().contains(buscar)){
-                    System.out.println(bibliografias.getTemasConcatenados().contains(buscar));
+                if(bibliografias.getTemas()[0].contains(buscar)){
+
+                }
+                if(bibliografias.getTitulo().contains(buscar)){
+                    verificarTitulo = true;
+                }
+                for (String temas :
+                        bibliografias.getTemas()) {
+                    if (temas.trim().contains(buscar)) {
+                        verificarTema = true;
+                        break;
+                    } else{
+                        verificarTema = false;
+                    }
+                }
+
+                if(verificarTitulo || verificarTema){
                     String [] fila = {
                             bibliografias.getStrTipo(),
                             bibliografias.getAutor(),
@@ -86,8 +111,4 @@ public class AlmacenLibros {
         }
         return datos;
     }
-
-
-
-
 }
