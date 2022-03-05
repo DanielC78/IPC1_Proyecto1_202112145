@@ -1,12 +1,10 @@
-import Ventanas.Bibliografias.CargaIndividual;
-import Ventanas.Bibliografias.CargaMasiva;
-import Ventanas.Bibliografias.EliminarLibros;
+import Ventanas.General.PanelAdministrador;
 
 public class Menu{
 
 
     public static void main(String args[]) {
-        new CargaIndividual().setVisible(true);
+        new PanelAdministrador().setVisible(true);
 
     }
 }

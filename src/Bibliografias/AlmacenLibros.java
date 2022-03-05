@@ -38,7 +38,6 @@ public class AlmacenLibros {
                 arregloBibliografias[i+1] = null;
             }
         }
-        System.out.println(arregloBibliografias.length);
     }
 
 
@@ -49,15 +48,12 @@ public class AlmacenLibros {
         boolean verificarTema = false;
         for(Bibliografias bibliografias: arregloBibliografias){
             if(bibliografias != null){
-                if(bibliografias.getTemas()[0].contains(buscar)){
-
-                }
                 if(bibliografias.getTitulo().contains(buscar)){
                     verificarTitulo = true;
                 }
                 for (String temas :
                         bibliografias.getTemas()) {
-                    if (temas.trim().contains(buscar)) {
+                    if (temas.trim().equals(buscar)) {
                         verificarTema = true;
                         break;
                     } else{
@@ -144,12 +140,12 @@ public class AlmacenLibros {
         ){
             mensajeAlerta = "DEBE DE LLENAR TODOS LOS CAMPOS";
         } else{
-            if(!autor.matches("^[A-Za-z ]*$")
-                    || !titulo.trim().matches("^[A-Za-z ]*$")
-                    || !descripcion.trim().matches("^[A-Za-z ]*$")
-                    || !temas.trim().matches("^[A-Za-z ]*$")
-                    || !frecuencia.trim().matches("^[A-Za-z ]*$")
-                    || !area.trim().matches("^[A-Za-z ]*$")
+            if(!autor.matches("^[A-Za-z ,.-]*$")
+                    || !titulo.trim().matches("^[A-Za-z ,.-]*$")
+                    || !descripcion.trim().matches("^[A-Za-z ,.-]*$")
+                    || !temas.trim().matches("^[A-Za-z ,.-]*$")
+                    || !frecuencia.trim().matches("^[A-Za-z ,.-]*$")
+                    || !area.trim().matches("^[A-Za-z ,.-]*$")
             ){
                 mensajeAlerta = "SOLO SE PERMITEN LETRAS";
 
