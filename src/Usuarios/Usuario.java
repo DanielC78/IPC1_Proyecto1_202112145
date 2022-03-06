@@ -1,5 +1,7 @@
 package Usuarios;
 
+import java.util.Objects;
+
 public class Usuario {
 
     //Credenciales de administrador
@@ -83,7 +85,7 @@ public class Usuario {
 
         //Desplazamos los usuarios una casilla hacia arriba cuando un usuario sea eliminado
         for (int i = 0; i < (matrizUsuarios.length - 1); i++) {
-            if(matrizUsuarios[i][0] == "" && matrizUsuarios[i+1][0] != ""){
+            if(Objects.equals(matrizUsuarios[i][0], "") && !Objects.equals(matrizUsuarios[i + 1][0], "")){
                 for (int j = 0; j < matrizUsuarios[i].length; j++) {
                     matrizUsuarios[i][j] = matrizUsuarios[i + 1][j];
                     matrizUsuarios[i + 1][j] = "";

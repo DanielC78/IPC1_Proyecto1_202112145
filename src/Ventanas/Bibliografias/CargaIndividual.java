@@ -14,40 +14,40 @@ import java.awt.event.ActionListener;
 public class CargaIndividual extends Formularios {
 
     //Tamaño de la ventanas
-    private static int sizeX = 700 ;
-    private static int sizeY = 650;
+    private static final int sizeX = 700 ;
+    private static final int sizeY = 650;
 
     //Paneles
-    private JPanel panelCargaIndividual = new Paneles();
+    private final JPanel panelCargaIndividual = new Paneles();
 
-    private JPanel panelIzquierdo = new Paneles();
-    private JPanel panelDerecho = new Paneles();
-    private JPanel panelBotones = new Paneles();
+    private final JPanel panelIzquierdo = new Paneles();
+    private final JPanel panelDerecho = new Paneles();
+    private final JPanel panelBotones = new Paneles();
 
     //Paneles del lado izquierdo
-    private JPanel panelElementosDerechos = new Paneles();
+    private final JPanel panelElementosDerechos = new Paneles();
 
     //Botones
-    private JButton botonCrear = new Botones("CREAR",grafica.letraTitulos);
-    private JButton botonCancelar = new Botones("CANCELAR",grafica.letraTitulos);
+    private final JButton botonCrear = new Botones("CREAR",grafica.letraTitulos);
+    private final JButton botonCancelar = new Botones("CANCELAR",grafica.letraTitulos);
 
     //Opciones de revista
     String [] tipoRevista = {"LIBRO","REVISTA","TESIS"};
 
     //Cajas de texto
-    private JTextField cajaAutor = new CajasTexto();
-    private JTextField cajaTitulo = new CajasTexto();
-    private JTextField cajaEdicion = new CajasTexto();
-    private JTextField cajaDescripcion = new CajasTexto();
-    private JTextField cajaTemas = new CajasTexto();
-    private JTextField cajaFrecuencia = new CajasTexto();
-    private JTextField cajaEjemplares = new CajasTexto();
-    private JTextField cajaArea = new CajasTexto();
-    private JTextField cajaCopias = new CajasTexto();
-    private JTextField cajaDisponibles = new CajasTexto();
+    private final JTextField cajaAutor = new CajasTexto();
+    private final JTextField cajaTitulo = new CajasTexto();
+    private final JTextField cajaEdicion = new CajasTexto();
+    private final JTextField cajaDescripcion = new CajasTexto();
+    private final JTextField cajaTemas = new CajasTexto();
+    private final JTextField cajaFrecuencia = new CajasTexto();
+    private final JTextField cajaEjemplares = new CajasTexto();
+    private final JTextField cajaArea = new CajasTexto();
+    private final JTextField cajaCopias = new CajasTexto();
+    private final JTextField cajaDisponibles = new CajasTexto();
 
     //Lista
-    private JComboBox<String> listaTipos = new JComboBox<>(tipoRevista);
+    private final JComboBox<String> listaTipos = new JComboBox<>(tipoRevista);
 
     public CargaIndividual(){
         super(sizeX,sizeY,"CARGA INDIVIDUAL");
@@ -203,7 +203,7 @@ public class CargaIndividual extends Formularios {
                     disponibles)
             );
 
-            vaciarCajas();
+            AlmacenLibros.vaciarCajas(listaTipos, cajaAutor, cajaTitulo, cajaEdicion, cajaDescripcion, cajaTemas, cajaCopias, cajaDisponibles);
             new Alertas("CREACION EXITOSA","").setVisible(true);
         } else {
             new Alertas(mensaje,"ERROR").setVisible(true);
@@ -243,17 +243,4 @@ public class CargaIndividual extends Formularios {
         caja.setEnabled(true);
         caja.setText("");
     }
-
-    private void vaciarCajas(){
-        listaTipos.setSelectedIndex(0);
-        cajaAutor.setText("");
-        cajaTitulo.setText("");
-        cajaEdicion.setText("");
-        cajaDescripcion.setText("");
-        cajaTemas.setText("");
-        cajaCopias.setText("");
-        cajaDisponibles.setText("");
-    }
-
-
 }

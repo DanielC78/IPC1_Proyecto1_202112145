@@ -1,5 +1,7 @@
 package Bibliografias;
 
+import javax.swing.*;
+
 public class AlmacenLibros {
 
     private static Bibliografias[] arregloBibliografias = new Bibliografias[100];
@@ -18,7 +20,7 @@ public class AlmacenLibros {
         }
     }
 
-    public static void actualizarLibro(String tipo,
+    public static String actualizarLibro(String tipo,
                                        String autor,
                                        String titulo,
                                        String descripcion,
@@ -30,10 +32,11 @@ public class AlmacenLibros {
                                        String copias,
                                        String disponibles){
 
+        String mensajeAlerta = "";
         for (int i = 0; i < (arregloBibliografias.length - 1); i++) {
             if(arregloBibliografias[i] != null){
                 if(arregloBibliografias[i].getTitulo().equals(titulo)){
-                    arregloBibliografias[i].setTitulo(tipo);
+                    arregloBibliografias[i].setTipo(tipo);
                     arregloBibliografias[i].setAutor(autor);
                     arregloBibliografias[i].setDescripcion(descripcion);
                     //Propiedades de Edicion
@@ -54,11 +57,15 @@ public class AlmacenLibros {
                     //Propiedades de Disponibles
                     arregloBibliografias[i].setStrDisponibles(disponibles);
                     arregloBibliografias[i].setDisponibles(Integer.parseInt(disponibles));
+                    mensajeAlerta = "ACTUALIZACION EXITOSA";
                     break;
+                } else {
+                    mensajeAlerta = "NO SE PUDO ACTUALIZAR";
                 }
             }
         }
 
+        return  mensajeAlerta;
     }
 
     public static void eliminarLibro(String titulo){
@@ -72,7 +79,7 @@ public class AlmacenLibros {
         }
 
         for (int i = 0; i < (arregloBibliografias.length - 1); i++) {
-            if(arregloBibliografias[i] == null || arregloBibliografias[i+1] != null){
+            if(arregloBibliografias[i] == null && arregloBibliografias[i+1] != null){
                 arregloBibliografias[i] = arregloBibliografias[i+1];
                 arregloBibliografias[i+1] = null;
             }
@@ -80,19 +87,17 @@ public class AlmacenLibros {
     }
 
 
-    public static String[][] buscarTemaLibro(String buscar){
-        String datos[][] = new String[cantidadBibliografias][11];
+    public static String[][] buscarTemaLibro(String tituloBuscar){
+        String[][] datos = new String[cantidadBibliografias][11];
         int pos = 0;
-        boolean verificarTitulo = false;
+        boolean verificarTitulo;
         boolean verificarTema = false;
         for(Bibliografias bibliografias: arregloBibliografias){
             if(bibliografias != null){
-                if(bibliografias.getTitulo().equalsIgnoreCase(buscar)){
-                    verificarTitulo = true;
-                }
+                verificarTitulo = bibliografias.getTitulo().equalsIgnoreCase(tituloBuscar);
                 for (String temas :
                         bibliografias.getTemas()) {
-                    if (temas.trim().equalsIgnoreCase(buscar)) {
+                    if (temas.trim().equalsIgnoreCase(tituloBuscar)) {
                         verificarTema = true;
                         break;
                     } else{
@@ -124,7 +129,7 @@ public class AlmacenLibros {
     }
 
     public static String[] cabeceraLibros(){
-        String [] cabecera =  {
+        return new String[]{
                 "TIPO",
                 "AUTOR",
                 "TITULO",
@@ -137,11 +142,10 @@ public class AlmacenLibros {
                 "COPIAS",
                 "DISPONIBLES"
         };
-        return cabecera;
     }
 
     public static String[][] obtenerLibros(){
-        String datos[][] = new String[cantidadBibliografias][11];
+        String[][] datos = new String[cantidadBibliografias][11];
         int pos = 0;
         for(Bibliografias bibliografias: arregloBibliografias){
             if(bibliografias != null){
@@ -217,5 +221,16 @@ public class AlmacenLibros {
             }
         }
         return mensajeAlerta;
+    }
+
+    public static void vaciarCajas(JComboBox<String> listaTipos, JTextField cajaAutor, JTextField cajaTitulo, JTextField cajaEdicion, JTextField cajaDescripcion, JTextField cajaTemas, JTextField cajaCopias, JTextField cajaDisponibles) {
+        listaTipos.setSelectedIndex(0);
+        cajaAutor.setText("");
+        cajaTitulo.setText("");
+        cajaEdicion.setText("");
+        cajaDescripcion.setText("");
+        cajaTemas.setText("");
+        cajaCopias.setText("");
+        cajaDisponibles.setText("");
     }
 }

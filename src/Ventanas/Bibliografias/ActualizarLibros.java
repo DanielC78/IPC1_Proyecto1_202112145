@@ -1,10 +1,8 @@
 package Ventanas.Bibliografias;
 
 import Bibliografias.AlmacenLibros;
-import Bibliografias.Bibliografias;
 import GUI.*;
 import Ventanas.General.Alertas;
-import Ventanas.General.PanelAdministrador;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,38 +18,38 @@ public class ActualizarLibros extends Formularios {
     */
 
     //Propiedades de la ventana
-    private static int sizeX = 700 ;
-    private static int sizeY = 650;
-    private static String titulo = "ACTUALIZAR BIBLIOGRAFÍA";
+    private static final int sizeX = 700 ;
+    private static final int sizeY = 650;
+    private static final String titulo = "ACTUALIZAR BIBLIOGRAFÍA";
 
     //Paneles
-    private JPanel panelActualizarBibliografia = new Paneles();
+    private final JPanel panelActualizarBibliografia = new Paneles();
 
-    private JPanel panelIzquierdo = new Paneles();
-    private JPanel panelDerecho = new Paneles();
-    private JPanel panelBotones = new Paneles();
+    private final JPanel panelIzquierdo = new Paneles();
+    private final JPanel panelDerecho = new Paneles();
+    private final JPanel panelBotones = new Paneles();
 
     //Paneles del lado izquierdo
-    private JPanel panelElementosDerechos = new Paneles();
+    private final JPanel panelElementosDerechos = new Paneles();
 
     //Botones
-    private JButton botonActualizar = new Botones("ACTUALIZAR",grafica.letraTitulos);
-    private JButton botonCancelar = new Botones("CANCELAR",grafica.letraTitulos);
+    private final JButton botonActualizar = new Botones("ACTUALIZAR",grafica.letraTitulos);
+    private final JButton botonCancelar = new Botones("CANCELAR",grafica.letraTitulos);
 
     //Opciones de revista
     String [] tipoRevista = {"LIBRO","REVISTA","TESIS"};
 
     //Cajas de texto
-    private JTextField cajaAutor = new CajasTexto();
-    private JTextField cajaTitulo = new CajasTexto();
-    private JTextField cajaEdicion = new CajasTexto();
-    private JTextField cajaDescripcion = new CajasTexto();
-    private JTextField cajaTemas = new CajasTexto();
-    private JTextField cajaFrecuencia = new CajasTexto();
-    private JTextField cajaEjemplares = new CajasTexto();
-    private JTextField cajaArea = new CajasTexto();
-    private JTextField cajaCopias = new CajasTexto();
-    private JTextField cajaDisponibles = new CajasTexto();
+    private final JTextField cajaAutor = new CajasTexto();
+    private final JTextField cajaTitulo = new CajasTexto();
+    private final JTextField cajaEdicion = new CajasTexto();
+    private final JTextField cajaDescripcion = new CajasTexto();
+    private final JTextField cajaTemas = new CajasTexto();
+    private final JTextField cajaFrecuencia = new CajasTexto();
+    private final JTextField cajaEjemplares = new CajasTexto();
+    private final JTextField cajaArea = new CajasTexto();
+    private final JTextField cajaCopias = new CajasTexto();
+    private final JTextField cajaDisponibles = new CajasTexto();
 
     //Lista
     private JComboBox<String> listaTipos = new JComboBox<>(tipoRevista);
@@ -71,25 +69,34 @@ public class ActualizarLibros extends Formularios {
         listaTipos.setSelectedItem(tipo);
         cajaAutor.setText(autor);
         cajaTitulo.setText(tituloLibro);
+        cajaTitulo.setEnabled(false);
         cajaDescripcion.setText(descripcion);
         cajaEdicion.setText(edicion);
         cajaTemas.setText(temas);
         cajaFrecuencia.setText(frecuencia);
         cajaEjemplares.setText(ejemplares);
         cajaArea.setText(area);
+        System.out.println(area);
         cajaCopias.setText(copias);
         cajaDisponibles.setText(disponibles);
-        componentesActualizarLibro();
-    }
 
-    public ActualizarLibros(){
-        super(sizeX, sizeY, titulo);
+        if(tipo.equals("LIBRO")) {
+            metodoDesactivar(cajaFrecuencia,"---");
+            metodoDesactivar(cajaArea, "---");
+            metodoDesactivar(cajaEjemplares,"0");
+
+        } else if(tipo.equals("REVISTA")){
+            metodoDesactivar(cajaArea,"---");
+
+        } else if(tipo.equals("TESIS")){
+            metodoDesactivar(cajaFrecuencia,"---");
+            metodoDesactivar(cajaEjemplares, "0");
+        }
         componentesActualizarLibro();
     }
 
     private void componentesActualizarLibro(){
         this.getContentPane().add(panelActualizarBibliografia);
-
 
         panelActualizarBibliografia.setLayout(new BorderLayout());
         panelActualizarBibliografia.add(panelRelleno(),BorderLayout.PAGE_START);
@@ -161,7 +168,7 @@ public class ActualizarLibros extends Formularios {
         botonActualizar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                btnCrear(e);
+                btnActualizar(e);
             }
         });
     }
@@ -190,7 +197,7 @@ public class ActualizarLibros extends Formularios {
         return  panelRelleno;
     }
 
-    private void btnCrear(ActionEvent e){
+    private void btnActualizar(ActionEvent e){
         String tipo = (String) listaTipos.getSelectedItem();
         String autor= cajaAutor.getText();
         String titulo= cajaTitulo.getText();
@@ -231,7 +238,7 @@ public class ActualizarLibros extends Formularios {
                     disponibles
             );
 
-            vaciarCajas();
+            AlmacenLibros.vaciarCajas(listaTipos, cajaAutor, cajaTitulo, cajaEdicion, cajaDescripcion, cajaTemas, cajaCopias, cajaDisponibles);
             new Alertas("ACTUALIZACIÓN EXITOSA","").setVisible(true);
         } else {
             new Alertas(mensaje,"ERROR").setVisible(true);
@@ -240,10 +247,10 @@ public class ActualizarLibros extends Formularios {
 
     private void btnCancelar(ActionEvent e){
         this.dispose();
-        new PanelAdministrador().setVisible(true);
+        new PanelActualizarLibros().setVisible(true);
     }
 
-    private void cambioTipo(ActionEvent e){
+    private void cambioTipo(Object e){
         if(listaTipos.getSelectedIndex() == 0) {
             metodoDesactivar(cajaFrecuencia,"---");
             metodoDesactivar(cajaArea, "---");
@@ -258,7 +265,6 @@ public class ActualizarLibros extends Formularios {
             metodoDesactivar(cajaFrecuencia,"---");
             metodoDesactivar(cajaEjemplares, "0");
             metodoActivar(cajaArea);
-
         }
     }
 
@@ -272,14 +278,4 @@ public class ActualizarLibros extends Formularios {
         caja.setText("");
     }
 
-    private void vaciarCajas(){
-        listaTipos.setSelectedIndex(0);
-        cajaAutor.setText("");
-        cajaTitulo.setText("");
-        cajaEdicion.setText("");
-        cajaDescripcion.setText("");
-        cajaTemas.setText("");
-        cajaCopias.setText("");
-        cajaDisponibles.setText("");
-    }
 }

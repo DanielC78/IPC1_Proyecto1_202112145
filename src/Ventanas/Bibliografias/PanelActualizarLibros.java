@@ -143,7 +143,6 @@ public class PanelActualizarLibros extends Formularios {
         } else{
             buscarLibros();
         }
-
     }
 
     private void btnActualizar(ActionEvent e){
@@ -172,6 +171,7 @@ public class PanelActualizarLibros extends Formularios {
             copiasTabla = (String)tablaLibros.getValueAt(fila,9);
             disponiblesTabla = (String)tablaLibros.getValueAt(fila,10);
 
+            this.dispose();
             new ActualizarLibros(
                     tipoTabla,
                     autorTabla,
