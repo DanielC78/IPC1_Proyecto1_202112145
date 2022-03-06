@@ -99,13 +99,13 @@ public class Login extends Formularios{
                     if(datos[i][3].equals(user)){
                         if(datos[i][5].equals(password)){
                             mensajeAlerta = "";
+                            Usuario.setIdActivo(datos[i][0]);
                             Usuario.setNombreActivo(datos[i][1]);
                             Usuario.setApellidoActivo(datos[i][2]);
-                            break;
                         } else{
                             mensajeAlerta = "LA CONTRASEÑA ES INCORRECTA";
-                            break;
                         }
+                        break;
                     } else{
                         mensajeAlerta = "EL USUARIO NO EXISTE";
                     }
@@ -123,8 +123,6 @@ public class Login extends Formularios{
                 this.dispose();
             }
         }
-
-
     }
 
     private void botonCancelarActionPerformed(ActionEvent e){

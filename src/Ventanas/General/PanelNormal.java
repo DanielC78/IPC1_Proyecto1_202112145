@@ -2,6 +2,7 @@ package Ventanas.General;
 
 import Bibliografias.*;
 import GUI.*;
+import Prestamos.Prestamos;
 import Usuarios.Usuario;
 
 import javax.swing.*;
@@ -249,14 +250,34 @@ public class PanelNormal extends Formularios {
 
     private void btnLogout(ActionEvent e){
         new Login().setVisible(true);
+        Usuario.setIdActivo(null);
+        Usuario.setNombreActivo(null);
+        Usuario.setApellidoActivo(null);
         this.dispose();
     }
 
     private void btnPrestar(ActionEvent e){
-        int i = tablaBibliografia.getSelectedRow();
-        int j = tablaBibliografia.getSelectedColumn();
-        int a = (int) tablaBibliografia.getValueAt(i,j);
-        System.out.println(a);
+        int fila = tablaBibliografia.getSelectedRow();
+        String idUsuario = Usuario.getIdActivo();
+        boolean verDisponibilidad;
+        if(!(fila == - 1)){
+            //Definimos los atributos del prestamo
+            String tipo = (String)tablaBibliografia.getValueAt(fila, 0);
+            String titulo = (String)tablaBibliografia.getValueAt(fila, 2);
+
+            //Verificamos que el libro todavía tenga unidades
+            verDisponibilidad = AlmacenLibros.disponibilidadLibros(titulo, 0);
+            if(verDisponibilidad){
+                Prestamos.crearPrestamo(new Prestamos(idUsuario,
+                        titulo,
+                        tipo));
+                mostrarBibliografia();
+            } else{
+                new Alertas("YA NO QUEDAN MÁS UNIDADES","ERROR").setVisible(true);
+            }
+        } else{
+            new Alertas("DEBE SELECCIONAR UNA FILA","ERROR").setVisible(true);
+        }
     }
 
     private void cajaMostrarDatos(KeyEvent e){

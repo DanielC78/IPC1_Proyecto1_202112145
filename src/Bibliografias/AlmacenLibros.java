@@ -233,4 +233,35 @@ public class AlmacenLibros {
         cajaCopias.setText("");
         cajaDisponibles.setText("");
     }
+
+    public static boolean disponibilidadLibros(String titulo, int opcion){
+        int cantidadDisponible = 0;
+        boolean disponibilidad = true;
+        for (int i = 0; i < arregloBibliografias.length; i++) {
+            if(arregloBibliografias[i] != null){
+                if(arregloBibliografias[i].getTitulo().equals(titulo)){
+                    System.out.println("Disponibilidad Inicial"+ arregloBibliografias[i].getStrDisponibles());
+                    /*
+                    * La opción 0 es devolver (se agregar +1 a la disponibilidad)
+                    * La opción 1 es prestar (se resta -1 a la disponibilidad)
+                    * */
+                    if(opcion == 0){
+                        if(arregloBibliografias[i].getDisponibles() > 0){
+                            cantidadDisponible = arregloBibliografias[i].getDisponibles()-1;
+                            disponibilidad = true;
+                        } else{
+                            disponibilidad = false;
+                        }
+                    } else if (opcion == 1){
+                        cantidadDisponible = (arregloBibliografias[i].getDisponibles()+1);
+                        disponibilidad = true;
+                    }
+                    arregloBibliografias[i].setDisponibles(cantidadDisponible);
+                    arregloBibliografias[i].setStrDisponibles(String.valueOf(arregloBibliografias[i].getDisponibles()));
+                    System.out.println("Disponibilidad después "+ arregloBibliografias[i].getStrDisponibles());
+                }
+            }
+        }
+        return disponibilidad;
+    }
 }

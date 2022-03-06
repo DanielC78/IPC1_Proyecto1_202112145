@@ -1,10 +1,10 @@
-import Ventanas.General.PanelNormal;
+import Ventanas.Bibliografias.CargaMasiva;
 
 public class Menu{
 
 
     public static void main(String args[]) {
-        new PanelNormal().setVisible(true);
+        new CargaMasiva().setVisible(true);
 
     }
 }

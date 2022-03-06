@@ -271,9 +271,7 @@ public class PanelAdministrador extends Formularios {
         new CrearLibros().setVisible(true);
     }
 
-
     private void btnBiblioEliminar(ActionEvent e){
-
         this.dispose();
         new EliminarLibros().setVisible(true);
     }
@@ -281,7 +279,6 @@ public class PanelAdministrador extends Formularios {
     private void btnBiblioActualizar(ActionEvent e){
         this.dispose();
         new PanelActualizarLibros().setVisible(true);
-
     }
 
     private void btnBiblioVer(ActionEvent e){
@@ -292,6 +289,7 @@ public class PanelAdministrador extends Formularios {
     private void btnLogOut(ActionEvent e){
         Usuario.setNombreActivo(null);
         Usuario.setApellidoActivo(null);
+        Usuario.setIdActivo(null);
         this.setVisible(false);
         new Login().setVisible(true);
         this.dispose();

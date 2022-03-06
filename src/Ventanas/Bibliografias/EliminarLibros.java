@@ -150,7 +150,7 @@ public class EliminarLibros extends Formularios {
     private void btnEliminar(ActionEvent e){
         String titulo;
         int fila = tablaLibros.getSelectedRow();
-        if(!(fila == -1)){
+        if(!(fila == - 1)){
             titulo = (String)tablaLibros.getValueAt(fila,2);
             modeloTabla.removeRow(fila);
             AlmacenLibros.eliminarLibro(titulo);
