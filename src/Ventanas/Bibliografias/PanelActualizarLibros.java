@@ -1,7 +1,6 @@
 package Ventanas.Bibliografias;
 
 import Bibliografias.AlmacenLibros;
-import Bibliografias.Bibliografias;
 import GUI.*;
 import Ventanas.General.Alertas;
 import Ventanas.General.PanelAdministrador;
@@ -14,15 +13,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class EliminarLibros extends Formularios {
+public class PanelActualizarLibros extends Formularios {
 
     //Dimensiones de la ventana
     private static int sizeX = 1300;
     private static int sizeY = 600;
-    private static String titulo = "ELIMINAR BIBLIOGRAFÍA";
+    private static String titulo = "EDITAR BIBLIOGRAFÍA";
 
     //Paneles
-    private JPanel panelEliminarLibros = new Paneles();
+    private JPanel panelActualizarLibros = new Paneles();
     private JPanel contenedorTabla = new Paneles();
     private JPanel contenedorSuperior = new Paneles();
     private JPanel contenedorInferior = new Paneles();
@@ -32,7 +31,7 @@ public class EliminarLibros extends Formularios {
     JTextField cajaBuscar = new CajasTexto();
 
     //Componentes de la parte inferior
-    JButton botonEliminar = new Botones("ELIMINAR", grafica.letraTitulos);
+    JButton botonEliminar = new Botones("EDITAR", grafica.letraTitulos);
     JButton botonRegresar = new Botones("MENÚ PRINCIPAL", grafica.letraTitulos);
 
     //Componenentes de la tabla
@@ -41,14 +40,14 @@ public class EliminarLibros extends Formularios {
     private JScrollPane scrollTablaLibros = new JScrollPane();
 
 
-    public EliminarLibros() throws HeadlessException {
+    public PanelActualizarLibros() throws HeadlessException {
         super(sizeX, sizeY, titulo);
         componentesEliminarLibros();
     }
 
     private void componentesEliminarLibros(){
-        this.getContentPane().add(panelEliminarLibros);
-        panelEliminarLibros.setLayout(new BorderLayout());
+        this.getContentPane().add(panelActualizarLibros);
+        panelActualizarLibros.setLayout(new BorderLayout());
         agregarPaneles(contenedorTabla, BorderLayout.CENTER);
         agregarPaneles(contenedorSuperior, BorderLayout.PAGE_START);
         agregarPaneles(contenedorInferior, BorderLayout.PAGE_END);
@@ -87,7 +86,7 @@ public class EliminarLibros extends Formularios {
         botonEliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                btnEliminar(e);
+                btnActualizar(e);
             }
         });
 
@@ -108,7 +107,7 @@ public class EliminarLibros extends Formularios {
             panel.setLayout(new FlowLayout(FlowLayout.CENTER,10,10));
             dimensionesContenedores(panel,10,70);
         }
-        panelEliminarLibros.add(panel, alineacionPanelCentral);
+        panelActualizarLibros.add(panel, alineacionPanelCentral);
     }
 
     private void mostrarLibros(){
@@ -147,13 +146,45 @@ public class EliminarLibros extends Formularios {
 
     }
 
-    private void btnEliminar(ActionEvent e){
-        String titulo;
+    private void btnActualizar(ActionEvent e){
+        String tipoTabla;
+        String autorTabla ;
+        String tituloTabla ;
+        String descripcionTabla ;
+        String edicionTabla ;
+        String temasTabla ;
+        String frecuenciaTabla ;
+        String ejemplaresTabla;
+        String areaTabla;
+        String copiasTabla;
+        String disponiblesTabla;
         int fila = tablaLibros.getSelectedRow();
-        if(!(fila == -1)){
-            titulo = (String)tablaLibros.getValueAt(fila,2);
-            modeloTabla.removeRow(fila);
-            AlmacenLibros.eliminarLibro(titulo);
+        if(!(fila == - 1)){
+            tipoTabla = (String)tablaLibros.getValueAt(fila,0);
+            autorTabla = (String)tablaLibros.getValueAt(fila,1);
+            tituloTabla = (String)tablaLibros.getValueAt(fila,2);
+            descripcionTabla = (String)tablaLibros.getValueAt(fila,3);
+            edicionTabla = (String)tablaLibros.getValueAt(fila,4);
+            temasTabla = (String)tablaLibros.getValueAt(fila,5);
+            frecuenciaTabla = (String)tablaLibros.getValueAt(fila,6);
+            ejemplaresTabla = (String)tablaLibros.getValueAt(fila,7);
+            areaTabla = (String)tablaLibros.getValueAt(fila,8);
+            copiasTabla = (String)tablaLibros.getValueAt(fila,9);
+            disponiblesTabla = (String)tablaLibros.getValueAt(fila,10);
+
+            new ActualizarLibros(
+                    tipoTabla,
+                    autorTabla,
+                    tituloTabla,
+                    descripcionTabla,
+                    edicionTabla,
+                    temasTabla,
+                    frecuenciaTabla,
+                    ejemplaresTabla,
+                    areaTabla,
+                    copiasTabla,
+                    disponiblesTabla
+            ).setVisible(true);
         } else{
             new Alertas("DEBE SELECCIONAR UNA FILA","ERROR").setVisible(true);
         }

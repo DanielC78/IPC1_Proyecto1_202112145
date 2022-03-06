@@ -6,8 +6,8 @@ public class Bibliografias {
     private String tipo;
     private String autor ;
     private String titulo;
-    private int edicion;
     private String descripcion;
+    private int edicion;
     private String[] temas;
     private int copias;
     private int disponibles;
@@ -19,8 +19,7 @@ public class Bibliografias {
     //Atributos de tesis
     private String area;
 
-    //Temas separados por comas
-    private String strTipo;
+    //Temas en cadenas de texto
     private String strTemas;
     private String strEdicion;
     private String strCopias;
@@ -54,7 +53,6 @@ public class Bibliografias {
         this.copias = Integer.parseInt(copias);
         this.disponibles = Integer.parseInt(disponibles);
 
-        this.strTipo = tipo;
         this.strEdicion = edicion;
         this.strCopias = copias;
         this.strDisponibles = disponibles;
@@ -63,21 +61,7 @@ public class Bibliografias {
 
     }
 
-    public void MostrarTemas(){
-        for(String tema: getTemas()){
-
-        }
-    }
-
     //Getters y setters
-    public String getStrTipo() {
-        return strTipo;
-    }
-
-    public void setStrTipo(String strTipo) {
-        this.strTipo = strTipo;
-    }
-
     public String getTipo() {
         return tipo;
     }

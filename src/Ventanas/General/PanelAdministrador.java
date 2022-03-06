@@ -5,10 +5,7 @@ import GUI.Etiquetas;
 import GUI.Formularios;
 import GUI.Paneles;
 import Usuarios.Usuario;
-import Ventanas.Bibliografias.ActualizarLibros;
-import Ventanas.Bibliografias.CrearLibros;
-import Ventanas.Bibliografias.EliminarLibros;
-import Ventanas.Bibliografias.VerLibros;
+import Ventanas.Bibliografias.*;
 import Ventanas.Usuarios.ActualizarUsuario;
 import Ventanas.Usuarios.CrearUsuario;
 import Ventanas.Usuarios.EliminarUsuario;
@@ -283,7 +280,7 @@ public class PanelAdministrador extends Formularios {
 
     private void btnBiblioActualizar(ActionEvent e){
         this.dispose();
-        new ActualizarLibros().setVisible(true);
+        new PanelActualizarLibros().setVisible(true);
 
     }
 

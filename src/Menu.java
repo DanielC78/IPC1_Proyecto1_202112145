@@ -1,10 +1,12 @@
-import Ventanas.General.PanelAdministrador;
+import Ventanas.Bibliografias.ActualizarLibros;
+import Ventanas.Bibliografias.CargaMasiva;
+import Ventanas.Bibliografias.PanelActualizarLibros;
 
 public class Menu{
 
 
     public static void main(String args[]) {
-        new PanelAdministrador().setVisible(true);
+        new PanelActualizarLibros().setVisible(true);
 
     }
 }

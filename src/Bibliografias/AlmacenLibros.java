@@ -18,12 +18,51 @@ public class AlmacenLibros {
         }
     }
 
-    public static void actualizarLibro(String titulo){
+    public static void actualizarLibro(String tipo,
+                                       String autor,
+                                       String titulo,
+                                       String descripcion,
+                                       String edicion,
+                                       String temas,
+                                       String frecuencia,
+                                       String ejemplares,
+                                       String area,
+                                       String copias,
+                                       String disponibles){
+
+        for (int i = 0; i < (arregloBibliografias.length - 1); i++) {
+            if(arregloBibliografias[i] != null){
+                if(arregloBibliografias[i].getTitulo().equals(titulo)){
+                    arregloBibliografias[i].setTitulo(tipo);
+                    arregloBibliografias[i].setAutor(autor);
+                    arregloBibliografias[i].setDescripcion(descripcion);
+                    //Propiedades de Edicion
+                    arregloBibliografias[i].setStrEdicion(edicion);
+                    arregloBibliografias[i].setEdicion(Integer.parseInt(edicion));
+                    //Propiedades de Temas
+                    arregloBibliografias[i].setTemas(temas.trim().split(";"));
+                    arregloBibliografias[i].setStrTemas(temas);
+                    arregloBibliografias[i].setTemasConcatenados(temas);
+                    arregloBibliografias[i].setFrecuenciaActual(frecuencia);
+                    //Propiedades de Ejemplares
+                    arregloBibliografias[i].setStrEjemplares(ejemplares);
+                    arregloBibliografias[i].setEjemplares(Integer.parseInt(ejemplares));
+                    arregloBibliografias[i].setArea(area);
+                    //Propiedades de Copias
+                    arregloBibliografias[i].setStrCopias(copias);
+                    arregloBibliografias[i].setCopias(Integer.parseInt(copias));
+                    //Propiedades de Disponibles
+                    arregloBibliografias[i].setStrDisponibles(disponibles);
+                    arregloBibliografias[i].setDisponibles(Integer.parseInt(disponibles));
+                    break;
+                }
+            }
+        }
 
     }
 
     public static void eliminarLibro(String titulo){
-        for (int i = 0; i < (arregloBibliografias.length-1); i++) {
+        for (int i = 0; i < (arregloBibliografias.length - 1); i++) {
             if(arregloBibliografias[i] != null){
                 if(arregloBibliografias[i].getTitulo().equals(titulo)){
                     arregloBibliografias[i] = null;
@@ -48,12 +87,12 @@ public class AlmacenLibros {
         boolean verificarTema = false;
         for(Bibliografias bibliografias: arregloBibliografias){
             if(bibliografias != null){
-                if(bibliografias.getTitulo().contains(buscar)){
+                if(bibliografias.getTitulo().equalsIgnoreCase(buscar)){
                     verificarTitulo = true;
                 }
                 for (String temas :
                         bibliografias.getTemas()) {
-                    if (temas.trim().equals(buscar)) {
+                    if (temas.trim().equalsIgnoreCase(buscar)) {
                         verificarTema = true;
                         break;
                     } else{
@@ -63,7 +102,7 @@ public class AlmacenLibros {
 
                 if(verificarTitulo || verificarTema){
                     String [] fila = {
-                            bibliografias.getStrTipo(),
+                            bibliografias.getTipo(),
                             bibliografias.getAutor(),
                             bibliografias.getTitulo(),
                             bibliografias.getDescripcion(),
@@ -71,8 +110,8 @@ public class AlmacenLibros {
                             bibliografias.getTemasConcatenados(),
                             bibliografias.getFrecuenciaActual(),
                             bibliografias.getStrEjemplares(),
+                            bibliografias.getArea(),
                             bibliografias.getStrCopias(),
-                            bibliografias.getStrDisponibles(),
                             bibliografias.getStrDisponibles(),
                     };
                     datos[pos] = fila;
@@ -86,7 +125,17 @@ public class AlmacenLibros {
 
     public static String[] cabeceraLibros(){
         String [] cabecera =  {
-                "TIPO", "AUTOR", "TITULO",  "EDICION", "DESCRIPCION","TEMAS","FRECUENCIA ACTUAL","EJEMPLARES","COPIAS"
+                "TIPO",
+                "AUTOR",
+                "TITULO",
+                "DESCRIPCION",
+                "EDICION",
+                "TEMAS",
+                "FRECUENCIA ACTUAL",
+                "EJEMPLARES",
+                "ÁREA",
+                "COPIAS",
+                "DISPONIBLES"
         };
         return cabecera;
     }
@@ -97,17 +146,17 @@ public class AlmacenLibros {
         for(Bibliografias bibliografias: arregloBibliografias){
             if(bibliografias != null){
                 String [] fila = {
-                        bibliografias.getStrTipo(),
+                        bibliografias.getTipo(),
                         bibliografias.getAutor(),
                         bibliografias.getTitulo(),
+                        bibliografias.getDescripcion(),
                         bibliografias.getStrEdicion(),
                         bibliografias.getTemasConcatenados(),
                         bibliografias.getFrecuenciaActual(),
                         bibliografias.getStrEjemplares(),
+                        bibliografias.getArea(),
                         bibliografias.getStrCopias(),
                         bibliografias.getStrDisponibles(),
-                        bibliografias.getStrDisponibles(),
-
                 };
                 datos[pos] = fila;
                 pos ++;
@@ -140,6 +189,10 @@ public class AlmacenLibros {
         ){
             mensajeAlerta = "DEBE DE LLENAR TODOS LOS CAMPOS";
         } else{
+            /*Valida que los caracteres sean letras, ya sea mayúsculas o minúsculas
+            mediante una expresión regular, además, puede incluir espacios en blanco,
+            puntos(.),guiones(-) o comas (,)
+             */
             if(!autor.matches("^[A-Za-z ,.-]*$")
                     || !titulo.trim().matches("^[A-Za-z ,.-]*$")
                     || !descripcion.trim().matches("^[A-Za-z ,.-]*$")
@@ -149,14 +202,20 @@ public class AlmacenLibros {
             ){
                 mensajeAlerta = "SOLO SE PERMITEN LETRAS";
 
-            } else if( !edicion.matches("^[0-9]+$")
+            }
+            /*
+            Valida que solo se ingresen números por medio de la
+            expresión regular donde agrupa los carácteres
+            de 0-1-2-3-4-5-6-7-8-9
+            */
+
+            else if( !edicion.matches("^[0-9]+$")
                     || !ejemplares.matches("^[0-9]+$")
                     || !copia.matches("^[0-9]+$")
                     || !disponibles.matches("^[0-9]+$")){
                 mensajeAlerta = "SOLO SE PERMITEN NUMEROS";
             }
         }
-
         return mensajeAlerta;
     }
 }

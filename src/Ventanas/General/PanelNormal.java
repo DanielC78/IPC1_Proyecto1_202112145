@@ -46,13 +46,12 @@ public class PanelNormal extends Formularios {
     private final JLabel etNombre = new Etiquetas(
             "<html><p style=\"text-align:center\">BIENVENIDO<p style=\"text-align:center\">"+ Usuario.getNombreActivo().toUpperCase()+" "+Usuario.getApellidoActivo().toUpperCase()+"<p></p><html>",null,grafica.Negro,grafica.letraTitulos);
     private final JLabel etFoto = new Etiquetas("",null,grafica.Blanco, null);
-
+    private JLabel etiquetaBuscar = new Etiquetas("BUSCAR",null,grafica.Negro,grafica.letraTitulos);
     //Tabla de datos
     private JScrollPane scrollTabla = new JScrollPane();
 
     //Botones
     private JButton botonLogOut = new Botones("LOGOUT");
-    private JButton botonBuscar = new Botones("BUSCAR");
     private JButton botonVerPrestamos = new Botones("VER PRÉSTAMOS");
     private JButton botonPrestar = new Botones("PRESTAR");
 
@@ -131,9 +130,9 @@ public class PanelNormal extends Formularios {
         panelBotones.setPreferredSize(new Dimension(10,35));
         panelBotones.setBorder(null);
 
-        botonBuscar.setPreferredSize(new Dimension(150, 35));
-        botonVerPrestamos.setPreferredSize(new Dimension(200,35));
-        panelBotones.add(botonBuscar, BorderLayout.LINE_START);
+        etiquetaBuscar.setPreferredSize(new Dimension(100, 35));
+        botonVerPrestamos.setPreferredSize(new Dimension(250,35));
+        panelBotones.add(etiquetaBuscar, BorderLayout.LINE_START);
         panelBotones.add(cajaTema, BorderLayout.CENTER);
         panelBotones.add(botonVerPrestamos, BorderLayout.LINE_END);
 
@@ -158,18 +157,10 @@ public class PanelNormal extends Formularios {
             }
         });
 
-        botonBuscar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mostrarBibliografia();
-
-            }
-        });
-
         botonVerPrestamos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                btnVerPrestamos(e);
             }
         });
 
@@ -275,6 +266,10 @@ public class PanelNormal extends Formularios {
         } else{
             buscarBibliografia();
         }
+
+    }
+
+    private void btnVerPrestamos(ActionEvent e){
 
     }
 }

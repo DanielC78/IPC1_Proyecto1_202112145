@@ -118,29 +118,30 @@ public class CargaMasiva extends Formularios {
             if(atributos.length == 11 && atributos[0].matches("[0-2]") ){
                 if(atributos[0].equals("0")){
                     atributos[0] = "LIBRO";
+                    atributos[6] = "---";
                     atributos[7] = "0";
-                    atributos[8] = "0";
-                    atributos[9] = "0";
+                    atributos[8] = "---";
                 } else if(atributos[0].equals("1")){
                     atributos[0] = "REVISTA";
                     atributos[7] = atributos[7].trim();
+                    atributos[8] = "---";
                 } else if(atributos[0].equals("2")){
                     atributos[0] = "TESIS";
+                    atributos[6] = "---";
                     atributos[7] = "0";
-                    atributos[8] = "0";
                 }
                 Bibliografias nuevoLibro = new Bibliografias(
-                        atributos[0],
-                        atributos[1],
-                        atributos[2],
-                        atributos[3],
-                        atributos[4].trim(),
-                        atributos[5],
-                        atributos[6],
-                        atributos[7],
-                        atributos[8],
-                        atributos[9].trim(),
-                        atributos[10].trim()
+                        atributos[0], //Tipo
+                        atributos[1], //Autor
+                        atributos[2], //Título
+                        atributos[3], //Descripción
+                        atributos[4].trim(), //Edición
+                        atributos[5], //Temas
+                        atributos[6], //Frecuencia Actual
+                        atributos[7], //Ejemplares
+                        atributos[8], //Área
+                        atributos[9].trim(), //Copias
+                        atributos[10].trim() //Disponibles
                         );
                 AlmacenLibros.crearBibliografia(nuevoLibro);
 

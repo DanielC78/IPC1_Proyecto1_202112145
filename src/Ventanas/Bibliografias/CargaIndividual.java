@@ -111,8 +111,8 @@ public class CargaIndividual extends Formularios {
 
         //Se inicializa ya que el inidce 0 es Libro
         //A menos de que el usario lo cambie
-        metodoDesactivar(cajaFrecuencia,"-");
-        metodoDesactivar(cajaArea, "-");
+        metodoDesactivar(cajaFrecuencia,"---");
+        metodoDesactivar(cajaArea, "---");
         metodoDesactivar(cajaEjemplares,"0");
 
         //Funcion de los botones
@@ -203,6 +203,7 @@ public class CargaIndividual extends Formularios {
                     disponibles)
             );
 
+            vaciarCajas();
             new Alertas("CREACION EXITOSA","").setVisible(true);
         } else {
             new Alertas(mensaje,"ERROR").setVisible(true);
@@ -216,19 +217,18 @@ public class CargaIndividual extends Formularios {
 
     private void cambioTipo(ActionEvent e){
         if(listaTipos.getSelectedIndex() == 0) {
-            metodoDesactivar(cajaFrecuencia,"-");
-            metodoDesactivar(cajaArea, "-");
+            metodoDesactivar(cajaFrecuencia,"---");
+            metodoDesactivar(cajaArea, "---");
             metodoDesactivar(cajaEjemplares,"0");
 
         } else if(listaTipos.getSelectedIndex() == 1){
-            metodoDesactivar(cajaArea,"-");
+            metodoDesactivar(cajaArea,"---");
             metodoActivar(cajaFrecuencia);
             metodoActivar(cajaEjemplares);
 
         } else if(listaTipos.getSelectedIndex() == 2){
-            metodoDesactivar(cajaFrecuencia,"-");
+            metodoDesactivar(cajaFrecuencia,"---");
             metodoDesactivar(cajaEjemplares, "0");
-
             metodoActivar(cajaArea);
 
         }
@@ -243,5 +243,17 @@ public class CargaIndividual extends Formularios {
         caja.setEnabled(true);
         caja.setText("");
     }
+
+    private void vaciarCajas(){
+        listaTipos.setSelectedIndex(0);
+        cajaAutor.setText("");
+        cajaTitulo.setText("");
+        cajaEdicion.setText("");
+        cajaDescripcion.setText("");
+        cajaTemas.setText("");
+        cajaCopias.setText("");
+        cajaDisponibles.setText("");
+    }
+
 
 }
