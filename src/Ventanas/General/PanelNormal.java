@@ -4,6 +4,7 @@ import Bibliografias.*;
 import GUI.*;
 import Prestamos.Prestamos;
 import Usuarios.Usuario;
+import Ventanas.Prestamos.VerPrestamos;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.time.LocalDateTime;
 
 
 public class PanelNormal extends Formularios {
@@ -24,41 +26,43 @@ public class PanelNormal extends Formularios {
     private final int altoRelleno = 20;
 
     //Paneles princiaples
-    private JPanel panelNormal = new Paneles();
-    private JPanel panelPrincipal = new Paneles();
-    private JPanel panelSuperior = new Paneles();
-    private JPanel panelInferior = new Paneles();
+    private final JPanel panelNormal = new Paneles();
+    private final JPanel panelPrincipal = new Paneles();
+    private final JPanel panelSuperior = new Paneles();
+    private final JPanel panelInferior = new Paneles();
 
     //Paneles secundarios superiores
-    private JPanel panelLogo = new Paneles();
-    private JPanel panelLogOut = new Paneles();
+    private final JPanel panelLogo = new Paneles();
+    private final JPanel panelLogOut = new Paneles();
 
     //Contenedores de informacion
-    private JPanel panelFoto = new Paneles();
-    private JPanel panelNombre = new Paneles();
-    private JPanel panelBotonLogout = new Paneles();
+    private final JPanel panelFoto = new Paneles();
+    private final JPanel panelNombre = new Paneles();
+    private final JPanel panelBotonLogout = new Paneles();
 
     //Paneles secunadrios inferiores
-    private JPanel panelBotones = new Paneles();
-    private JPanel panelTabla = new Paneles();
+    private final JPanel panelBotones = new Paneles();
+    private final JPanel panelTabla = new Paneles();
 
     //Etiquetas
     private final JLabel etLogo = new Etiquetas("",grafica.Blanco,null,null);
     private final JLabel etNombre = new Etiquetas(
             "<html><p style=\"text-align:center\">BIENVENIDO<p style=\"text-align:center\">"+ Usuario.getNombreActivo().toUpperCase()+" "+Usuario.getApellidoActivo().toUpperCase()+"<p></p><html>",null,grafica.Negro,grafica.letraTitulos);
     private final JLabel etFoto = new Etiquetas("",null,grafica.Blanco, null);
-    private JLabel etiquetaBuscar = new Etiquetas("BUSCAR",null,grafica.Negro,grafica.letraTitulos);
+    private final JLabel etiquetaBuscar = new Etiquetas("BUSCAR",null,grafica.Negro,grafica.letraTitulos);
+
     //Tabla de datos
-    private JScrollPane scrollTabla = new JScrollPane();
+    private final JScrollPane scrollTabla = new JScrollPane();
+    private JTable tablaBibliografia;
 
     //Botones
-    private JButton botonLogOut = new Botones("LOGOUT");
-    private JButton botonVerPrestamos = new Botones("VER PRÉSTAMOS");
-    private JButton botonPrestar = new Botones("PRESTAR");
+    private final JButton botonLogOut = new Botones("LOGOUT");
+    private final JButton botonVerPrestamos = new Botones("VER PRÉSTAMOS");
+    private final JButton botonPrestar = new Botones("PRESTAR");
 
     //Caja de texto
-    private JTextField cajaTema = new CajasTexto();
-    JTable tablaBibliografia;
+    private final  JTextField cajaTema = new CajasTexto();
+
 
     public PanelNormal() {
         super(sizeX, sizeY, "USUARIO NORMAL");
@@ -264,13 +268,15 @@ public class PanelNormal extends Formularios {
             //Definimos los atributos del prestamo
             String tipo = (String)tablaBibliografia.getValueAt(fila, 0);
             String titulo = (String)tablaBibliografia.getValueAt(fila, 2);
+            String hora = LocalDateTime.now().toString();
 
             //Verificamos que el libro todavía tenga unidades
             verDisponibilidad = AlmacenLibros.disponibilidadLibros(titulo, 0);
             if(verDisponibilidad){
                 Prestamos.crearPrestamo(new Prestamos(idUsuario,
                         titulo,
-                        tipo));
+                        tipo,
+                        hora));
                 mostrarBibliografia();
             } else{
                 new Alertas("YA NO QUEDAN MÁS UNIDADES","ERROR").setVisible(true);
@@ -291,6 +297,7 @@ public class PanelNormal extends Formularios {
     }
 
     private void btnVerPrestamos(ActionEvent e){
-
+        this.dispose();
+        new VerPrestamos().setVisible(true);
     }
 }

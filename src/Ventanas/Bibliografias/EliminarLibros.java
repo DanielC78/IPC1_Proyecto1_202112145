@@ -1,7 +1,6 @@
 package Ventanas.Bibliografias;
 
 import Bibliografias.AlmacenLibros;
-import Bibliografias.Bibliografias;
 import GUI.*;
 import Ventanas.General.Alertas;
 import Ventanas.General.PanelAdministrador;
@@ -22,23 +21,23 @@ public class EliminarLibros extends Formularios {
     private static String titulo = "ELIMINAR BIBLIOGRAFÍA";
 
     //Paneles
-    private JPanel panelEliminarLibros = new Paneles();
-    private JPanel contenedorTabla = new Paneles();
-    private JPanel contenedorSuperior = new Paneles();
-    private JPanel contenedorInferior = new Paneles();
+    private final JPanel panelEliminarLibros = new Paneles();
+    private final JPanel contenedorTabla = new Paneles();
+    private final JPanel contenedorSuperior = new Paneles();
+    private final JPanel contenedorInferior = new Paneles();
 
     //Componentes de la parte superior
-    JLabel etiquetaBuscar = new Etiquetas("BUSCAR",null, grafica.Negro,grafica.letraTitulos);
-    JTextField cajaBuscar = new CajasTexto();
+    private final JLabel etiquetaBuscar = new Etiquetas("BUSCAR",null, grafica.Negro,grafica.letraTitulos);
+    private final JTextField cajaBuscar = new CajasTexto();
 
     //Componentes de la parte inferior
-    JButton botonEliminar = new Botones("ELIMINAR", grafica.letraTitulos);
-    JButton botonRegresar = new Botones("MENÚ PRINCIPAL", grafica.letraTitulos);
+    private final JButton botonEliminar = new Botones("ELIMINAR", grafica.letraTitulos);
+    private final JButton botonRegresar = new Botones("MENÚ PRINCIPAL", grafica.letraTitulos);
 
     //Componenentes de la tabla
     private DefaultTableModel modeloTabla;
     private JTable tablaLibros;
-    private JScrollPane scrollTablaLibros = new JScrollPane();
+    private final JScrollPane scrollTablaLibros = new JScrollPane();
 
 
     public EliminarLibros() throws HeadlessException {
@@ -57,7 +56,7 @@ public class EliminarLibros extends Formularios {
         cajaBuscar.setPreferredSize(new Dimension(950,40));
         etiquetaBuscar.setPreferredSize(new Dimension(75,50));
 
-        //Dimensiones d elos elementos inferiores
+        //Dimensiones de los elementos inferiores
         botonEliminar.setPreferredSize(new Dimension((sizeX - 40),40));
         botonRegresar.setPreferredSize(new Dimension(170,40));
 

@@ -1,9 +1,6 @@
 package Prestamos;
 
-import Bibliografias.*;
 import Usuarios.Usuario;
-
-import java.time.LocalDateTime;
 
 public class Prestamos {
 
@@ -12,11 +9,17 @@ public class Prestamos {
     private String idUsuarioPrestamo;
     private String tituloPrestamo;
     private String tipoPrestamo;
+    private String hora;
 
-    public Prestamos(String idUsuarioPrestamo, String tituloPrestamo, String tipoPrestamo) {
+    public Prestamos(String idUsuarioPrestamo,
+                     String tituloPrestamo,
+                     String tipoPrestamo,
+                     String hora) {
+
         this.idUsuarioPrestamo = idUsuarioPrestamo;
         this.tituloPrestamo = tituloPrestamo;
         this.tipoPrestamo = tipoPrestamo;
+        this.hora = hora;
     }
 
     public static void crearPrestamo(Prestamos nuevoPrestamo){
@@ -29,25 +32,57 @@ public class Prestamos {
         System.out.println("Tipo "+arregloPrestamos[0].getTipoPrestamo());
         System.out.println("Titulo: "+arregloPrestamos[0].getTituloPrestamo());
         System.out.println("ID"+arregloPrestamos[0].getIdUsuarioPrestamo());
+        System.out.println("Hora"+arregloPrestamos[0].getHora());
 
     }
 
-    public static void devolverPrestamo(String idUsuario, String titulo){
+    public static void regresarLibro(String idUsuario,String tituloLibro,String hora){
+        for (int i = 0; i < arregloPrestamos.length; i++) {
+            if(idUsuario.equals(arregloPrestamos[i].getIdUsuarioPrestamo())
+                    && tituloLibro.equals(arregloPrestamos[i].getTituloPrestamo())
+                    && hora.equals(arregloPrestamos[i].getHora())
+            ){
+                arregloPrestamos[i] = null;
+            }
+        }
 
+        for (int i = 0; i < arregloPrestamos.length; i++) {
+            if (arregloPrestamos[i] == null && arregloPrestamos[i+1] != null) {
+                arregloPrestamos[i] = arregloPrestamos[i+1];
+                arregloPrestamos[i+1] = null;
+            }
+        }
     }
 
-    public void mostrarPrestamos(){
-        String titulo ="";
-        String tipo ="";
-        String fecha = LocalDateTime.now().toString();
-        System.out.println("El titulo es: "+ titulo);
-        System.out.println("El tipo es: " + tipo);
-        System.out.println("La fecha es: "+ fecha);
+    //Es el encabezado de la tabla para ver los préstamos del usuario
+    public String[] cabecera(){
+        return new String[]{
+                "TÍTULO",
+                "TIPO",
+                "FECHA Y HORA"
+        };
     }
 
-    public void buscarPrestamos(String idUsuario){
-
+    public String[][] mostrarPrestamos(String idUsuario){
+        String [][] datos = new String[cantidadPrestamos][3];
+        int pos = 0;
+        for (Prestamos prestamo :
+                arregloPrestamos) {
+            if(prestamo != null){
+                if(prestamo.getIdUsuarioPrestamo().equals(Usuario.getIdActivo())){
+                    String [] fila = {
+                            prestamo.getTituloPrestamo(),
+                            prestamo.getTipoPrestamo(),
+                            prestamo.getHora()
+                    };
+                    datos[pos] = fila;
+                    pos++;
+                }
+            }
+        }
+        return datos;
     }
+
 
     public String getIdUsuarioPrestamo() {
         return idUsuarioPrestamo;
@@ -71,5 +106,13 @@ public class Prestamos {
 
     public void setTipoPrestamo(String tipoPrestamo) {
         this.tipoPrestamo = tipoPrestamo;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 }
