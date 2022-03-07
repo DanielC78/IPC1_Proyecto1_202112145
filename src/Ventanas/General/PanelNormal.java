@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class PanelNormal extends Formularios {
@@ -261,14 +262,16 @@ public class PanelNormal extends Formularios {
     }
 
     private void btnPrestar(ActionEvent e){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         int fila = tablaBibliografia.getSelectedRow();
         String idUsuario = Usuario.getIdActivo();
         boolean verDisponibilidad;
         if(!(fila == - 1)){
+
             //Definimos los atributos del prestamo
             String tipo = (String)tablaBibliografia.getValueAt(fila, 0);
             String titulo = (String)tablaBibliografia.getValueAt(fila, 2);
-            String hora = LocalDateTime.now().toString();
+            String hora = dtf.format(LocalDateTime.now());
 
             //Verificamos que el libro todavía tenga unidades
             verDisponibilidad = AlmacenLibros.disponibilidadLibros(titulo, 0);

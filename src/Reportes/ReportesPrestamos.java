@@ -1,39 +1,48 @@
 package Reportes;
 
-import Usuarios.Usuario;
+import Prestamos.Prestamos;
 
 public class ReportesPrestamos {
 
-    private final String headerReportePrestamos = "";
-    private final String footerReportePrestamos = "";
+    private String headerReportePrestamos = "";
+    private String footerReportePrestamos = "";
 
 
-    private Usuario[][] datos;
+    private Prestamos[] datos;
     private String [] columnas;
 
-    public ReportesPrestamos(Usuario[][] datos, String[] columnas) {
+    public ReportesPrestamos(Prestamos[] datos, String[] columnas) {
         this.datos = datos;
         this.columnas = columnas;
     }
 
     public String obtenerReportePrestamos(){
 
-        String tablaColumnas = "";
+        headerReportePrestamos = EstilosReportes.encabezadoReporte("PRESTAMOS");
+        footerReportePrestamos = EstilosReportes.footerReporte();
 
-        tablaColumnas += " <tr>\n";
+        String tablaColumas = "";
+        tablaColumas += "        <thead>\n";
 
         for (int i = 0; i < columnas.length; i++) {
-            tablaColumnas += "          <th>"+columnas[i]+"<th>\n";
+            tablaColumas+="        <th>"+columnas[i]+"</th>\n";
         }
-        tablaColumnas += " </tr>\n";
+
+        tablaColumas += "</thead>\n";
 
         String tablaDatos = "";
-        for (int i = 0; i < datos.length; i++) {
-            if(datos[i] != null){
-                tablaDatos += "";
+
+        for (Prestamos dato : datos) {
+            if (dato != null) {
+                tablaDatos += "        <tr>\n";
+                tablaDatos += "          <td>" + dato.getIdUsuarioPrestamo() + "</td>\n";
+                tablaDatos += "          <td>" + dato.getTituloPrestamo() + "</td>\n";
+                tablaDatos += "          <td>" + dato.getTipoPrestamo() + "</td>\n";
+                tablaDatos += "          <td>" + dato.getHora() + "</td>\n";
+                tablaDatos += "        </tr>\n";
             }
         }
 
-        return tablaDatos;
+        return headerReportePrestamos + tablaColumas + tablaDatos + footerReportePrestamos;
     }
 }

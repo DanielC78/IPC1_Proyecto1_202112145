@@ -65,7 +65,7 @@ public class CargaMasiva extends Formularios {
         contenedorBotones.add(botonCancelar);
 
         //Colocamos el TextArea
-        carga.setFont(grafica.letraCargaMasiva);
+        carga.setFont(grafica.letraAreasDeTexto);
         scrollCarga.setBorder(grafica.bordeNegro);
         scrollCarga.setViewportView(carga);
         panelTexto.add(scrollCarga, BorderLayout.CENTER);

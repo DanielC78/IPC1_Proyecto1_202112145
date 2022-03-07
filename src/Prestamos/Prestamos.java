@@ -67,7 +67,7 @@ public class Prestamos {
         for (Prestamos prestamo :
                 arregloPrestamos) {
             if(prestamo != null){
-                if(prestamo.getIdUsuarioPrestamo().equals(Usuario.getIdActivo())){
+                if(prestamo.getIdUsuarioPrestamo().equals(idUsuario)){
                     String [] fila = {
                             prestamo.getTituloPrestamo(),
                             prestamo.getTipoPrestamo(),
@@ -112,5 +112,13 @@ public class Prestamos {
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    public static Prestamos[] getArregloPrestamos() {
+        return arregloPrestamos;
+    }
+
+    public static void setArregloPrestamos(Prestamos[] arregloPrestamos) {
+        Prestamos.arregloPrestamos = arregloPrestamos;
     }
 }

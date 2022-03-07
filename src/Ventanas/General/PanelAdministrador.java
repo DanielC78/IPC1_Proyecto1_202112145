@@ -6,6 +6,7 @@ import GUI.Formularios;
 import GUI.Paneles;
 import Usuarios.Usuario;
 import Ventanas.Bibliografias.*;
+import Ventanas.Reportes.VentanaReportes;
 import Ventanas.Usuarios.ActualizarUsuario;
 import Ventanas.Usuarios.CrearUsuario;
 import Ventanas.Usuarios.EliminarUsuario;
@@ -19,20 +20,20 @@ import java.awt.event.ActionListener;
 public class PanelAdministrador extends Formularios {
 
     //Credenciales del usuario activo
-    private static String nombre = new Usuario().getNombreActivo();
-    private static String apellido = new Usuario().getApellidoActivo();
+    private static final String nombre = new Usuario().getNombreActivo();
+    private final static  String apellido = new Usuario().getApellidoActivo();
 
     //Paneles principales
-    private JPanel panelAdministrador = new Paneles();
-    private JPanel panelReportes = new Paneles();
-    private JPanel panelInfo = new Paneles();
-    private JPanel panelUsuario = new Paneles();
-    private JPanel panelLibros = new Paneles();
+    private final JPanel  panelAdministrador = new Paneles();
+    private final JPanel  panelReportes = new Paneles();
+    private final JPanel  panelInfo = new Paneles();
+    private final JPanel  panelUsuario = new Paneles();
+    private final JPanel  panelLibros = new Paneles();
 
     //Contenedores
-    private JPanel contenedorReportes = new JPanel();
-    private JPanel contenedorLibros= new JPanel();
-    private JPanel contenedorUsuarios= new JPanel();
+    private final JPanel contenedorReportes = new JPanel();
+    private final JPanel contenedorLibros= new JPanel();
+    private final JPanel contenedorUsuarios= new JPanel();
 
     //Etiquetas de los paneles
     private final JLabel tituloReportes = new Etiquetas("REPORTES", null, grafica.Negro, grafica.letraTitulos);
@@ -40,25 +41,25 @@ public class PanelAdministrador extends Formularios {
     private final JLabel tituloUsuarios = new Etiquetas("USUARIOS", null, grafica.Negro, grafica.letraTitulos);
 
     //Informaciond del usuario
-    private JLabel tituloInfo = new Etiquetas(nombre+" "+apellido, null, grafica.Negro, grafica.letraTitulos);
-    private JLabel fotoInfo = new Etiquetas("", null, grafica.Negro, null);
+    private final JLabel tituloInfo = new Etiquetas(nombre+" "+apellido, null, grafica.Negro, grafica.letraTitulos);
+    private final JLabel fotoInfo = new Etiquetas("", null, grafica.Negro, null);
 
     //Botones para reportes
-    private JButton userRepo = new Botones("USUARIO",grafica.letraTitulos);
-    private JButton biblioRepo = new Botones("BIBLIOGRAFÍA",grafica.letraTitulos);
-    private JButton prestamosRepo = new Botones("PRÉSTAMOS",grafica.letraTitulos);
+    private final JButton btnReporteUsuarios = new Botones("USUARIO",grafica.letraTitulos);
+    private final JButton btnReporteLibros = new Botones("BIBLIOGRAFÍA",grafica.letraTitulos);
+    private final JButton btnReportePrestamos = new Botones("PRÉSTAMOS",grafica.letraTitulos);
 
     //Botones para usuarios
-    private JButton userCrear = new Botones("CREAR", grafica.letraTitulos);
-    private JButton userVer = new Botones("VER",grafica.letraTitulos);
-    private JButton userActualizar = new Botones("MODIFICAR",grafica.letraTitulos);
-    private JButton userEliminar = new Botones("ELIMINAR",grafica.letraTitulos);
+    private final JButton btnCrearUsuario = new Botones("CREAR", grafica.letraTitulos);
+    private final JButton btnVerUsuario = new Botones("VER",grafica.letraTitulos);
+    private final JButton btnActualizarUsuario = new Botones("MODIFICAR",grafica.letraTitulos);
+    private final JButton btnEliminarUsuario = new Botones("ELIMINAR",grafica.letraTitulos);
 
     //Botones para bibliografias
-    private JButton biblioCrear = new Botones("CREAR",grafica.letraTitulos);
-    private JButton biblioVer = new Botones("VER",grafica.letraTitulos);
-    private JButton biblioActualizar = new Botones("MODIFICAR",grafica.letraTitulos);
-    private JButton biblioEliminar = new Botones("ELIMINAR",grafica.letraTitulos);
+    private JButton btnCrearLibro = new Botones("CREAR",grafica.letraTitulos);
+    private JButton btnVerLibro = new Botones("VER",grafica.letraTitulos);
+    private JButton btnActualizarLibro = new Botones("MODIFICAR",grafica.letraTitulos);
+    private JButton btnEliminarLibro = new Botones("ELIMINAR",grafica.letraTitulos);
 
     //Logout
     private JButton logout = new Botones("LOGOUT",grafica.letraTitulos);
@@ -93,48 +94,48 @@ public class PanelAdministrador extends Formularios {
         agregarContenedores(panelUsuario, contenedorUsuarios, tituloUsuarios);
 
         //Separacion de botones en el panel contenedor de reportes
-        grillasContenedor(contenedorReportes,userRepo);
-        grillasContenedor(contenedorReportes,biblioRepo);
-        grillasContenedor(contenedorReportes,prestamosRepo);
+        grillasContenedor(contenedorReportes, btnReporteUsuarios);
+        grillasContenedor(contenedorReportes, btnReporteLibros);
+        grillasContenedor(contenedorReportes, btnReportePrestamos);
 
         //Seperacion de botones en el panel de Usuarios
-        grillasContenedor(contenedorUsuarios,userCrear);
-        grillasContenedor(contenedorUsuarios,userVer);
-        grillasContenedor(contenedorUsuarios, userActualizar);
-        grillasContenedor(contenedorUsuarios,userEliminar);
+        grillasContenedor(contenedorUsuarios, btnCrearUsuario);
+        grillasContenedor(contenedorUsuarios, btnVerUsuario);
+        grillasContenedor(contenedorUsuarios, btnActualizarUsuario);
+        grillasContenedor(contenedorUsuarios, btnEliminarUsuario);
 
         //Seperacion de botones en el panel de Bibliografias
-        grillasContenedor(contenedorLibros,biblioCrear);
-        grillasContenedor(contenedorLibros,biblioVer);
-        grillasContenedor(contenedorLibros, biblioActualizar);
-        grillasContenedor(contenedorLibros,biblioEliminar);
+        grillasContenedor(contenedorLibros, btnCrearLibro);
+        grillasContenedor(contenedorLibros, btnVerLibro);
+        grillasContenedor(contenedorLibros, btnActualizarLibro);
+        grillasContenedor(contenedorLibros, btnEliminarLibro);
 
         //Agregamos el Panel de LogOut en el panel principal
         informacionUsuario(panelInfo, logout, tituloInfo);
 
         //Funcion de los botones para Usuarios
-        userCrear.addActionListener(new ActionListener() {
+        btnCrearUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnUserCrear(e);
             }
         });
 
-        userActualizar.addActionListener(new ActionListener() {
+        btnActualizarUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnUserActualizar(e);
             }
         });
 
-        userEliminar.addActionListener(new ActionListener() {
+        btnEliminarUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnUserEliminar(e);
             }
         });
 
-        userVer.addActionListener(new ActionListener() {
+        btnVerUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnUserVer(e);
@@ -143,28 +144,28 @@ public class PanelAdministrador extends Formularios {
 
         //Funcion de los botones para Bibliografias
 
-        biblioCrear.addActionListener(new ActionListener() {
+        btnCrearLibro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnBiblioCrear(e);
             }
         });
 
-        biblioActualizar.addActionListener(new ActionListener() {
+        btnActualizarLibro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnBiblioActualizar(e);
             }
         });
 
-        biblioEliminar.addActionListener(new ActionListener() {
+        btnEliminarLibro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnBiblioEliminar(e);
             }
         });
 
-        biblioVer.addActionListener(new ActionListener() {
+        btnVerLibro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnBiblioVer(e);
@@ -181,6 +182,28 @@ public class PanelAdministrador extends Formularios {
                 btnLogOut(e);
             }
         });
+
+        btnReporteLibros.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnReporteBibliografias(e);
+            }
+        });
+
+        btnReportePrestamos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnReportePrestamos(e);
+            }
+        });
+
+        btnReporteUsuarios.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnReporteUsuario(e);
+            }
+        });
+
     }
 
 
@@ -295,5 +318,16 @@ public class PanelAdministrador extends Formularios {
         this.dispose();
     }
 
-
+    private void btnReporteUsuario(ActionEvent e){
+        this.dispose();
+        new VentanaReportes("REPORTE DE USUARIOS").setVisible(true);
+    }
+    private void btnReporteBibliografias(ActionEvent e){
+        this.dispose();
+        new VentanaReportes("REPORTE DE BIBLIOGRAFIAS").setVisible(true);
+    }
+    private void btnReportePrestamos(ActionEvent e){
+        this.dispose();
+        new VentanaReportes("REPORTE DE PRESTAMOS").setVisible(true);
+    }
 }
