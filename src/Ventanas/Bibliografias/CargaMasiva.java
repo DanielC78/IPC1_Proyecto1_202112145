@@ -15,9 +15,10 @@ import java.awt.event.ActionListener;
 public class CargaMasiva extends Formularios {
 
     //Tamaño de la ventanas
-    private static int sizeX = 700 ;
+    private static int sizeX = 750 ;
     private static int sizeY = 600;
 
+    //Tamaño de los paneles de relleno
     private int width = 20;
     private int height = 20;
 

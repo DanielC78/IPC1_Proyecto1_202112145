@@ -5,6 +5,7 @@ import GUI.*;
 import Usuarios.Usuario;
 import Ventanas.General.Alertas;
 import Ventanas.General.PanelNormal;
+import Prestamos.Prestamos;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +16,7 @@ import java.awt.event.ActionListener;
 public class VerPrestamos extends Formularios {
 
     //Dimensiones de la ventana
-    private final static int sizeX = 550 ;
+    private final static int sizeX = 750 ;
     private final static int sizeY = 500;
     private final static String tituloVentana = "VER PRÉSTAMOS";
 
@@ -60,6 +61,10 @@ public class VerPrestamos extends Formularios {
         contenedorSuperior.add(etiquetaListado);
         contenedorSuperior.add(botonMenuPrincipal);
 
+        //Parte inferior
+        contenedorInferior.add(botonDevolver);
+
+        mostrarPrestamos();
 
         /*
         * Funcion de los botones dentro
@@ -93,6 +98,21 @@ public class VerPrestamos extends Formularios {
         panelVerPrestamos.add(panel, alineacionPanelCentral);
     }
 
+    private void mostrarPrestamos(){
+        String [][] datos = Prestamos.mostrarPrestamos(Usuario.getIdActivo());
+        cargarTabla(datos);
+    }
+
+    private void cargarTabla(String[][] datos) {
+        modeloTabla = new DefaultTableModel(datos, Prestamos.cabecera());
+        tablaPrestamos = new JTable(modeloTabla);
+        tablaPrestamos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tablaPrestamos.setAutoscrolls(true);
+        scrollTabla.setViewportView(tablaPrestamos);
+        scrollTabla.setBorder(grafica.margenPanelesAdmin);
+        contenedorTabla.add(scrollTabla, BorderLayout.CENTER);
+    }
+
     private void dimensionesContenedores(JPanel panel, int width, int height){
         panel.setPreferredSize(new Dimension(width,height));
     }
@@ -103,9 +123,14 @@ public class VerPrestamos extends Formularios {
         if(!(fila == - 1)){
             String tituloLibro = (String)tablaPrestamos.getValueAt(fila, 0);
             String idUsuario = Usuario.getIdActivo();
-            String hora = (String)tablaPrestamos.getValueAt(fila,3);
-
+            String hora = (String)tablaPrestamos.getValueAt(fila,2);
+            Prestamos.devolverLibro(idUsuario,
+                    tituloLibro,
+                    hora);
             AlmacenLibros.disponibilidadLibros(tituloLibro,1);
+            modeloTabla.removeRow(fila);
+            new Alertas("SE HA DEVUELTO CON EXITO","").setVisible(true);
+
 
         } else{
             new Alertas("DEBE SELECCIONAR UNA FILA ", "ERROR").setVisible(true);

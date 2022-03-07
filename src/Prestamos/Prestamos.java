@@ -27,26 +27,24 @@ public class Prestamos {
             if(arregloPrestamos[i] == null){
                 arregloPrestamos[i] = nuevoPrestamo;
                 cantidadPrestamos++;
+                break;
             }
         }
-        System.out.println("Tipo "+arregloPrestamos[0].getTipoPrestamo());
-        System.out.println("Titulo: "+arregloPrestamos[0].getTituloPrestamo());
-        System.out.println("ID"+arregloPrestamos[0].getIdUsuarioPrestamo());
-        System.out.println("Hora"+arregloPrestamos[0].getHora());
-
     }
 
-    public static void regresarLibro(String idUsuario,String tituloLibro,String hora){
+    public static void devolverLibro(String idUsuario,String tituloLibro,String hora){
         for (int i = 0; i < arregloPrestamos.length; i++) {
-            if(idUsuario.equals(arregloPrestamos[i].getIdUsuarioPrestamo())
-                    && tituloLibro.equals(arregloPrestamos[i].getTituloPrestamo())
-                    && hora.equals(arregloPrestamos[i].getHora())
-            ){
-                arregloPrestamos[i] = null;
+            if(arregloPrestamos[i] != null){
+                if(idUsuario.equals(arregloPrestamos[i].getIdUsuarioPrestamo())
+                        && tituloLibro.equals(arregloPrestamos[i].getTituloPrestamo())
+                        && hora.equals(arregloPrestamos[i].getHora())
+                ){
+                    arregloPrestamos[i] = null;
+                }
             }
         }
 
-        for (int i = 0; i < arregloPrestamos.length; i++) {
+        for (int i = 0; i < (arregloPrestamos.length - 1); i++) {
             if (arregloPrestamos[i] == null && arregloPrestamos[i+1] != null) {
                 arregloPrestamos[i] = arregloPrestamos[i+1];
                 arregloPrestamos[i+1] = null;
@@ -55,7 +53,7 @@ public class Prestamos {
     }
 
     //Es el encabezado de la tabla para ver los préstamos del usuario
-    public String[] cabecera(){
+    public static String[] cabecera(){
         return new String[]{
                 "TÍTULO",
                 "TIPO",
@@ -63,7 +61,7 @@ public class Prestamos {
         };
     }
 
-    public String[][] mostrarPrestamos(String idUsuario){
+    public static String[][] mostrarPrestamos(String idUsuario){
         String [][] datos = new String[cantidadPrestamos][3];
         int pos = 0;
         for (Prestamos prestamo :

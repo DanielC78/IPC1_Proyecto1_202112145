@@ -43,7 +43,7 @@ public class AlmacenLibros {
                     arregloBibliografias[i].setStrEdicion(edicion);
                     arregloBibliografias[i].setEdicion(Integer.parseInt(edicion));
                     //Propiedades de Temas
-                    arregloBibliografias[i].setTemas(temas.trim().split(";"));
+                    arregloBibliografias[i].setTemas(temas.trim().split(","));
                     arregloBibliografias[i].setStrTemas(temas);
                     arregloBibliografias[i].setTemasConcatenados(temas);
                     arregloBibliografias[i].setFrecuenciaActual(frecuencia);
@@ -73,6 +73,7 @@ public class AlmacenLibros {
             if(arregloBibliografias[i] != null){
                 if(arregloBibliografias[i].getTitulo().equals(titulo)){
                     arregloBibliografias[i] = null;
+                    cantidadBibliografias--;
                     break;
                 }
             }
@@ -240,7 +241,6 @@ public class AlmacenLibros {
         for (int i = 0; i < arregloBibliografias.length; i++) {
             if(arregloBibliografias[i] != null){
                 if(arregloBibliografias[i].getTitulo().equals(titulo)){
-                    System.out.println("Disponibilidad Inicial"+ arregloBibliografias[i].getStrDisponibles());
                     /*
                     * La opción 0 es devolver (se agregar +1 a la disponibilidad)
                     * La opción 1 es prestar (se resta -1 a la disponibilidad)
@@ -258,10 +258,14 @@ public class AlmacenLibros {
                     }
                     arregloBibliografias[i].setDisponibles(cantidadDisponible);
                     arregloBibliografias[i].setStrDisponibles(String.valueOf(arregloBibliografias[i].getDisponibles()));
-                    System.out.println("Disponibilidad después "+ arregloBibliografias[i].getStrDisponibles());
                 }
             }
         }
         return disponibilidad;
+    }
+
+    public static int temasRelacionados(){
+        int i = 0;
+        return i;
     }
 }
