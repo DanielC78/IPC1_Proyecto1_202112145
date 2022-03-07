@@ -1,10 +1,12 @@
 package Ventanas.Reportes;
 
+import Bibliografias.Bibliografias;
 import GUI.Botones;
 import GUI.Formularios;
 import GUI.Paneles;
 import Prestamos.Prestamos;
 import Reportes.ReportesPrestamos;
+import Usuarios.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,6 +56,7 @@ public class VentanaReportes extends Formularios {
         agregarAreaTexto(areaDeTexto);
 
         switch (opcion){
+            //GENERA EL REPORTE DE USUARIOS
             case tituloUsuarios:
                 agregarBoton(botonReporteUsuario);
                 botonReporteUsuario.addActionListener(new ActionListener() {
@@ -63,6 +66,7 @@ public class VentanaReportes extends Formularios {
                     }
                 });
                 break;
+                //GENERA EL REPORTE DE LIBROS
             case tituloLibros:
                 agregarBoton(botonReporteBibliografia);
                 botonReporteBibliografia.addActionListener(new ActionListener() {
@@ -72,6 +76,7 @@ public class VentanaReportes extends Formularios {
                     }
                 });
                 break;
+                //GENERA EL REPORTE DE PRESTAMOS
             case tituloPrestamos:
                 agregarBoton(botonReportePrestamos);
                 botonReportePrestamos.addActionListener(new ActionListener() {
@@ -114,11 +119,32 @@ public class VentanaReportes extends Formularios {
     }
 
     private void btnReporteUsuarios(ActionEvent e){
+        String [] theadUsuarios = {
+                "ID",
+                "NOMBRE",
+                "APELLIDO",
+                "NICKNAME",
+                "ROL",
+                "BIBLIOGRAFIAS PRESTADAS"
+        };
 
+        Usuario datos = new Usuario();
+        String[][] datosUsuario= datos.verDatos();
+
+        String reporteHTMLUsuarios = "";
+        areaDeTexto.setText(reporteHTMLUsuarios);
     }
 
     private void btnReporteLibros(ActionEvent e){
+        String [] theadLibros = {
+                "TEMAS",
+                "BIBLIOGRAFIAS ASOCIADAS"
+        };
 
+        Bibliografias[] datosLibros;
+
+        String reporteHTMLBibliografia = "";
+        areaDeTexto.setText(reporteHTMLBibliografia);
     }
     private void btnReportePrestamos(ActionEvent e){
         String [] theadPrestamos = {
@@ -128,10 +154,10 @@ public class VentanaReportes extends Formularios {
                 "HORA"
         };
 
-        Prestamos [] datos = Prestamos.getArregloPrestamos();
-        ReportesPrestamos generadorHTML = new ReportesPrestamos(datos,theadPrestamos);
-        String reporteHTML = generadorHTML.obtenerReportePrestamos();
-        areaDeTexto.setText(reporteHTML);
+        Prestamos [] datosPrestamos = Prestamos.getArregloPrestamos();
+        ReportesPrestamos generadorHTML = new ReportesPrestamos(datosPrestamos,theadPrestamos);
+        String reporteHTMLPrestamos = generadorHTML.obtenerReportePrestamos();
+        areaDeTexto.setText(reporteHTMLPrestamos);
     }
 
 }

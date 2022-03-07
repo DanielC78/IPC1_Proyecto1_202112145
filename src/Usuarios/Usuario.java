@@ -36,7 +36,7 @@ public class Usuario {
         matrizUsuarios[0][4] = rolAdmin;
         matrizUsuarios[0][5] = passwordAdmin;
 
-        matrizUsuarios[1][0] = "1";
+        matrizUsuarios[1][0] = "3024465830102";
         matrizUsuarios[1][1] = "daniel";
         matrizUsuarios[1][2] = "ruiz";
         matrizUsuarios[1][3] = "cuque";
@@ -125,7 +125,6 @@ public class Usuario {
     public String[][] verDatos() {
         return matrizUsuarios;
     }
-
 
     //Verifica si el id del usiario es identico a otro
     private boolean usuarioExistente() {

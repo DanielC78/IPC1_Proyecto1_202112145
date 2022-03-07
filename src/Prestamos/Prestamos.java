@@ -1,10 +1,9 @@
 package Prestamos;
 
-import Usuarios.Usuario;
-
 public class Prestamos {
 
     private static Prestamos[] arregloPrestamos = new Prestamos[100];
+    private static String [][] cantidadPrestada = new String[100][2];
     private static int cantidadPrestamos = 0;
     private String idUsuarioPrestamo;
     private String tituloPrestamo;
@@ -22,12 +21,25 @@ public class Prestamos {
         this.hora = hora;
     }
 
-    public static void crearPrestamo(Prestamos nuevoPrestamo){
+    public static void crearPrestamo(Prestamos nuevoPrestamo, String idUsuario){
         for (int i = 0; i < arregloPrestamos.length; i++) {
             if(arregloPrestamos[i] == null){
                 arregloPrestamos[i] = nuevoPrestamo;
+                cantidadUsuarioPrestamo(0, idUsuario);
                 cantidadPrestamos++;
                 break;
+            }
+        }
+    }
+
+    public static void verificarCantidadPrestada(String idUsuario, int operacion){
+        for (int i = 0; i < cantidadPrestada.length; i++) {
+            if(cantidadPrestada[0] != null){
+                if(cantidadPrestada[i][0].equals(idUsuario)){
+                    cantidadPrestada[i][1] = "";
+                }
+            } else{
+
             }
         }
     }
@@ -39,6 +51,7 @@ public class Prestamos {
                         && tituloLibro.equals(arregloPrestamos[i].getTituloPrestamo())
                         && hora.equals(arregloPrestamos[i].getHora())
                 ){
+                    cantidadUsuarioPrestamo(1, idUsuario);
                     arregloPrestamos[i] = null;
                 }
             }
@@ -79,6 +92,79 @@ public class Prestamos {
             }
         }
         return datos;
+    }
+
+    //Verificar cuantos libros ha creado un mismo ID
+    public static void cantidadUsuarioPrestamo(int operacion, String idUsuario){
+
+        /*for(Prestamos prestamos: arregloPrestamos){
+            if(prestamos != null){
+                if(prestamos.getIdUsuarioPrestamo().equals(idUsuario)){
+                    for (int i = 0; i < cantidadPrestada.length; i++) {
+                        if (cantidadPrestada[i][0] != null){
+                            if(cantidadPrestada[i][0].equals(idUsuario)){
+                                System.out.println("Pasa varias veces por aca");
+
+                                if(operacion == 0){
+                                    cantidadPrestada[i][1] = String.valueOf(Integer.parseInt(cantidadPrestada[i][1]) + 1);
+                                    System.out.println(cantidadPrestada[i][1]);
+                                    break;
+                                }
+
+                                else if(operacion == 1){
+                                    cantidadPrestada[i][1] = String.valueOf(Integer.parseInt(cantidadPrestada[i][1]) - 1);
+                                    System.out.println(cantidadPrestada[i][1]);
+                                    break;
+                                }
+                            }
+                        } else{
+                            cantidadPrestada[i][0] = prestamos.getIdUsuarioPrestamo();
+                            cantidadPrestada[i][1] = "1";
+                            break;
+                        }
+                    }
+                }
+            }
+        }*/
+
+        boolean validacion = false;
+        //Recorremos la matriz de los prestamos que se repiten
+        for (int i = 0; i < cantidadPrestada.length; i++) {
+            /*Por cada iteracion en la cantidad prestada vamos a revisar
+                cuantas veces el usuario aparece dentro del arrego de Prestamos*/
+            for (Prestamos prestamos :
+                    arregloPrestamos) {
+                /*Solo comprobamos para aquellos espacios donde
+                * el arreglo no esté vacío*/
+                if(prestamos != null){
+                    /*Miramos si el la casilla de
+                    * las cantidades repetidas están vacías*/
+                    if(cantidadPrestada[i][0] != null){
+                        /*Si no está en null, significa que hay un
+                        * usuario ingresado entonces buscamos su ID
+                        * y le sumamos o restamos a la cantidad prestada*/
+
+                    } else{
+                        /*Si está en estado null
+                        * entonces agregamos a ese espacio
+                        * un nuevo usario*/
+                        cantidadPrestada[i][0] = idUsuario;
+                    }
+
+                }
+            }
+            if(validacion){
+                break;
+            }
+        }
+
+        for (int i = 0; i < cantidadPrestada.length; i++) {
+                if(cantidadPrestada[i][0] != null){
+                    System.out.println("El id es "+cantidadPrestada[i][0]);
+                    System.out.println("La cantidad es "+cantidadPrestada[i][1]);
+                    System.out.println("----");
+                }
+        }
     }
 
 
