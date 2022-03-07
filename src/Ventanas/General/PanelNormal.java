@@ -279,7 +279,8 @@ public class PanelNormal extends Formularios {
                 Prestamos.crearPrestamo(new Prestamos(idUsuario,
                         titulo,
                         tipo,
-                        hora),Usuario.getIdActivo());
+                        hora));
+                Prestamos.verificarCantidadPrestada(idUsuario,0);
                 mostrarBibliografia();
             } else{
                 new Alertas("YA NO QUEDAN MÁS UNIDADES","ERROR").setVisible(true);

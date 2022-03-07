@@ -29,10 +29,10 @@ public class VentanaReportes extends Formularios {
     private final String tituloPrestamos = "REPORTE DE PRESTAMOS";
 
     //Botones
-    private String textoBoton = "GENERAR REPORTE";
+    private final String textoBoton = "GENERAR REPORTE";
     private final JButton botonReporteUsuario = new Botones(textoBoton + " DE USUARIO",grafica.letraTitulos);
     private final JButton botonReporteBibliografia = new Botones(textoBoton + " DE BIBLIOGRAFIA",grafica.letraTitulos);
-    private final JButton botonReportePrestamos = new Botones(textoBoton + " DE PRESTAMOS", grafica.letraTitulos);
+    private final JButton botonReportePrestamos = new Botones(textoBoton + " DE PRÉSTAMOS", grafica.letraTitulos);
     private final JButton botonMenuPrincipal = new Botones("REGRESAR",grafica.letraTitulos);
 
     //Area de texto
@@ -90,7 +90,7 @@ public class VentanaReportes extends Formularios {
     }
 
     private void agregarPaneles(JPanel panelContenedor, Object alineacion, int ancho, int alto){
-        panelContenedor.setBorder(null);
+        //panelContenedor.setBorder(null);
         panelContenedor.setLayout(new BorderLayout());
         panelContenedor.setPreferredSize(new Dimension( ancho, alto));
         panelContenedor.add(panelRelleno(10,20), BorderLayout.PAGE_END);
@@ -104,11 +104,16 @@ public class VentanaReportes extends Formularios {
         areaTexto.setFont(grafica.letraAreasDeTexto);
         scrollAreaDeTexto.setViewportView(areaTexto);
         scrollAreaDeTexto.setBorder(grafica.margenPanelesAdmin);
-        contenedorTexto.add(areaTexto, BorderLayout.CENTER);
+        contenedorTexto.add(scrollAreaDeTexto, BorderLayout.CENTER);
     }
 
     private void agregarBoton(JButton boton){
-        contenedorBoton.add(boton, BorderLayout.CENTER);
+        JPanel panelBotones = new Paneles();
+        panelBotones.setBorder(null);
+        panelBotones.setLayout(new GridLayout(1,2,15,20));
+        panelBotones.add(boton);
+        panelBotones.add(botonMenuPrincipal);
+        contenedorBoton.add(panelBotones, BorderLayout.CENTER);
     }
 
     private JPanel panelRelleno(int width, int height){

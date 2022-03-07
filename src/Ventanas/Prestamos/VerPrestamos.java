@@ -127,6 +127,7 @@ public class VerPrestamos extends Formularios {
             Prestamos.devolverLibro(idUsuario,
                     tituloLibro,
                     hora);
+            Prestamos.verificarCantidadPrestada(idUsuario,1);
             AlmacenLibros.disponibilidadLibros(tituloLibro,1);
             modeloTabla.removeRow(fila);
             new Alertas("SE HA DEVUELTO CON EXITO","").setVisible(true);

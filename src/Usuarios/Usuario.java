@@ -5,18 +5,17 @@ import java.util.Objects;
 public class Usuario {
 
     //Credenciales de administrador
-    private static String idAdmin = "admin";
-    private static String nombreAdmin = "Administrador";
-    private static String apellidoAdmin = " ";
-    private static String usuarioAdmin = "admin";
-    private static String rolAdmin = "ADMINISTRADOR";
-    private static String passwordAdmin = "password";
+    private static final String idAdmin = "admin";
+    private static final String nombreAdmin = "Administrador";
+    private static final String apellidoAdmin = " ";
+    private static final String usuarioAdmin = "admin";
+    private static final String rolAdmin = "ADMINISTRADOR";
+    private static final String passwordAdmin = "password";
 
     //Usuario actual
     private static String nombreActivo = "daniel";
     private static String apellidoActivo = "cuque";
     private static String idActivo;
-
 
     //Campos para usuarios
     private static String ID;
@@ -26,7 +25,6 @@ public class Usuario {
     private static String rol;
     private static String password;
     public static String matrizUsuarios[][] = new String[100][6];
-
 
     public Usuario() {
         matrizUsuarios[0][0] = idAdmin;
