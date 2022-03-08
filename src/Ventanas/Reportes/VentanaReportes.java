@@ -5,8 +5,10 @@ import GUI.Botones;
 import GUI.Formularios;
 import GUI.Paneles;
 import Prestamos.Prestamos;
+import Reportes.ReporteUsuarios;
 import Reportes.ReportesPrestamos;
 import Usuarios.Usuario;
+import Ventanas.General.PanelAdministrador;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,9 +32,9 @@ public class VentanaReportes extends Formularios {
 
     //Botones
     private final String textoBoton = "GENERAR REPORTE";
-    private final JButton botonReporteUsuario = new Botones(textoBoton + " DE USUARIO",grafica.letraTitulos);
-    private final JButton botonReporteBibliografia = new Botones(textoBoton + " DE BIBLIOGRAFIA",grafica.letraTitulos);
-    private final JButton botonReportePrestamos = new Botones(textoBoton + " DE PRÉSTAMOS", grafica.letraTitulos);
+    private final JButton botonReporteUsuario = new Botones(textoBoton + " DE USUARIO",grafica.letraFuerte);
+    private final JButton botonReporteBibliografia = new Botones(textoBoton + " DE BIBLIOGRAFIA",grafica.letraFuerte);
+    private final JButton botonReportePrestamos = new Botones(textoBoton + " DE PRÉSTAMOS", grafica.letraFuerte);
     private final JButton botonMenuPrincipal = new Botones("REGRESAR",grafica.letraTitulos);
 
     //Area de texto
@@ -87,10 +89,17 @@ public class VentanaReportes extends Formularios {
                 });
                 break;
         }
+
+        botonMenuPrincipal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnMenuPrincipal(e);
+            }
+        });
     }
 
     private void agregarPaneles(JPanel panelContenedor, Object alineacion, int ancho, int alto){
-        //panelContenedor.setBorder(null);
+        panelContenedor.setBorder(null);
         panelContenedor.setLayout(new BorderLayout());
         panelContenedor.setPreferredSize(new Dimension( ancho, alto));
         panelContenedor.add(panelRelleno(10,20), BorderLayout.PAGE_END);
@@ -104,6 +113,7 @@ public class VentanaReportes extends Formularios {
         areaTexto.setFont(grafica.letraAreasDeTexto);
         scrollAreaDeTexto.setViewportView(areaTexto);
         scrollAreaDeTexto.setBorder(grafica.margenPanelesAdmin);
+        areaTexto.setBorder(grafica.bordeNegro);
         contenedorTexto.add(scrollAreaDeTexto, BorderLayout.CENTER);
     }
 
@@ -133,10 +143,11 @@ public class VentanaReportes extends Formularios {
                 "BIBLIOGRAFIAS PRESTADAS"
         };
 
-        Usuario datos = new Usuario();
-        String[][] datosUsuario= datos.verDatos();
-
-        String reporteHTMLUsuarios = "";
+        Usuario tablaUsuarios = new Usuario();
+        String[][] datosUsuario = tablaUsuarios.verDatos();
+        String[][] datosPrestamos = Prestamos.getCantidadPrestada();
+        ReporteUsuarios generadorHTML = new ReporteUsuarios(datosUsuario,theadUsuarios,datosPrestamos);
+        String reporteHTMLUsuarios = generadorHTML.obtenerReporteUsuarios();
         areaDeTexto.setText(reporteHTMLUsuarios);
     }
 
@@ -151,6 +162,7 @@ public class VentanaReportes extends Formularios {
         String reporteHTMLBibliografia = "";
         areaDeTexto.setText(reporteHTMLBibliografia);
     }
+
     private void btnReportePrestamos(ActionEvent e){
         String [] theadPrestamos = {
                 "ID DEL USUARIO",
@@ -163,6 +175,11 @@ public class VentanaReportes extends Formularios {
         ReportesPrestamos generadorHTML = new ReportesPrestamos(datosPrestamos,theadPrestamos);
         String reporteHTMLPrestamos = generadorHTML.obtenerReportePrestamos();
         areaDeTexto.setText(reporteHTMLPrestamos);
+    }
+
+    private void btnMenuPrincipal(ActionEvent e){
+        this.dispose();
+        new PanelAdministrador().setVisible(true);
     }
 
 }

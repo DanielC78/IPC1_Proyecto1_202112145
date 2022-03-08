@@ -1,8 +1,8 @@
 import Ventanas.Bibliografias.CargaMasiva;
-import Ventanas.General.PanelAdministrador;
+import Ventanas.General.Inicio;
 
 public class Menu{
     public static void main(String args[]) {
-        new PanelAdministrador().setVisible(true);
+        new CargaMasiva().setVisible(true);
     }
 }

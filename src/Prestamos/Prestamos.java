@@ -21,6 +21,10 @@ public class Prestamos {
         this.hora = hora;
     }
 
+    public Prestamos(){
+
+    }
+
     public static void crearPrestamo(Prestamos nuevoPrestamo){
         for (int i = 0; i < arregloPrestamos.length; i++) {
             if(arregloPrestamos[i] == null){
@@ -151,5 +155,13 @@ public class Prestamos {
 
     public static void setArregloPrestamos(Prestamos[] arregloPrestamos) {
         Prestamos.arregloPrestamos = arregloPrestamos;
+    }
+
+    public static String[][] getCantidadPrestada() {
+        return cantidadPrestada;
+    }
+
+    public static void setCantidadPrestada(String[][] cantidadPrestada) {
+        Prestamos.cantidadPrestada = cantidadPrestada;
     }
 }

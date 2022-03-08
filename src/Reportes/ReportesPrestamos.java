@@ -9,11 +9,11 @@ public class ReportesPrestamos {
 
 
     private Prestamos[] datos;
-    private String [] columnas;
+    private String [] encabezado;
 
-    public ReportesPrestamos(Prestamos[] datos, String[] columnas) {
+    public ReportesPrestamos(Prestamos[] datos, String[] encabezado) {
         this.datos = datos;
-        this.columnas = columnas;
+        this.encabezado = encabezado;
     }
 
     public String obtenerReportePrestamos(){
@@ -21,14 +21,14 @@ public class ReportesPrestamos {
         headerReportePrestamos = EstilosReportes.encabezadoReporte("PRESTAMOS");
         footerReportePrestamos = EstilosReportes.footerReporte();
 
-        String tablaColumas = "";
-        tablaColumas += "        <thead>\n";
+        String tablaColumnas = "";
+        tablaColumnas += "        <thead>\n";
 
-        for (int i = 0; i < columnas.length; i++) {
-            tablaColumas+="        <th>"+columnas[i]+"</th>\n";
+        for (int i = 0; i < encabezado.length; i++) {
+            tablaColumnas+="        <th>"+ encabezado[i]+"</th>\n";
         }
 
-        tablaColumas += "</thead>\n";
+        tablaColumnas += "</thead>\n";
 
         String tablaDatos = "";
 
@@ -43,6 +43,6 @@ public class ReportesPrestamos {
             }
         }
 
-        return headerReportePrestamos + tablaColumas + tablaDatos + footerReportePrestamos;
+        return headerReportePrestamos + tablaColumnas + tablaDatos + footerReportePrestamos;
     }
 }

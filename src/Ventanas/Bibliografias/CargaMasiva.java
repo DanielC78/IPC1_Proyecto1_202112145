@@ -15,24 +15,20 @@ import java.awt.event.ActionListener;
 public class CargaMasiva extends Formularios {
 
     //Tamaño de la ventanas
-    private static int sizeX = 750 ;
-    private static int sizeY = 600;
-
-    //Tamaño de los paneles de relleno
-    private int width = 20;
-    private int height = 20;
+    private static final int sizeX = 750 ;
+    private static final int sizeY = 600;
 
     //Paneles
     //Generales
-    private JPanel panelCargaMasiva = new Paneles();
-    private JPanel panelBotones = new Paneles();
-    private JPanel panelTexto = new Paneles();
+    private final JPanel panelCargaMasiva = new Paneles();
+    private final JPanel panelBotones = new Paneles();
+    private final JPanel panelTexto = new Paneles();
     //Centrales
-    private JPanel contenedorBotones = new Paneles();
+    private final JPanel contenedorBotones = new Paneles();
 
     //Botones
-    private JButton botonCargar = new Botones("CARGAR");
-    private JButton botonCancelar = new Botones("CANCELAR");
+    private final JButton botonCargar = new Botones("CARGAR");
+    private final JButton botonCancelar = new Botones("CANCELAR");
 
     //Texto
     private JScrollPane scrollCarga = new JScrollPane();
@@ -101,7 +97,10 @@ public class CargaMasiva extends Formularios {
     private JPanel panelRelleno(){
         JPanel panelRelleno = new Paneles();
         panelRelleno.setBorder(null);
-        panelRelleno.setPreferredSize(new Dimension(width,height));
+        //Tamaño de los paneles de relleno
+        int width = 20;
+        int height = 20;
+        panelRelleno.setPreferredSize(new Dimension(width, height));
         return  panelRelleno;
     }
 
@@ -117,19 +116,23 @@ public class CargaMasiva extends Formularios {
                 lineasTexto) {
             String[] atributos = linea.split(";");
             if(atributos.length == 11 && atributos[0].matches("[0-2]") ){
-                if(atributos[0].equals("0")){
-                    atributos[0] = "LIBRO";
-                    atributos[6] = "---";
-                    atributos[7] = "0";
-                    atributos[8] = "---";
-                } else if(atributos[0].equals("1")){
-                    atributos[0] = "REVISTA";
-                    atributos[7] = atributos[7].trim();
-                    atributos[8] = "---";
-                } else if(atributos[0].equals("2")){
-                    atributos[0] = "TESIS";
-                    atributos[6] = "---";
-                    atributos[7] = "0";
+                switch (atributos[0]) {
+                    case "0":
+                        atributos[0] = "LIBRO";
+                        atributos[6] = "---";
+                        atributos[7] = "0";
+                        atributos[8] = "---";
+                        break;
+                    case "1":
+                        atributos[0] = "REVISTA";
+                        atributos[7] = atributos[7].trim();
+                        atributos[8] = "---";
+                        break;
+                    case "2":
+                        atributos[0] = "TESIS";
+                        atributos[6] = "---";
+                        atributos[7] = "0";
+                        break;
                 }
                 Bibliografias nuevoLibro = new Bibliografias(
                         atributos[0], //Tipo
@@ -144,6 +147,13 @@ public class CargaMasiva extends Formularios {
                         atributos[9].trim(), //Copias
                         atributos[10].trim() //Disponibles
                         );
+                AlmacenLibros.buscarTemasRelacionados();
+               /* for (int i = 0; i < AlmacenLibros.buscarTemasRelacionados().length; i++) {
+                    if(AlmacenLibros.buscarTemasRelacionados()[i][0] != null){
+                        System.out.println("El tema es: "+AlmacenLibros.buscarTemasRelacionados()[i][0]);
+                        System.out.println("--------------------------------------------");
+                    }
+                }*/
                 AlmacenLibros.crearBibliografia(nuevoLibro);
 
             } else{

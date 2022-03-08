@@ -5,9 +5,56 @@ import javax.swing.*;
 public class AlmacenLibros {
 
     private static Bibliografias[] arregloBibliografias = new Bibliografias[100];
+    private static String[] temasSinRepeticion = new String[300];
     private static int  cantidadBibliografias = 0;
 
     public AlmacenLibros(){
+    }
+    
+    public static void buscarTemasRelacionados(){
+        int pos = 0;
+        for (Bibliografias libro :
+                arregloBibliografias) {
+            if(libro != null){
+                for (String tema :
+                        libro.getTemas()) {
+                    if(!temaExiste(temasSinRepeticion, tema)){
+                        temasSinRepeticion[pos] = tema;
+                        pos++;
+                    }
+                }
+            }
+        }
+
+        int contador = 0;
+        for (String tema :
+                temasSinRepeticion) {
+            System.out.println("Tema: "+tema+ "inice: "+ contador);
+            contador++;
+        }
+    }
+
+    private static boolean temaExiste(String [] arregloTemas, String tema){
+        boolean validacion = false;
+        int temasRecorridos = 0;
+        if(arregloTemas[0] != null){
+            for (String comprobarTema :
+                    arregloTemas) {
+                if(comprobarTema != null){
+                    if (comprobarTema.equals(tema)) {
+                        validacion = true;
+                    } else{
+                        temasRecorridos++;
+                        if(temasRecorridos == arregloTemas.length){
+                            validacion = false;
+                        }
+                    }
+                }
+            }
+        } else{
+            return false;
+        }
+        return validacion;
     }
 
     public static void crearBibliografia(Bibliografias nuevoLibro){
@@ -263,9 +310,5 @@ public class AlmacenLibros {
         }
         return disponibilidad;
     }
-
-    public static int temasRelacionados(){
-        int i = 0;
-        return i;
-    }
+    
 }
