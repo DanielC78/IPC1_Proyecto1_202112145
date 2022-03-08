@@ -147,15 +147,7 @@ public class CargaMasiva extends Formularios {
                         atributos[9].trim(), //Copias
                         atributos[10].trim() //Disponibles
                         );
-                AlmacenLibros.buscarTemasRelacionados();
-               /* for (int i = 0; i < AlmacenLibros.buscarTemasRelacionados().length; i++) {
-                    if(AlmacenLibros.buscarTemasRelacionados()[i][0] != null){
-                        System.out.println("El tema es: "+AlmacenLibros.buscarTemasRelacionados()[i][0]);
-                        System.out.println("--------------------------------------------");
-                    }
-                }*/
                 AlmacenLibros.crearBibliografia(nuevoLibro);
-
             } else{
                 System.out.println("Fila omitida, al no cumplir con la estructura de entrada"); //Mensaje en consola si existe una cadena que no tiene todos los atritutos
             }

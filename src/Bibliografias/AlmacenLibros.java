@@ -5,56 +5,52 @@ import javax.swing.*;
 public class AlmacenLibros {
 
     private static Bibliografias[] arregloBibliografias = new Bibliografias[100];
-    private static String[] temasSinRepeticion = new String[300];
+    public static String[] temasSinRepeticion = new String[300];
     private static int  cantidadBibliografias = 0;
+    private static int contadorTemas = 0;
 
-    public AlmacenLibros(){
-    }
-    
     public static void buscarTemasRelacionados(){
-        int pos = 0;
+        for (Bibliografias libro : arregloBibliografias) {
+            if (libro != null) {
+                for (String temasLibro :
+                        libro.getTemas()) {
+                    if(!temaExiste(temasLibro)){
+                        temasSinRepeticion[contadorTemas] = temasLibro;
+                        contadorTemas++;
+                    }
+                }
+            }
+        }
+    }
+
+    //Verifica si el tema ya existe
+    private static boolean temaExiste(String tema){
+        boolean validacion = false;
+        for (String s : temasSinRepeticion) {
+            if (s != null) {
+                if (s.equals(tema)) {
+                    validacion = true;
+                    break;
+                }
+            }
+        }
+        return validacion;
+    }
+
+    public static int contarRepeticionTemas(String tema){
+        int contador = 0;
         for (Bibliografias libro :
                 arregloBibliografias) {
             if(libro != null){
-                for (String tema :
+                for (String temaLibro :
                         libro.getTemas()) {
-                    if(!temaExiste(temasSinRepeticion, tema)){
-                        temasSinRepeticion[pos] = tema;
-                        pos++;
+                    if (temaLibro.equals(tema)) {
+                        contador++;
                     }
                 }
             }
         }
-
-        int contador = 0;
-        for (String tema :
-                temasSinRepeticion) {
-            System.out.println("Tema: "+tema+ "inice: "+ contador);
-            contador++;
-        }
-    }
-
-    private static boolean temaExiste(String [] arregloTemas, String tema){
-        boolean validacion = false;
-        int temasRecorridos = 0;
-        if(arregloTemas[0] != null){
-            for (String comprobarTema :
-                    arregloTemas) {
-                if(comprobarTema != null){
-                    if (comprobarTema.equals(tema)) {
-                        validacion = true;
-                    } else{
-                        temasRecorridos++;
-                        if(temasRecorridos == arregloTemas.length){
-                            validacion = false;
-                        }
-                    }
-                }
-            }
-        } else{
-            return false;
-        }
-        return validacion;
+        return contador;
     }
 
     public static void crearBibliografia(Bibliografias nuevoLibro){

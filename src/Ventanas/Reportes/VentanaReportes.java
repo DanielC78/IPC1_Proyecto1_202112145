@@ -1,10 +1,11 @@
 package Ventanas.Reportes;
 
-import Bibliografias.Bibliografias;
+import Bibliografias.*;
 import GUI.Botones;
 import GUI.Formularios;
 import GUI.Paneles;
 import Prestamos.Prestamos;
+import Reportes.ReporteBibliografias;
 import Reportes.ReporteUsuarios;
 import Reportes.ReportesPrestamos;
 import Usuarios.Usuario;
@@ -156,10 +157,10 @@ public class VentanaReportes extends Formularios {
                 "TEMAS",
                 "BIBLIOGRAFIAS ASOCIADAS"
         };
-
-        Bibliografias[] datosLibros;
-
-        String reporteHTMLBibliografia = "";
+        AlmacenLibros.buscarTemasRelacionados();
+        String temas[] = AlmacenLibros.temasSinRepeticion;
+        ReporteBibliografias generadorHTML = new ReporteBibliografias(temas,theadLibros);
+        String reporteHTMLBibliografia = generadorHTML.obtenerReporteLibros();
         areaDeTexto.setText(reporteHTMLBibliografia);
     }
 

@@ -1,16 +1,16 @@
 package Reportes;
 
-import Bibliografias.Bibliografias;
+import Bibliografias.*;
 
 public class ReporteBibliografias {
 
     private String headerReporteBibliogafia = EstilosReportes.encabezadoReporte("REPORTE DE BIBLIOGRAFÍA");
     private String footerReporteBibliografia = EstilosReportes.footerReporte();
 
-    private String[][] datosLibros;
+    private String[] datosLibros;
     private String[] encabezadoLibros;
 
-    public ReporteBibliografias(String[][] datosLibros, String[] encabezadoLibros) {
+    public ReporteBibliografias(String[] datosLibros, String[] encabezadoLibros) {
         this.datosLibros = datosLibros;
         this.encabezadoLibros = encabezadoLibros;
     }
@@ -23,12 +23,14 @@ public class ReporteBibliografias {
         tablaColumnas += "        </thead>\n";
 
         String tablaDatos = "";
-        for (int i = 0; i < datosLibros.length; i++) {
-            if(datosLibros[i][0] != null){
-                tablaDatos += "        <tr>\n";
-                tablaDatos += "          <td>" + datosLibros[i][0] + "</td>\n";
-                tablaDatos += "          <td>" + datosLibros[i][1] + "</td>\n";
-                tablaDatos += "        </tr>\n";
+        for (String temas: datosLibros) {
+            if (temas != null) {
+                if(AlmacenLibros.contarRepeticionTemas(temas) > 0){
+                    tablaDatos += "        <tr>\n";
+                    tablaDatos += "          <td>" + temas + "</td>\n";
+                    tablaDatos += "          <td>" + AlmacenLibros.contarRepeticionTemas(temas) + "</td>\n";
+                    tablaDatos += "        </tr>\n";
+                }
             }
         }
         return headerReporteBibliogafia + tablaColumnas + tablaDatos + footerReporteBibliografia;
