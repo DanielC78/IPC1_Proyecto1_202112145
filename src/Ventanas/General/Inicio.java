@@ -50,7 +50,7 @@ public class Inicio extends Formularios{
 
         //Logo
         etiquetaLogo.setBounds(60,160-10,390,155);
-        ajustarImagen(etiquetaLogo,"src/Imagenes/logoFiusac.png");
+        ajustarImagen(etiquetaLogo,"Imagenes/logoFiusac.png");
         //Botones
         botonIngresar.setBounds(660,70-10,132,33);
         botonAbout.setBounds(60,400-5,170,33);
@@ -87,7 +87,7 @@ public class Inicio extends Formularios{
     }
 
     private void ajustarImagen(JLabel lbl, String ruta){
-        ImageIcon logo = new ImageIcon(ruta);
+        ImageIcon logo = new ImageIcon(getClass().getClassLoader().getResource(ruta));
         Icon icono = new ImageIcon(logo.getImage().getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_DEFAULT));
         lbl.setIcon(icono);
     }

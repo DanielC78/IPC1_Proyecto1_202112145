@@ -93,7 +93,7 @@ public class PanelNormal extends Formularios {
         rellenoPaneles(panelLogo);
 
         etLogo.setSize(new Dimension(300,100));
-        ajustarImagen(etLogo,"src/Imagenes/logoFiusac.png");
+        ajustarImagen(etLogo,"Imagenes/logoFiusac.png");
         panelLogo.add(etLogo, BorderLayout.CENTER);
 
         //Agregando los datos del usuario
@@ -106,7 +106,7 @@ public class PanelNormal extends Formularios {
 
         etFoto.setBorder(grafica.bordeNegro);
         etFoto.setSize(100,100);
-        ajustarImagen(etFoto,"src/Imagenes/user.png");
+        ajustarImagen(etFoto,"Imagenes/user.png");
         agregarRellenoInformacion(panelFoto);
         agregarRellenoInformacion(panelNombre);
         agregarRellenoInformacion(panelBotonLogout);
@@ -240,7 +240,7 @@ public class PanelNormal extends Formularios {
     }
 
     private void ajustarImagen(JLabel lbl, String ruta){
-        ImageIcon logo = new ImageIcon(ruta);
+        ImageIcon logo = new ImageIcon(getClass().getClassLoader().getResource(ruta));
         Icon icono = new ImageIcon(logo.getImage().getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_DEFAULT));
         lbl.setIcon(icono);
     }
