@@ -1,5 +1,7 @@
 package Reportes;
 
+import java.util.Objects;
+
 public class ReporteUsuarios {
 
     private String headerReporteUsuarios = EstilosReportes.encabezadoReporte("REPORTE DE USUARIOS");
@@ -28,14 +30,16 @@ public class ReporteUsuarios {
         String tablaDatos = "";
         for (int i = 0; i < datosUsuarios.length; i++) {
             if(datosUsuarios[i][0] != null){
-                tablaDatos += "        <tr>\n";
-                tablaDatos += "          <td>" + datosUsuarios[i][0] + "</td>\n";
-                tablaDatos += "          <td>" + datosUsuarios[i][1] + "</td>\n";
-                tablaDatos += "          <td>" + datosUsuarios[i][2] + "</td>\n";
-                tablaDatos += "          <td>" + datosUsuarios[i][3] + "</td>\n";
-                tablaDatos += "          <td>" + datosUsuarios[i][4] + "</td>\n";
-                tablaDatos += "          <td>" + buscarCantidadPrestada(datosUsuarios[i][0]) + "</td>\n";
-                tablaDatos += "        </tr>\n";
+                if(!Objects.equals(datosUsuarios[i][0], "")){
+                    tablaDatos += "        <tr>\n";
+                    tablaDatos += "          <td>" + datosUsuarios[i][0] + "</td>\n";
+                    tablaDatos += "          <td>" + datosUsuarios[i][1] + "</td>\n";
+                    tablaDatos += "          <td>" + datosUsuarios[i][2] + "</td>\n";
+                    tablaDatos += "          <td>" + datosUsuarios[i][3] + "</td>\n";
+                    tablaDatos += "          <td>" + datosUsuarios[i][4] + "</td>\n";
+                    tablaDatos += "          <td>" + buscarCantidadPrestada(datosUsuarios[i][0]) + "</td>\n";
+                    tablaDatos += "        </tr>\n";
+                }
             }
         }
 

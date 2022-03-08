@@ -51,7 +51,7 @@ public class Login extends Formularios{
         cajaPassword.setCursor(new Cursor(Cursor.TEXT_CURSOR));
 
         etUsuario.setBounds(83, 184, 85, 16);
-        etPassword.setBounds(83, 264, 85, 16);
+        etPassword.setBounds(83, 264, 100, 16);
         etFoto.setBounds(162, 70, 80, 85);
         botonIngresar.setBounds(238, 367, 118, 29);
         botonCancelar.setBounds(42, 367, 118, 29);

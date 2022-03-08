@@ -13,8 +13,8 @@ import java.awt.event.ActionListener;
 
 public class CrearUsuario extends Formularios {
 
-    private static int anchoVentana = 500;
-    private static int altoVentana = 550;
+    private final static int anchoVentana = 520;
+    private final static int altoVentana = 550;
 
     public CrearUsuario(){
         super(anchoVentana, altoVentana,"CREAR USUARIOS");
@@ -133,7 +133,7 @@ public class CrearUsuario extends Formularios {
 
     //Agregar elemenos a la ventana
     private void agregarEtiqueta(String texto){
-        JLabel etiqueta = new Etiquetas("                    " + texto,grafica.Blanco,grafica.Negro,grafica.letraFuerte);
+        JLabel etiqueta = new Etiquetas("         " + texto,grafica.Blanco,grafica.Negro,grafica.letraFuerte);
         etiqueta.setHorizontalAlignment(SwingConstants.LEFT);
         contenedorEtiquetas.add(etiqueta);
     }

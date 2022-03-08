@@ -32,13 +32,13 @@ public class ReportesPrestamos {
 
         String tablaDatos = "";
 
-        for (Prestamos dato : datos) {
-            if (dato != null) {
+        for (int i = (datos.length-1); i >= 0; i--) {
+            if (datos[i] != null) {
                 tablaDatos += "        <tr>\n";
-                tablaDatos += "          <td>" + dato.getIdUsuarioPrestamo() + "</td>\n";
-                tablaDatos += "          <td>" + dato.getTituloPrestamo() + "</td>\n";
-                tablaDatos += "          <td>" + dato.getTipoPrestamo() + "</td>\n";
-                tablaDatos += "          <td>" + dato.getHora() + "</td>\n";
+                tablaDatos += "          <td>" + datos[i].getIdUsuarioPrestamo() + "</td>\n";
+                tablaDatos += "          <td>" + datos[i].getTituloPrestamo() + "</td>\n";
+                tablaDatos += "          <td>" + datos[i].getTipoPrestamo() + "</td>\n";
+                tablaDatos += "          <td>" + datos[i].getHora() + "</td>\n";
                 tablaDatos += "        </tr>\n";
             }
         }

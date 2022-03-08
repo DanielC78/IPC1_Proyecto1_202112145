@@ -57,14 +57,6 @@ public class Prestamos {
                 break;
             }
         }
-
-        for (int i = 0; i < cantidadPrestada.length; i++) {
-            if(cantidadPrestada[i][0] != null){
-                System.out.println("El id es: "+ cantidadPrestada[i][0]);
-                System.out.println("La cantidad es: "+  cantidadPrestada[i][1]);
-                System.out.println("-----------------------------------");
-            }
-        }
     }
 
     public static void devolverLibro(String idUsuario,String tituloLibro,String hora){

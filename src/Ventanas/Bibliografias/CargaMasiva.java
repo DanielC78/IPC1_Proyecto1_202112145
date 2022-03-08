@@ -73,7 +73,6 @@ public class CargaMasiva extends Formularios {
                 String entradaText = carga.getText();
                 cargarLibros(entradaText);
                 carga.setText("");
-                carga.requestFocus();
             }
         });
 

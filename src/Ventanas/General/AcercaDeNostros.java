@@ -1,6 +1,5 @@
 package Ventanas.General;
 
-import GUI.Botones;
 import GUI.Etiquetas;
 import GUI.Formularios;
 import GUI.Paneles;
@@ -29,6 +28,7 @@ public class AcercaDeNostros extends Formularios {
 
     public AcercaDeNostros() throws HeadlessException {
         super(sizeX, sizeY, titulo);
+        botonMaximizar.setVisible(false);
         componentesInformacion();
     }
 

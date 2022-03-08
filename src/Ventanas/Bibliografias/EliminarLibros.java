@@ -153,6 +153,7 @@ public class EliminarLibros extends Formularios {
             titulo = (String)tablaLibros.getValueAt(fila,2);
             modeloTabla.removeRow(fila);
             AlmacenLibros.eliminarLibro(titulo);
+            new Alertas("SE HA ELIMINADO CON ÉXITO","").setVisible(true);
         } else{
             new Alertas("DEBE SELECCIONAR UNA FILA","ERROR").setVisible(true);
         }
