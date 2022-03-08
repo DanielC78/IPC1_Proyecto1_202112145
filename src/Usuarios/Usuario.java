@@ -3,7 +3,6 @@ package Usuarios;
 import java.util.Objects;
 
 public class Usuario {
-
     //Credenciales de administrador
     private static final String idAdmin = "admin";
     private static final String nombreAdmin = "Administrador";
@@ -13,8 +12,8 @@ public class Usuario {
     private static final String passwordAdmin = "password";
 
     //Usuario actual
-    private static String nombreActivo = "daniel";
-    private static String apellidoActivo = "cuque";
+    private static String nombreActivo = "";
+    private static String apellidoActivo = "";
     private static String idActivo;
 
     //Campos para usuarios
