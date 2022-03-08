@@ -13,8 +13,8 @@ import java.awt.event.ActionListener;
 
 public class ActualizarUsuario extends Formularios {
 
-    private static int anchoVentana = 500;
-    private static int altoVentana = 550;
+    private final static int anchoVentana = 580;
+    private final static int altoVentana = 550;
     private String mensajeAlerta;
     private int indiceActualizar;
 
@@ -169,7 +169,7 @@ public class ActualizarUsuario extends Formularios {
 
     //Agregar elemenos a la ventana
     private void agregarEtiqueta(String texto){
-        JLabel etiqueta = new Etiquetas("            " + texto,grafica.Blanco,grafica.Negro,grafica.letraFuerte);
+        JLabel etiqueta = new Etiquetas("        " + texto,grafica.Blanco,grafica.Negro,grafica.letraFuerte);
         etiqueta.setHorizontalAlignment(SwingConstants.LEFT);
         contenedorAuxiliarEtiquetas.add(etiqueta);
     }
@@ -208,8 +208,7 @@ public class ActualizarUsuario extends Formularios {
         String password = cajaPassword.getText();
         String confirmPassword = cajaConfirmPassword.getText();
 
-        ValidacionesUsuario validar = new ValidacionesUsuario();
-        if(!validar.validacionCamposVacios(id,nombre,apellido,usuario,rol,password,confirmPassword)){
+        if(!validarCamposVacios()){
             Usuario actualizacionUsuario = new Usuario();
             new Alertas(actualizacionUsuario.actualizarUsuario(indiceActualizar,id,nombre,apellido,usuario,rol,password),"").setVisible(true);
         }
@@ -252,12 +251,15 @@ public class ActualizarUsuario extends Formularios {
     //Validacion de campos
     private boolean validarCamposVacios(){
         boolean validacion;
-        if(cajaID.getText().isEmpty() || cajaNombre.getText().isEmpty() || cajaApellido.getText().isEmpty() || cajaUsuario.getText().isEmpty()){
+        if(cajaID.getText().isEmpty() || cajaNombre.getText().isEmpty() || cajaApellido.getText().isEmpty() || cajaUsuario.getText().isEmpty() || cajaPassword.getText().isEmpty() || cajaConfirmPassword.getText().isEmpty()){
             mensajeAlerta = "<html><p style=\"text-align:center\">DEBE DE LLENAR <p>TODOS LOS CAMPOS<p></p><html>";
             validacion = true;
 
         } else if(listaRoles.getSelectedIndex() == 0){
             mensajeAlerta = "DEBE DE SELECCIONAR UN ROL";
+            validacion = true;
+        } else if(!cajaConfirmPassword.getText().equals(cajaPassword.getText())){
+            mensajeAlerta = "<html><p style=\"text-align:center\">LAS CONTRASEÑAS <p>DEBEN SER IGUALES<p></p><html>";
             validacion = true;
         } else{
             validacion = false;

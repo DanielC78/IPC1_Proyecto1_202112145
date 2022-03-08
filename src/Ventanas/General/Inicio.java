@@ -19,39 +19,47 @@ public class Inicio extends Formularios{
 
 
     //Objetos de la clase Inicio
-    private JPanel panelInicio = new Paneles();
+    private final JPanel panelInicio = new Paneles();
 
     //Botones
-    private JButton botonIngresar = new Botones("INICAR SESIÓN");
-    private JButton botonAbout = new Botones("ACERCA DE NOSOTROS");
+    private final JButton botonIngresar = new Botones("INICAR SESIÓN");
+    private final JButton botonAbout = new Botones("ACERCA DE NOSOTROS");
 
     //Etiquetas
-    private JLabel marcoLogin = new Etiquetas("", grafica.Blanco, null, grafica.letraTitulos);
-
-    private JLabel marcoAbout = new Etiquetas("", null, null, null);
-    private JLabel marcoLogo = new Etiquetas("", null, null, null);
+    private final JLabel etiquetaLogo = new Etiquetas("",null,null,null);
+    private final JLabel etiquetaVision = new Etiquetas("VISIÓN", null, null,grafica.letraTitulos);
+    private final JLabel etiquetaVisionTexto = new Etiquetas("<html>" +
+            "<p text-align: center>" +
+            " \t\n" +
+            " \n" +
+            "Constituirse como el Centro líder de información de la Universidad, con el apoyo de las nuevas tecnologías de la información y la comunicación para el almacenamiento, recuperación y difusión de la información" +
+            "</p>" +
+            "</html>", null,null, grafica.letraAbout);
+    private final JLabel marcoLogo = new Etiquetas("", null, null, null);
 
     private void iniciarComponentesInicio(){
         this.getContentPane().add(panelInicio);
 
-        //Paneles
-        marcoLogin.setBounds(60,50,750,78);
-        marcoLogin.setBorder(grafica.bordeNegro);
-
-        marcoAbout.setBounds(492,160,300,155);
-        marcoAbout.setBorder(grafica.bordeNegro);
-
+        //Marcos
         marcoLogo.setBorder(grafica.bordeNegro);
-        marcoLogo.setBounds(60,160,385,155);
+        marcoLogo.setBounds(60,160-10,385,155);
 
+        //Textos
+        etiquetaVision.setBounds(498,164-10,290,20);
+        etiquetaVisionTexto.setBounds(496-10,162+20,290,130);
+
+        //Logo
+        etiquetaLogo.setBounds(60,160-10,390,155);
+        ajustarImagen(etiquetaLogo,"src/Imagenes/logoFiusac.png");
         //Botones
-        botonIngresar.setBounds(660,70,132,33);
-        botonAbout.setBounds(60,400,170,33);
+        botonIngresar.setBounds(660,70-10,132,33);
+        botonAbout.setBounds(60,400-5,170,33);
 
-        panelInicio.add(marcoLogin);
+        panelInicio.add(etiquetaLogo);
+        panelInicio.add(etiquetaVision);
+        panelInicio.add(etiquetaVisionTexto);
         panelInicio.add(botonIngresar);
         panelInicio.add(botonAbout);
-        panelInicio.add(marcoAbout);
         panelInicio.add(marcoLogo);
 
         botonIngresar.addActionListener(new ActionListener() {
@@ -75,8 +83,13 @@ public class Inicio extends Formularios{
     }
 
     private void btnAbout(ActionEvent e){
-        this.dispose();
         new AcercaDeNostros().setVisible(true);
+    }
+
+    private void ajustarImagen(JLabel lbl, String ruta){
+        ImageIcon logo = new ImageIcon(ruta);
+        Icon icono = new ImageIcon(logo.getImage().getScaledInstance(lbl.getWidth(), lbl.getHeight(), Image.SCALE_DEFAULT));
+        lbl.setIcon(icono);
     }
 
 

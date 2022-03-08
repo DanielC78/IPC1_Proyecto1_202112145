@@ -70,8 +70,8 @@ public class Login extends Formularios{
             }
         });
 
-        etUsuario.setHorizontalAlignment(2);
-        etPassword.setHorizontalAlignment(2);
+        etUsuario.setHorizontalAlignment(SwingConstants.LEFT);
+        etPassword.setHorizontalAlignment(SwingConstants.LEFT);
         etFoto.setBorder(grafica.bordeNegro);
 
         cajaUsuario.setFocusable(true);

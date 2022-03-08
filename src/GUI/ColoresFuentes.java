@@ -17,7 +17,8 @@ public class ColoresFuentes {
     final public Color Verde = new Color(100,202,87);
 
     //Fuentes
-    final public Font letraSuave = new Font("Work Sans", 0, 13);
+    final public Font letraSuave = new Font("Work Sans", 0, 14);
+    final public Font letraAbout  = new Font("Work Sans",0,16);
     final public Font letraFuerte = new Font("Work Sans", 1, 13);
     final public Font letraTitulos = new Font("Work Sans",1,17);
     final public Font letraAreasDeTexto = new Font("Work Sans", 0, 16);

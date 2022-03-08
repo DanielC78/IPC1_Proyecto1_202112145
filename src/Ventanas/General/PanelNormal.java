@@ -70,7 +70,6 @@ public class PanelNormal extends Formularios {
         componentesPanelNormal();
     }
 
-
     private void componentesPanelNormal(){
         this.getContentPane().add(panelNormal);
         cajaTema.requestFocus();
@@ -297,7 +296,6 @@ public class PanelNormal extends Formularios {
         } else{
             buscarBibliografia();
         }
-
     }
 
     private void btnVerPrestamos(ActionEvent e){
